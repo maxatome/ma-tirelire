@@ -1,0 +1,81 @@
+--- multilink/Makefile.orig	2003-01-05 10:49:23.000000000 +0100
++++ multilink/Makefile	2003-05-05 22:51:03.000000000 +0200
+@@ -1,5 +1,7 @@
+ #!make
+ #
++# http://www.djw.org/product/palm/multilink/index.html
++#
+ # The contents of this file are subject to the Mozilla Public License
+ # Version 1.0 (the "License"); you may not use this file except in
+ # compliance with the License. You may obtain a copy of the License at
+@@ -113,7 +115,8 @@
+ ifeq ($(PRC_TOOLS_VERSION),0_5)
+   TARGET_CFLAGS = -O2 -g $(PALMOS2_INCLUDES) -DMULTILINK_GLOBALS_A4 -Wall
+ else
+-  TARGET_CFLAGS = -O2 -g -DMULTILINK_NEW_HEADERS $(PALMOS35_INCLUDES)
++  TARGET_CFLAGS = -O2 -g -DMULTILINK_NEW_HEADERS -DAUX_POINTER \
++			 $(PALMOS35_INCLUDES)
+ endif
+ 
+ TARGET_CC = $(PALM_TOOLS_PREFIX)gcc
+--- multilink/multilink.c.orig	2003-05-05 22:26:03.000000000 +0200
++++ multilink/multilink.c	2003-05-05 22:26:23.000000000 +0200
+@@ -73,6 +73,7 @@
+ #include <sys/wait.h>
+ #include <unistd.h>
+ #include <ctype.h>
++#include <netinet/in.h>
+ 
+ #include <bfd.h>
+ 
+--- multilink/multilinkload.c.orig	2003-01-04 19:44:45.000000000 +0100
++++ multilink/multilinkload.c	2003-01-05 11:04:14.000000000 +0100
+@@ -139,12 +139,23 @@
+          * can do cleanup at the end of the app.
+          */
+         jmptables = (unsigned**)MemPtrNew(sizeof(unsigned*) *
+-                                          (UInt32)((2 * nsegments) + 1));
++                                          (UInt32)((2 * nsegments) + 1)
++#ifdef AUX_POINTER
++                                          /* Add 4 bytes for auxiliary ptr */
++                                          + sizeof(void *)
++#endif /* AUX_POINTER */
++                                          );
+ 		if (!jmptables) {
+ 			StrCopy(errmsg, "Could not allocate memory for segment JmpTables");
+ 			ErrFatalDisplayIf(1, errmsg);
+ 		}
+ 
++#ifdef AUX_POINTER
++        /* The first 4 bytes are reserved for the auxiliary pointer,
++           initialize it to 0 */
++        *jmptables++ = NULL;
++#endif /* AUX_POINTER */
++
+         jmptables[0] = (unsigned*)code1jmptable;
+         jmptables[nsegments] = (unsigned*)0UL; /* don't know it */
+ 
+@@ -157,7 +168,11 @@
+         
+         jmptables[2 * nsegments] = 0;
+ 
++#ifdef AUX_POINTER
++		MemPtrSetOwner(jmptables - 1, 0);
++#else
+ 		MemPtrSetOwner(jmptables, 0);
++#endif /* AUX_POINTER */
+ 
+ 		/* Set the Feature */
+ 		FtrSet(creatorId, featureId, (UInt32)jmptables);
+@@ -193,6 +208,11 @@
+         }
+ 
+         FtrUnregister(creatorId, featureId);
++
++#ifdef AUX_POINTER
++        jmptables--;            /* Restore the initial value of allocation */
++#endif /* AUX_POINTER */
++
+         MemPtrFree(jmptables);
+     }
+ }

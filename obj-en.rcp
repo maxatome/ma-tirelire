@@ -1,0 +1,1704 @@
+TRANSLATION "EN"
+BEGIN
+
+/************************************************************************
+ * Put here your language name (in your language), your full name
+ * and your e-mail address (you can set "your-language@Ma-Tirelire.net")
+ ************************************************************************/
+
+"$LanguageLang"		= "English"
+"$LanguageAuthor"	= "Claire Nurcombe, Philip Hellyer & Maxime Soulé"
+"$LanguageEmail"	= "english@Ma-Tirelire.net"
+
+
+/************************************************************************
+ * Default menu (/X are shortcuts)
+ ************************************************************************/
+
+"$DefaultMenu-Edit" = "Edit"
+"$DefaultMenu-Edit-Undo"			= "Undo"			/Z
+"$DefaultMenu-Edit-Cut"				= "Cut"				/X
+"$DefaultMenu-Edit-Copy"			= "Copy"			/C
+"$DefaultMenu-Edit-Paste"			= "Paste"			/P
+"$DefaultMenu-Edit-SelectAll"		= "Select all"		/A
+
+"$DefaultMenu-Misc" = "Misc"
+"$DefaultMenu-Misc-About"			= "About Ma Tirelire 2"
+
+
+/************************************************************************
+ * Transactions list dialog
+ ************************************************************************/
+
+"$TransListMenu-Account" = "Account"
+"$TransListMenu-Account-Clearing"		= "Clearing..."			/I
+"$TransListMenu-Account-PurgeCleared"	= "Purge cleared..."
+"$TransListMenu-Account-Repeats"		= "View repeats..."		/R
+"$TransListMenu-Account-DeleteAll" 		= "Delete all..."
+"$TransListMenu-Account-Properties"		= "Properties..."
+"$TransListMenu-Account-DBProperties"	= "DBase properties..."
+"$TransListMenu-Account-Accounts"		= "Accounts list..."	/O
+"$TransListMenu-Account-DBases"			= "Manage DBases..."	/B
+
+"$TransListMenu-Flagged" = "Flag"
+"$TransListMenu-Flagged-Flag"		= "Search & flag..."		/H
+"$TransListMenu-Flagged-FlagPage" 	= "Flag the page"			/G
+"$TransListMenu-Flagged-UnflagPage" = "Unflag the page"
+"$TransListMenu-Flagged-InvertPage"	= "Invert the page"
+"$TransListMenu-Flagged-UnflagAll" 	= "Unflag all"				/U
+"$TransListMenu-Flagged-InvertAll"	= "Invert all"
+"$TransListMenu-Flagged-FlagClear" 	= "Flagged -> cleared"		/E
+"$TransListMenu-Flagged-DeleteFlag" = "Delete flagged..."
+"$TransListMenu-Flagged-Screen"		= "View flagged..."			/V
+
+"$TransListMenu-GoTo" = "Go to"
+"$TransListMenu-GoTo-FirstNotClear"	= "First not cleared"
+"$TransListMenu-GoTo-NextNotClear"	= "Next not cleared"
+"$TransListMenu-GoTo-FirstNotFlag"	= "First not flagged"
+"$TransListMenu-GoTo-NextNotFlag"	= "Next not flagged"
+"$TransListMenu-GoTo-FirstNotClearFlag" = "First not cleared, not flagged"
+"$TransListMenu-GoTo-NextNotClearFlag"  = "Next not cleared, not flagged"
+"$TransListMenu-GoTo-FirstFlag"		= "First flagged"			/F
+"$TransListMenu-GoTo-NextFlag"		= "Next flagged"			/N
+"$TransListMenu-GoTo-Date"			= "Date..."					/A
+
+"$TransListMenu-Misc" = "Misc"
+"$TransListMenu-Misc-Copy"			= "Copy sum"				/C
+"$TransListMenu-Misc-Desc"			= "Descriptions..."			/D
+"$TransListMenu-Misc-Types"			= "Types..."				/T
+"$TransListMenu-Misc-Modes"			= "Modes..."				/M
+"$TransListMenu-Misc-Curr"			= "Currencies..."			/Y
+"$TransListMenu-Misc-Stats"			= "Statistics..."			/S
+"$TransListMenu-Misc-MiniStats"		= "Short statistics..."		/8
+"$TransListMenu-Misc-Prefs"			= "Preferences..."			/P
+"$TransListMenu-Misc-ExeRepeats"	= "Compute repeats"
+
+
+/* The circomflex char must be present at the beginning of "^Dates..." item */
+[$TransList-Sums] = ["All"
+					 "At worst"
+					 "00/00"
+					 "Cleared"
+					 "Flagged"
+					 "Clear./Flag."
+					 "00/00"
+					 "00/00"
+					 "^Dates..." /* !!! Don't delete the '^' char !!! */
+					 "This date..."]
+
+[$TransList-ContextMenu] =  ["Copy..."
+							 "Delete..."
+							 "Date..."
+							 "Time..."
+							 "Edit..."
+							 "Un-clear"
+							 "Unflag"]
+
+"$strTransListContextMenuClear" 	= "Clear"
+"$strTransListContextMenuUnclear" 	= "Un-clear"
+"$strTransListContextMenuFlag"		= "Flag"
+"$strTransListContextMenuUnflag" 	= "Unflag"
+
+/* Long-clic screen/alarm remainder one "On [date] at [time]" (63 chars max) */
+"$strTransListDateTime"				= "On %s at %s"
+
+/* Long-clic screen, the valuation date (63 chars max) %s is replaced by date*/
+"$strTransListValuationDate"		= "Valuation date: %s"
+
+/* Long-clic screen: separator between amount and mode (63 chars max) */
+"$strTransListSepAmountMode"		= ", by "
+
+/* Long-clic screen, the cheque number (63 chars max) */
+"$strTransListCheckNum"				= "Cheque #%s"
+
+/* Long-clic screen, the statement number (63 chars max) */
+"$strTransListStatementNum"			= "Statement #%s"
+
+/* Long-clic screen, every week repeat (63 chars max.) */
+"$strTransListRepeatWeekly"			= "Repeated every week"
+
+/* Long-clic screen, every N weeks repeat (63 chars max.) */
+"$strTransListRepeatNweekly"		= "Repeated every %d weeks"
+
+/* Long-clic screen, every month repeat (63 chars max.) */
+"$strTransListRepeatMonthly"		= "Repeated every month"
+
+/* Long-clic screen, end of each month repeat (63 chars max.) */
+"$strTransListRepeatMonthlyEnd"		= "Repeated at end of each month"
+
+/* Long-clic screen, every N months repeat (63 chars max.) */
+"$strTransListRepeatNmonthly"		= "Repeated every %d months"
+
+/* Long-clic screen, every year repeat (63 chars max.) */
+"$strTransListRepeatAnnually"		= "Repeated every year"
+
+/* Long-clic screen, every N year repeat (63 chars max.) */
+"$strTransListRepeatNannually"		= "Repeated every %d years"
+
+/* Long-clic screen, transaction type (63 chars max.) */
+"$strTransListType"					= "Type: %s"
+
+/* Long-clic screen, transfer TO ... (63 chars max.) */
+"$strTransListXferTo"				= "Transfer to "
+
+/* Long-clic screen, transfer FROM ... (63 chars max.) */
+"$strTransListXferFrom"				= "Transfer from "
+
+/* Long-clic screen, transfer TO unknown account (63 chars max.) */
+"$strTransListXferToUnknown"		= "Transfer to unknown account"
+
+/* Long-clic screen, transfer FROM unknown account (63 chars max.) */
+"$strTransListXferFromUnknown"		= "Transfer from unknown account"
+
+/* Long-clic screen, number of sub-transactions (63 chars max.) */
+"$strTransListNumSplits"			= "%d transaction split(s)"
+
+/* Title of "Go to date..." dialog (63 chars max.) */
+"$strTransListGotoDate"				= "Go to date..."
+
+
+"$strTransListAccountProp"			= "Account properties..."/*31 chars max*/
+
+
+/************************************************************************
+ * Transaction edit dialog
+ ************************************************************************/
+ 
+"$TransMenu-GoTo"		= "Go to"
+"$TransMenu-GoTo-Prev"			= "Previous"
+"$TransMenu-GoTo-Next"			= "Next"
+"$TransMenu-GoTo-PrevNotClear"	= "Previous not cleared"
+"$TransMenu-GoTo-NextNotClear"	= "Next not cleared"
+"$TransMenu-GoTo-PrevFlag"		= "Previous flagged"
+"$TransMenu-GoTo-NextFlag"		= "Next flagged"
+
+"$TransMenu-Edit"		= "Edit"
+"$TransMenu-Edit-TransCopy"		= "Copy transaction..."			/O
+
+"$TransMenu-Misc"		= "Misc"
+
+
+"$Trans-Date"				= "Date:"
+"$Trans-Desc"				= "Desc"
+
+"$Trans-MainTab"			= "Main"
+
+"$Trans-Mode"				= "Mode:"
+"$Trans-ChkNum"				= "#"
+
+"$Trans-OnValueDate"		= "On"
+[$Trans-OnValueDate-Add]	= 22 /*in pixels,to shift value date widget right*/
+
+"$Trans-Type"				= "Type:"
+
+"$Trans-Statement"			= "Statemt:"
+"$Trans-Clear"				= "Cleared"
+
+"$Trans-Xfer"				= "Transfer:"
+
+
+"$Trans-RepeatTab"			= "Repeat"
+
+"$Trans-Repeat"				= "Repeat:"
+[$Trans-RepeatList]     =  ["Never"
+							"Every week"
+							"Every 2 weeks"
+							"Every month"
+							"End of each month"
+							"Every 2 months"
+							"Every 3 months"
+							"Every 4 months"
+							"Every 6 months"
+							"Every year"
+							"Every 2 years"]
+
+/* Second item in this list must not contain more than 14 chars */
+[$Trans-RepeatChoices]	=  ["Choose a date..."
+							"No end"
+							"From occurrences"]
+
+"$Trans-RepeatEndsAt"	= "End at:"
+"$Trans-RepeatTimes"	= "occurrence(s) to be"
+
+
+"$Trans-BreakdownTab"		= "Splits"
+
+"$Trans-SplitCreate"		= "New"
+"$Trans-SplitSortBy"		= "by"
+[$Trans-SplitSortList]		= ["desc." "type" "amount"]
+
+/* 63 chars max */
+"$strOpFormSplitsRemain"	= "Remaining"
+
+
+"$Trans-CurrencyTab"		= "Currency"
+
+"$Trans-CurrencyNone"		= "No currency..."
+"$Trans-CurrencyInAccount"	= "In account:"
+"$Trans-CurrencyRate"		= "Exchange rate:"
+
+
+"$Trans-OK"		= "OK"
+"$Trans-Cancel"	= "Cancel"
+"$Trans-Delete"	= "Delete"
+
+/* Debit/Credit label with its colon (16 chars max.) */
+[$TransDebCredLabel]	=  ["Debit:"
+							"Credit:"]
+
+/* Debit/Credit title with its ellipsis (16 chars max.) */
+[$TransDebCredTitle]	=  ["Debit..."
+							"Credit..."]
+
+/* Title of the date selection dialog (31 chars max) */
+"$OpDate"		= "Transaction date"
+
+/* Title of the time selection dialog (31 chars max) */
+"$OpTime"		= "Transaction time"
+
+/* Title of the value date selection dialog (31 chars max) */
+"$OpValueDate"	= "Valuation date"
+
+/* Title of the repeat end date selection dialog (31 chars max) */
+"$OpRepeatEndDate"	= "Repeat end date"
+
+/* Transfer popup label if no transfer (32 chars max.) */
+"$strOpFormNoXfer" = "None"
+
+/* Value date label if no value date (14 chars max.) */
+"$strOpNoValueDate" = "same day"
+
+/* Names of Debit/Credit label (31 chars max.) */
+"$strOpFormErrorDebitLabel"		= "Debit"
+"$strOpFormErrorCreditLabel"	= "Credit"
+
+/* Name of the currency amount field (31 chars max.) */
+"$strOpFormErrorCurrencyAmount"	= "In account"
+
+
+/************************************************************************
+ * Edit split dialog
+ ************************************************************************/
+
+"$EditSplit-Amount"				= "Amount:"
+"$strEditSplitAmount"			= "Amount"
+
+[$Trans-SplitSortByChoices]		=  ["desc."
+									"type"
+									"amount"]
+
+
+/************************************************************************
+ * Preferences dialog
+ ************************************************************************/
+
+"$PrefsForm-Title"		= "Main preferences"
+
+"$Prefs-GeneralTab"		= "General"
+"$Prefs-LeftHandMode"	= "Left hand mode"
+"$Prefs-SelectFocusedNumFlds" = "Numeric fields auto-select"
+"$Prefs-AccessCode"		= "Access code:"
+"$Prefs-AutoLockAfter"	= "Auto lock after:"
+[$Prefs-AutoLockDelays]	= ["Never" "30 sec" "1 min" "2 min" "5 min"]
+"$Prefs-AutoLockOnPowerOff" = "Auto lock on power off"
+
+"$Prefs-ListsTab"		= "Lists"
+"$Prefs-ListFont"		= "Used font in lists:"
+"$Prefs-ColorTitle"		= "Lines attributes for..."
+"$Prefs-RepeatColor"	= "Repeats"
+"$Prefs-XferColor"		= "Transfers"
+"$Prefs-CreditColor"	= "Credits"
+"$Prefs-DebitColor"		= "Debits"
+"$Prefs-BoldFace"		= "bold"
+
+"$Prefs-TransactionTab"	= "Transaction"
+"$Prefs-DescReplace"		= "The descriptions replace"
+"$Prefs-FirstNext"			= "first/next:"
+[$Prefs-FirstNextList]		=  ["not cleared"
+								"not flagged"
+								"not cleared, not flagged"
+								"flagged"]
+"$Prefs-Os3TimeSelector"	= "OS>3.0 time selector"
+
+"$Prefs-Save"			= "Save"
+"$Prefs-Cancel"			= "Cancel"
+
+"$Prefs-CodeEnabled"	= "Enabled"			/* 16 chars max */
+"$Prefs-CodeDisabled"	= "Disabled"		/* 16 chars max */
+
+
+/************************************************************************
+ * Account properties
+ ************************************************************************/
+
+"$AccountProp-Name"			= "Name:"
+
+"$AccountProp-GeneralTab"	= "Main"
+"$AccountProp-Devise"						= "Account currency:"
+"$AccountProp-InitialBalance"				= "Initial balance:"
+"$AccountProp-Statements"					= "Statement # management"
+"$AccountProp-OverdrawnWarning"				= "Warn if overdrawn"
+"$AccountProp-OverdrawnWarningThreshold"	= ", thresholds:"
+"$AccountProp-OverdrawnThreshold"			= "Overdrawn:"
+"$AccountProp-NonOverdrawnThreshold"		= "No longer over.:"
+
+
+"$AccountProp-TransactionTab"= "Trans."
+"$AccountProp-KeepLastDate"		= "Keep last typed date"
+
+
+"$AccountProp-ChequebookTab"= "Cheque books"
+"$AccountProp-NumCheques"		= "cheques per cheque book"
+"$AccountProp-ChequebookList"	= "Current cheque books:"
+"$AccountProp-Chequebook1"		= "#1:"
+"$AccountProp-Chequebook2"		= "#2:"
+"$AccountProp-Chequebook3"		= "#3:"
+"$AccountProp-Chequebook4"		= "#4:"
+
+
+"$AccountProp-InfosTab"		= "Infos"
+"$AccountProp-AccountNum"	= "#:"
+"$AccountProp-Notes"		= "Notes:"
+
+"$AccountProp-OK"			= "OK"
+"$AccountProp-Cancel"		= "Cancel"
+"$AccountProp-Delete"		= "Delete"
+
+"$strTitleNewAccountProp"	= "New account"	/* 15 chars max */
+
+"$strAccountPropName"					= "Name"
+"$strAccountPropInitialBalance"			= "Initial balance"
+"$strAccountPropOverdrawnThreshold"		= "Overdrawn"
+"$strAccountPropNonOverdrawnThreshold"	= "No longer overdrawn"
+"$strAccountPropNumCheques"				= "cheques per cheque book"
+
+
+/************************************************************************
+ * Accounts list dialog
+ ************************************************************************/
+
+"$AccountsListMenu-DBase"	= "DBase"
+"$AccountsListMenu-Properties"	= "Properties..."
+"$AccountsListMenu-Manage"		= "Manage DBases..."
+
+
+"$AccountsList-New"			= "New"
+
+/* Items have to be short, because the sum field may be wide... */
+[$AccountsList-SelectList] 	= ["All"
+							   "Selected"
+							   "Not select."]
+
+"$strAccountsListEditDBs"	= "Manage accounts DBases..." /* 30 chars max*/
+"$strAccountsListDBProp"	= "DBase properties..." /* 30 chars max*/
+"$SumListSumTypePopup"		= "Sum on this date..."
+
+[$AccountsList-ContextMenu]	= ["Properties..."
+							   "Open..."]
+
+
+/************************************************************************
+ * DBase properties
+ ************************************************************************/
+
+"$strTitleNewDBaseProp"		= "New Data Base"	/* 31 chars max */
+
+"$DBaseProp-Name"			= "Name:"
+
+"$DBaseProp-GeneralTab"		= "General"
+"$DBaseProp-Launchable"		= "Launchable"
+"$DBaseProp-AutoRepeat"	    = "Compute repeats automatically"
+"$DBaseProp-ViewRepeats"	= "View repeats"
+"$DBaseProp-ViewRepeatsDays"= "days before date"
+"$DBaseProp-ConduitUse"		= "Use the conduit"
+
+
+"$DBaseProp-TransListsTab"	= "Tr. lists"
+"$DBaseProp-SortType"		= "Sort by valuation date"
+"$DBaseProp-ValueDate"		= "Display valuation date"
+"$DBaseProp-TypeForDesc"	= "Display type instead of desc."
+
+
+"$DBaseProp-SecurityTab"	= "Security"
+"$DBaseProp-AccessCode"		= "DBase access code:"
+"$DBaseProp-DenyFind"		= "Refuse global find"
+
+
+"$DBaseProp-NoteTab"		= "Note"
+
+"$DBaseProp-OK"				= "OK"
+"$DBaseProp-Cancel"			= "Cancel"
+"$DBaseProp-Delete"			= "Delete"
+
+"$strDBasePropName"			= "Name"
+"$strDBasePropRepeatDays"	= "View repeats"
+
+
+/************************************************************************
+ * DBases list dialog
+ ************************************************************************/
+ 
+"$DBasesListMenu-Misc" = "Misc"
+"$DBasesListMenu-Misc-Correct"	= "Check & correct databases"
+
+"$DBasesList-Title"			= "Accounts Data Bases"
+
+"$DBasesList-Open"			= "Open"
+"$DBasesList-New"			= "New"
+"$DBasesList-Properties"	= "Prop."
+"$DBasesList-Clone"			= "Clone"
+
+/* Name of a cloned database, %s is later replaced by the original
+   database name (15 chars max) */
+"$strDBasesListCloneFmt"	= "Clone of %s"
+
+
+/************************************************************************
+ * Statistics dialog
+ ************************************************************************/
+
+"$Stats-Title"  			= "Statistics"
+
+[$Stats-Center-Anchor]		= 57		/* Widgets center pos in pixels */
+[$Stats-Center-RightShift]	= 2			/* Pixels to shift to write to right */
+
+"$Stats-Between"			= "Between:"
+"$Stats-BetweenPlus"		= ""
+
+[$Stats-BetweenList]		=  ["Current month"
+								"Last month"
+								"Last but one month"
+								"Month>" /* !! KEEP the > at end !!! */
+								"Current year"
+								"Last year"
+								"Year>"	/* !!! KEEP the > at end !!! */
+								"Week begin/end"
+								"All"
+								"^Previous stats...>"]
+
+/* Shortcut for each previous list entry, the last entry have to be
+enclosed in parenthesis, it shows that the computed date is rounded to
+the begin/end of week (15 char max for each item) */
+[$Stats-BetweenListShortCut]=  ["Cur month"
+								"Lst month"
+								"Last-1 m."
+								"Cur year"
+								"Last year"
+								"All"
+								"(week)"]
+
+"$Stats-And"				= "and:"
+"$Stats-By"					= "By"
+
+[$Stats-ByList]				=  ["Transaction type"
+								"Payment mode"
+								"^Week"   	/* !!! KEEP the ^ !!! */
+								"Two weeks"
+								"Month"
+								"Quarter"
+								"Year"]
+/*								["^Min./Max./Average"]  !!! KEEP the ^ !!! */
+
+/* One letter shortcut for each previous list entry */
+"$strStatsByListShortCut"	=  "TMW2MQY~"
+
+"$Stats-Type"				= "Type:"
+"$Stats-Mode"				= "Mode:"
+
+"$Stats-On"					= "On"
+
+[$Stats-OnList]				=  ["All transactions"
+								"Debits only"
+								"Credits only"
+								"Flagged"]
+
+"$Stats-From"				= "From"
+
+"$Stats-ValueDate"			= "Using the valuation date"
+"$Stats-ExcludeNils"		= "Skip null amounts"
+
+"$Stats-View"				= "View"
+"$Stats-Cancel"				= "Cancel"
+
+/* In accounts popup, string to select all accounts (31 chars max) */
+"$strStatsSelectAllAccounts"= "Select all"
+
+/* In accounts popup, string to reset to one account (31 chars max) */
+"$strStatsResetAccounts"	= "Reset"
+
+/* In accounts popup label, when no room to display all names */
+"$strStatsNAccounts"		= "%d accounts"
+
+/* (31 chars max) */
+"$StatsBegDate"				= "Statistics begin date"
+"$StatsEndDate"				= "Statistics end date"
+
+
+/************************************************************************
+ * Stats results dialog
+ ************************************************************************/
+
+ /* MENU */
+"$CustomListMenu-Select" = "Selection"
+"$CustomListMenu-Select-Invert" = "Invert"
+"$CustomListMenu-Select-None"	= "Unselect all"
+"$CustomListMenu-Select-All"	= "Select all"
+
+"$CustomListMenu-Misc-Export"	= "Export..."			/9
+
+
+/* Keep the 3 first items short, because there is no much room on screen */
+[$CustomList-SumTypes]	=  ["All"
+							"Selected"
+							"Not Selected"
+							"^Invert"  /* !!! Don't delete the '^' char !!! */
+							"Unselect all"
+							"Select all"]
+
+[$CustomList-RefineBy]	=  ["Refine by transaction type"
+							"Refine by payment mode"
+							"View all"]
+
+/* Title of statistics results (31 chars max.) */
+[$strCustomListStatsTitle]	=  ["By "
+								"type"
+								"mode"
+								"week"
+								"two weeks"
+								"month"
+								"quarter"
+								"year"]
+
+/* Statistics by week, begining of week : Sunday or Monday */
+/* only the 2 first letters + space */
+[$strClistWeekStartDays] = ["Su "
+							"Mo "]
+
+/* Statistics by week, end of week : Saturday or Sunday */
+/* only the 2 first letters + space */
+[$strClistWeekEndDays]   = ["Sa "
+							"Su "]
+
+/* Statistics by year, label on each line before the #year (58 chars max) */
+"$strClistTypeYear" = "Year"
+
+/* Accounts list dialog, long clic: no transaction (31 chars max.) */
+"$strClistAccountsZeroOp" = "No transaction"
+
+/* Accounts list dialog, long clic: only one transaction (31 chars max.) */
+"$strClistAccountsOneOp" = "Only one transaction in:"
+
+/* Accounts list dialog, long clic: N transactions (28 chars max.) */
+"$strClistAccountsManyOp" = "%d transactions in:"
+
+/* Stats results list dialog, long clic: only one trans. split (31 c. max.)*/
+"$strClistTypeOneSplitOp" = "Only one transaction split"
+
+/* Stats results list dialog, long clic: N transaction splits (28 chars max.)*/
+"$strClistTypeManySplitOp" = "%lu transaction splits"
+
+/* Stats by type results list dialog, long clic: with one sub-type (31 chars)*/
+"$strClistTypesOneSubType" = "With only one sub-type"
+
+/* Stats by type results list dialog, long clic: with N sub-types (28 chars)*/
+"$strClistTypesNSubTypes" = "With %d sub-types"
+
+/* Flagged screen title (31 chars max) */
+"$strClistFlagged"              = "Flagged"
+
+/*
+ * Lists export headers
+ *
+ * Stats / modes */
+[$strExportHeadersStatsMode]	=  ["Mode name"
+									"Amount"
+									"Selected"]
+
+/* Stats / types */
+[$strExportHeadersStatsTypes]	=  ["Type name"
+									"Amount"
+									"Selected"]
+
+/* Stats / periods */
+[$strExportHeadersStatsPeriods]	=  ["Period"
+									"Amount"
+									"Selected"]
+
+/* Stats / transactions */
+[$strExportHeadersStatsTrans]	=  ["Date"
+									"Description"
+									"Amount"
+									"Cleared"
+									"Flagged"
+									"Selected"]
+
+/* Flagged transactions list */
+[$strExportHeadersFlaggedTrans]	=  ["Date"
+									"Description"
+									"Amount"
+									"Cleared"
+									"Selected"]
+
+
+/************************************************************************
+ * Clearing intro dialog (called before clearing)
+ ************************************************************************/
+
+"$ClearingIntro-Title"			= "Clearing..."
+
+"$ClearingIntro-TargetBalance"	= "Target bal.:"
+
+"$ClearingIntro-OK"				= "Next..."
+"$ClearingIntro-Cancel"			= "Cancel"
+
+"$strClearingIntroTargetBalance" = "Target balance"
+
+
+/************************************************************************
+ * Auto-clearing intro dialog (called before auto-clearing)
+ ************************************************************************/
+
+"$ClearingAutoConf-Title"			= "Auto clearing"
+
+"$ClearingAutoConf-UntilDate"		= "Transactions till"
+
+"$ClearingAutoConf-NumTransBefore"	= "On exactly"
+"$ClearingAutoConf-NumTransAfter"	= "transaction(s)"
+"$ClearingAutoConf-CommentTip"		= "(let it empty if unknown)"
+
+"$ClearingAutoConf-OK"				= "Clear"
+"$ClearingAutoConf-Cancel"			= "Cancel"
+
+"$ClearingAutoConfDate"				= "Transactions till"
+
+
+/************************************************************************
+ * Clearing list dialog
+ ************************************************************************/
+ 
+/* Char used in the auto clearing button (single char) */
+"$ClearingList-AutoClearChar"   = "C"
+ 
+/* Sort types (31 chars each) */
+[$ClearingList-SortList]		= ["By val. date"
+								   "By date"
+								   "By mode"
+								   "By type"
+								   "By chq #"
+								   "By amount"]
+ 
+/* First line in cleared list (63 chars max) */
+"$strClearingListClearedSum"	= "Already cleared sum"
+
+/* Sum types (31 chars max for each) */
+[$strClearingListSumTypes]		= ["Cleared" "Left"]
+
+
+/************************************************************************
+ * Statement number dialog (called at clearing end)
+ ************************************************************************/
+
+"$StatementNum-Title"			= "Statement number"
+
+[$StatementNum-List]			= ["Last" "Next"]
+"$StatementNum-NumLabel"		= "Statement number:"
+
+"$StatementNum-Balance"			= "For balance"
+
+"$StatementNum-Ask"				= "Do you confirm this clearing?"
+
+"$StatementNum-OK"				= "Yes"
+"$StatementNum-BackClearing"	= "No, back"
+"$StatementNum-CancelClearing"	= "Cancel all"
+
+
+/************************************************************************
+ * Repeats list dialog
+ ************************************************************************/
+
+"$RepeatsList-Title"			= "Repeats"
+
+"$RepeatsListDate"				= "Limit date"
+
+"$strRepeatsListNonRepeatsSum"	= "Non repeats sum"
+
+/************************************************************************
+ * Desc or modes list dialog
+ ************************************************************************/
+
+/* Title for either desc/macros OR modes list dialog */
+"$strTitleDescList"			= "Descriptions / Macros"	/* 31 chars max */
+"$strTitleModesList"		= "Payment modes"		/* 31 chars max */
+
+"$DescModesList-OK"			= "OK"
+"$DescModesList-New"		= "New"
+
+
+/************************************************************************
+ * Types list dialog
+ ************************************************************************/
+
+"$TypesList-Title"			= "Transaction types"
+
+"$TypesList-OK"				= "OK"
+"$TypesList-New"			= "New"
+"$TypesList-NewUnder"		= "New under"
+
+
+/************************************************************************
+ * Search dialog
+ ************************************************************************/
+
+"$Search-Title"			= "Search and flag..."
+
+"$Search-Type"			= "Type"
+"$Search-Mode"			= "Mode"
+"$Search-Desc"			= "Desc. contains"
+"$Search-Amount"		= "Amt"
+"$Search-ChequeNumFrom"	= "Chq"
+"$Search-ChequeNumTo"	= "to"
+"$Search-StatementBefore"= ""
+[$Search-StatementList]	= ["Only"
+						   "From"
+						   "Until"]
+"$Search-StatementAfter"= "statement #"
+
+"$Search-Op"			= "Criteria linked by"
+/*
+ * AND    = all tests must be OK
+ * OR	  = at least one test must be OK
+ * Not OR = all tests must be false
+ */
+[$Search-OpList]		= ["AND" "OR" "Not OR"]
+
+"$Search-Action"		= "Action:"
+[$Search-ActionList]	=  ["Flag"
+							"Unflag all then flag"
+							"Unflag"]
+
+"$Search-Search"		= "Search"
+"$Search-Cancel"		= "Back"
+
+/* (31 chars max) */
+"$SearchBegDate"		= "Search begin date"
+"$SearchEndDate"		= "Search end date"
+
+
+/************************************************************************
+ * Sum dates for the transaction list form
+ ************************************************************************/
+
+"$DateSums-Title"		= "Sum dates..."
+
+"$DateSums-On"			= "Sum on"
+"$DateSums-Month"		= "in current month"
+"$DateSums-Today"		= "Sum today +"
+"$DateSums-Days"		= "days"
+"$DateSums-Save"		= "Save"
+"$DateSums-Cancel"		= "Cancel"
+
+"$strSumDatesOnDay"		= "Sum on..."
+"$strSumDatesTodayDays"	= "Sum today +..."
+
+
+/************************************************************************
+ * Enter a numeric password
+ ************************************************************************/
+
+"$Password-Title"	 = "Access code"
+
+"$Password-ClearKey" 		= "C"		/* Only one char! */
+"$Password-OK"		 		= "OK"
+
+"$Password-MaTirelireAccess"= "To enter Ma Tirelire 2"	/* 32 chars max */
+"$Password-DBaseAccess"		= "To enter %s accounts"	/* 32 chars max */
+"$Password-Current"			= "Type the current code"	/* 32 chars max */
+"$Password-New"				= "Type the new code"		/* 32 chars max */
+"$Password-Again"			= "Confirm the new code"	/* 32 chars max */
+
+
+/************************************************************************
+ * Edit type dialog
+ ************************************************************************/
+
+"$EditType-For"				= "For"
+
+[$EditType-SignList]		= ["All transactions"
+							   "Debits only"
+							   "Credits only"]
+
+"$EditType-OnlyIn"			= "Only in"
+
+
+/************************************************************************
+ * Edit description dialog
+ ************************************************************************/
+
+"$EditDesc-OnlyIn"			= "Only in"
+
+"$EditDesc-Macro"			= "Macro:"
+
+[$EditDesc-SignList]		= ["="
+							   "-"
+							   "+"]
+
+"$EditDesc-Amount"			= "Amount:"
+
+"$EditDesc-Mode"			= "Mode:"
+
+"$EditDesc-Type"			= "Type:"
+
+"$EditDesc-ChequeAuto"		= "Auto. cheque #"
+
+"$EditDesc-Account"			= "Go to account:"
+
+"$EditDesc-Xfer"			= "Transfer to:"
+
+"$EditDesc-AutoSubmit"		= "Auto valid."
+
+
+/************************************************************************
+ * Edit mode dialog
+ ************************************************************************/
+
+"$EditMode-Label"			= "Label:"
+"$EditMode-OnlyIn"			= "Only in"
+"$EditMode-ChequeAuto"		= "Select when auto cheque number"
+"$EditMode-ValueDate"		= "Valuation date:"
+
+"$EditMode-Check1Label1"	= "if date op. <= to"
+"$EditMode-Check1Label2"	= "of month"
+"$EditMode-Check1Label3"	= "val. date ="
+"$EditMode-Check1Label4"	= "of"
+[$EditMode-Check1List]		= ["cur. month"
+							   "next month"]
+"$EditMode-Check1Label5"	= "(else chosen month + 1)"
+
+"$EditMode-Check2Label1"	= "valuation date"
+"$EditMode-Check2Label2"	= "days"
+[$EditMode-Check2List]		= ["before"
+							   "after"]
+"$EditMode-Check2Label3"	= "transaction date"
+
+"$EditMode-OK"			= "OK"
+[$EditMode-OK-Width]	= 30	/* Width of "OK" button in pixels */
+"$EditMode-Cancel"		= "Cancel"
+[$EditMode-Cancel-Width]= 35	/* Width of "Cancel" button in pixels */
+"$EditMode-Delete"		= "Delete"
+[$EditMode-Delete-Width]= 38	/* Width of "Delete" button in pixels */
+"$EditMode-New"			= "New"
+[$EditMode-New-Width]	= 31	/* Width of "New" button in pixels */
+
+
+"$strEditModeName"				= "Label"
+"$strEditModeCheck1Day1"		= "< to"
+"$strEditModeCheck1Day2"		= "val. date"
+"$strEditModeCheck2Day"			= "days"
+
+
+/************************************************************************
+ * About dialog
+ ************************************************************************/
+
+"$About-Title"	= "About Ma Tirelire 2"
+
+"$About-Freeware"		= "Freeware"
+"$About-LogoBy"			= "Logo by Gofre & Oli"
+"$About-Translators"	= "Translators"
+
+
+/************************************************************************
+ * Purge dialog
+ ************************************************************************/
+
+"$Purge-Title"	= "Transactions purge"
+
+"$Purge-Label"		= "Gather together cleared trans."
+
+"$Purge-InAccount"	= "in account initial balance"
+"$Purge-ByType"		= "in new transactions by type"
+"$Purge-ByMode"		= "in new transactions by mode"
+
+"$Purge-Between"	= "Between:"
+"$Purge-And"		= "and:"
+[$Purge-Center-Anchor] = 41		/* Widgets center pos in pixels */
+
+"$Purge-ValueDate"	= "by valuable date"
+
+"$Purge-OK"			= "Purge"
+"$Purge-Cancel"		= "Cancel"
+
+/* (31 chars max) */
+"$PurgeBegDate"		= "Purge begin date"
+"$PurgeEndDate"		= "Purge end date"
+
+
+/************************************************************************
+ * Currencies dialog
+ ************************************************************************/
+
+"$CurrenciesList-Title"			= "Currencies"
+"$CurrenciesList-RefCurrency"	= "Reference currency:"
+"$CurrenciesList-OK"			= "OK"
+"$CurrenciesList-New"			= "New"
+
+/* The default local currency used when the currencies database is
+ * created. Must be 4 chars max. */
+"$strDefaultLocalCurrency"			= "\200"
+
+/* Same as previous but for OSes < 3.5 (for example the euro symbol,
+ * appears only in OS 3.5)
+ * In "$strDefaultLocalCurrency" If you use symbols that exists in
+ * OSes < 3.5, use the same value here */
+"$strDefaultLocalCurrencyBefore35"	= "E"
+
+/* The ISO-4217 code of the default local currency. Must be 3 chars max. */
+"$strDefaultLocalCurrencyIso"		= "EUR"
+
+
+/************************************************************************
+ * Currency edit dialog
+ ************************************************************************/
+
+"$EditCurrency-InCurrency"		= "In currency:"
+"$EditCurrency-CurrencyAmount"	= "the amount:"
+"$EditCurrency-EqualsTo"		= "equals to:"
+"$EditCurrency-Iso4217"			= "ISO-4217 code:"
+
+"$strEditCurrencyName"			= "currency"
+"$strEditCurrencyAmount"		= "amount"
+"$strEditCurrencyRefAmount"		= "equals to"
+
+
+/************************************************************************
+ * Reference currency edit dialog
+ ************************************************************************/
+
+"$EditCurrency-RefCurrencyName"	= "Reference currency:"
+
+"$EditCurrency-OK"				= "OK"
+"$EditCurrency-Cancel"			= "Cancel"
+
+
+/************************************************************************
+ * Export dialog
+ ************************************************************************/
+
+"$Export-Title"			= "Export to Memo Pad"
+"$Export-Name"			= "Export name:"
+"$Export-DontSplit"		= "Don't split large export"
+"$Export-Export"		= "Export"
+"$Export-Cancel"		= "Cancel"
+
+"$strExportName"		= "Export name"
+
+
+/************************************************************************
+ * Mini statistics dialog
+ ************************************************************************/
+
+"$MiniStats-Between"	= "Between:"
+"$MiniStats-And"		= "and:"
+
+"$MiniStats-Credits"	= "Credits:"
+"$MiniStats-Debits"		= "Debits:"
+"$MiniStats-Total"		= "Total:"
+
+"$MiniStats-Back"		= "Back"
+"$MiniStats-Statistics" = "Statistics"
+
+/* (31 chars max) */
+"$MiniStatsBegDate"		= "Statistics begin date"
+"$MiniStatsEndDate"		= "Statistics end date"
+
+
+/************************************************************************
+ * The alarm rings!!!!
+ ************************************************************************/
+
+"$Alarm-Title"	= "Ma Tirelire 2 - Reminder"
+"$Alarm-OK"		= "OK"
+
+
+/************************************************************************
+ * Alert boxes
+ ************************************************************************/
+ 
+/*************************************************************
+ * This application is a beta version, use at own your risks */
+ 
+"$alertBeta-Message"	= "This version is a beta one.\n"\
+						  "USE IT AT YOUR OWN RISKS.\n"\
+						  "Send bug reports to "\
+						  "bug@Ma-Tirelire.net in english or french."
+"$alertBeta-Abort"		= "Abort"
+"$alertBeta-Continue"	= "Cont."
+"$alertBeta-ContinueOK"	= "Don't tell anymore"
+
+
+/*******************************
+ * Feature not yet implemented */
+
+"$alertNotImplementedXXX-Title"    = "Not yet implemented"
+"$alertNotImplementedXXX-Message"  = "This feature is not yet implemented."
+"$alertNotImplementedXXX-Button"   = "OK, I'll wait..."
+
+
+/********************
+ * Error in a field */
+
+"$alertErrorField-Title" 	= "Error"
+"$alertErrorField-Message" 	= "The field `^1' ^2."
+"$alertErrorField-Button" 	= "Correct"
+
+/* to fill the previous alert box: "The field `XXX' has to be filled in" */
+"$alertErrorField-ErrMiss"	= "has to be filled in"
+
+/* to fill the previous alert box: "The field `XXX' can't be nil" */
+"$alertErrorField-ErrNull"	= "can't be nil"
+
+
+/******************************
+ * Can't save the transaction */
+
+"$alertCantSave-Title"          = "Error"
+"$alertCantSave-Message"        = "Can't save the transaction."
+"$alertCantSave-Button"         = "Too bad"
+
+
+/***********************************************************************
+ * At least one erroneous transaction detected during the last hotsync */
+
+"$alertHaveToCorrectDB-Title"   = "Erroneous transaction(s)"
+"$alertHaveToCorrectDB-Message" = "At least one erroneous transaction was "\
+                    "detected during the last hotsync.\nMa Tirelire 2 can "\
+                    "repair them, do you want it to?"
+"$alertHaveToCorrectDB-No"      = "No"
+"$alertHaveToCorrectDB-Correct" = "Yes, repair"
+"$alertHaveToCorrectDB-Quit"    = "No, quit"
+
+
+/***********************************************
+ * Report the number of corrected transactions */
+
+"$alertIncorrectDBnumCorrections-Title"   = "Repair completed"
+"$alertIncorrectDBnumCorrections-Message" = "^1 transaction(s) repaired "\
+					"in ^2 accounts database(s). "\
+                    "Don't forget to verify your accounts..."
+"$alertIncorrectDBnumCorrections-Button"  = "OK"
+
+
+/***************************
+ * Overdrawn account alert */
+
+"$alertOverdrawnAccount-Title"		= "Overdrawn account"
+"$alertOverdrawnAccount-Message"	= "This account is overdrawn!"
+"$alertOverdrawnAccount-Button"		= "OK"
+
+
+/************************************
+ * No longer overdrawn account alert */
+
+"$alertNoOverdrawnAccount-Title"	= "No longer overdrawn"
+"$alertNoOverdrawnAccount-Message"	= "This account isn't overdrawn any more."
+"$alertNoOverdrawnAccount-Button"	= "OK"
+
+
+/******************************
+ * Purge cleared transactions */
+
+"$alertDeleteCleared-Title"     = "Purge cleared"
+"$alertDeleteCleared-Message"   = "Do you really want to purge all the "\
+                    "cleared transactions? This operation can't be undone."
+"$alertDeleteCleared-No"        = "No"
+"$alertDeleteCleared-Purge"     = "Purge cleared"
+
+
+/***********************
+ * No chequebook found */
+
+"$alertNoChequebook-Title"    = "Automatic cheque number"
+"$alertNoChequebook-Message"  = "This account has no chequebook. "\
+			"Edit the account properties or enter a new cheque number here."
+"$alertNoChequebook-Button"   = "OK"
+
+
+/**************************
+ * All chequebooks filled */
+
+"$alertFilledChequebooks-Title"		= "Automatic cheque number"
+"$alertFilledChequebooks-Message"	= "All account chequebooks have "\
+			"their last cheque number in use. Edit the account properties "\
+			"or enter a new cheque number here."
+"$alertFilledChequebooks-Button"	= "OK"
+
+
+/**************************
+ * Create new chequebook? */
+
+"$alertNewChequebook-Title"		= "New chequebook"
+"$alertNewChequebook-Message"	= "The cheque number of this transaction "\
+				"do not belong to any account chequebook. "\
+				"Do you want to create a new chequebook with this number "\
+				"as its first cheque?"
+"$alertNewChequebook-Create"	= "Create"
+"$alertNewChequebook-No"		= "No"
+
+
+/***************************
+ * Transaction copy : date */
+
+"$alertCopy-Title"		= "Copy transaction"
+"$alertCopy-Message"	= "What date do you want to use for the copied "\
+						  "transaction?"
+"$alertCopy-Today"		= "Today"
+"$alertCopy-Original"	= "Original"
+"$alertCopy-Cancel"		= "Cancel"
+
+
+/**********************************
+ * Too many repeated transactions */
+
+"$alertTooManyRepeats-Title"	= "Repeating transaction..."
+"$alertTooManyRepeats-Message"	= ""\
+				"It would seem that there are one or more transactions that "\
+				"repeat far into the future. This calculation may go on for "\
+				"a long time and fill up the memory.\n"\
+				"Do you want to..."
+"$alertTooManyRepeats-Stop"		= "Stop"
+"$alertTooManyRepeats-Continue"	= "Continue"
+
+
+/*************************************
+ * A macro definition can't be empty */
+
+"$alertEmptyMacroDef-Title"	  = "Empty macro!"
+"$alertEmptyMacroDef-Message" = "A macro can not be totally empty."
+"$alertEmptyMacroDef-Button"  = "Fill..."
+
+
+/*****************************************************************
+ * When auto-submit is checked, the macro have to be well filled */
+
+"$alertMacroCantAutoSubmit-Title"	= "Auto-validation can't be done"
+"$alertMacroCantAutoSubmit-Message" = "When auto-validation is "\
+									  "enabled, one must type an amount."
+"$alertMacroCantAutoSubmit-Button"  = "Correct..."
+
+
+/************************************
+ * Really delete this description ? */
+
+"$alertDescDelete-Title"	= "Description delete"
+"$alertDescDelete-Message"	= "Do you really want to delete this description?"
+"$alertDescDelete-Yes"		= "Yes"
+"$alertDescDelete-No"		= "No"
+
+
+/*****************************
+ * Really delete this mode ? */
+
+"$alertModeDelete-Title"	= "Payment mode delete"
+"$alertModeDelete-Message"	= "If some transactions or macros depend on this "\
+			"mode, they will be reaffected to the default mode. Delete ?"
+"$alertModeDelete-Yes"		= "Yes"
+"$alertModeDelete-No"		= "No"
+
+
+/*****************************
+ * Really delete this type ? */
+
+"$alertTypeDelete-Title"	= "Transaction type delete"
+"$alertTypeDelete-Message"	= "If some transactions or macros depend on this "\
+			"type, they will be reaffected to the default type. Delete ?"
+"$alertTypeDelete-Yes"		= "Yes"
+"$alertTypeDelete-No"		= "No"
+
+
+/*******************************************************
+ * Really want to change subtypes sign for this type ? */
+
+"$alertTypeChangeChildrenSign-Title"	= "Sub-types sign change"
+"$alertTypeChangeChildrenSign-Message"	= ""\
+		"If you valid this type, all its sub-types will change too. "\
+		"Do you want this?"
+"$alertTypeChangeChildrenSign-Yes"		= "Yes"
+"$alertTypeChangeChildrenSign-No"		= "No"
+
+
+/**************************************************************
+ * When a type/mode is deleted displays # of modified records */
+
+"$alertRecordsModified-Title"	= "Modified records"
+"$alertRecordsModified-Message"	= "Modified records number:\n"\
+								  "- Transactions: ^1 on ^2 DBase(s)\n"\
+								  "- Macros: ^3"
+"$alertRecordsModified-Button"	= "OK"
+
+
+/************************************************************************
+ * Want to delete a currency but it used as main currency in an account */
+
+"$alertAccountMainCurrency-Title"	 = "Protected main currency"
+"$alertAccountMainCurrency-Message"	 = ""\
+		"This currency can not be deleted, because it is the main currency "\
+		"of ^1 account(s) on ^2 DBase(s)."
+"$alertAccountMainCurrency-Button"	 = "OK"
+
+
+/********************************
+ * Really delete this currency? */
+
+"$alertCurrencyDelete-Title"	= "Currency delete"
+"$alertCurrencyDelete-Message"	= "If some transaction use this currency, "\
+		"they will be reaffected to use the reference currency. Delete?"
+"$alertCurrencyDelete-Yes"		= "Yes"
+"$alertCurrencyDelete-No"		= "No"
+
+
+/**************************************************************
+ * When a currency is deleted displays # of modified records */
+
+"$alertCurrDelRecordsModified-Title"	= "Modified records"
+"$alertCurrDelRecordsModified-Message"	= "^1 transaction modified "\
+										  "on ^2 DBase(s)."
+"$alertCurrDelRecordsModified-Button"	= "OK"
+
+
+/***********************************
+ * Bad access code : access denied */
+
+"$alertPasswordBadCode-Title"	= "Access denied"
+"$alertPasswordBadCode-Message"	= "Bad access code!\nRetry..."
+"$alertPasswordBadCode-Button"	= "OK"
+
+
+/**************************************************
+ * While code change, the two codes must be equal */
+
+"$alertPasswordCodesMustBeEqual-Title"		= "Erreur"
+"$alertPasswordCodesMustBeEqual-Message"	= ""\
+		"The two access codes must be equal!\nRetry..."
+"$alertPasswordCodesMustBeEqual-Button"		= "OK"
+
+
+/*********************************************************************
+ * The external DB of currencies is not present, propose to download *
+ * it from http://ma-tirelire.net								     */
+
+"$alertNoExternalCurrencyDB-Title"		= "External currency DBase"
+"$alertNoExternalCurrencyDB-Message"	= ""\
+		"You do not have an external currency DBase. "\
+		"You can download it free of charge on "\
+		"http://ma-tirelire.net/currencies"
+"$alertNoExternalCurrencyDB-Button"		= "OK"
+
+
+/******************************************************************
+ * The external DB of currencies is present but don't contain the *
+ * reference currency ISO-4217 code								  */
+
+"$alertNoRefInExternalCurrencyDB-Title"		= "External currency DBase"
+"$alertNoRefInExternalCurrencyDB-Message"	= ""\
+		"The ISO-4217 code of the used reference currency can not be "\
+		"found in the external currency DBase.\n"\
+		"Go to http://ma-tirelire.net/currencies for details."
+"$alertNoRefInExternalCurrencyDB-Button"	= "OK"
+
+
+/********************************************************************
+ * The user wants to delete an accounts DB, ask confirmation before *
+ * proceeding...												    */
+
+"$alertDBaseDelete-Title"	= "DBase delete"
+"$alertDBaseDelete-Message"	= ""\
+		"Are you really sure to delete this accounts Data Base?\n"\
+		"Once done, this DBase and all its accounts will be lost..."
+"$alertDBaseDelete-Yes"		= "Delete!"
+"$alertDBaseDelete-No"		= "No"
+
+
+/****************************************************************
+ * The user wants to delete an account, ask confirmation before *
+ * proceeding...											    */
+
+"$alertAccountDelete-Title"		= "Account delete"
+"$alertAccountDelete-Message"	= ""\
+		"Are you really sure to delete this account?\n"\
+		"Once done, this account and all its transactions will be lost..."
+"$alertAccountDelete-Yes"		= "Delete!"
+"$alertAccountDelete-No"		= "No"
+
+
+/********************************************
+ * An account already exists with this name */
+
+"$alertAccountAlreadyExists-Title"		= "Account already exists..."
+"$alertAccountAlreadyExists-Message"	= ""\
+		"An account with this name already exists."
+"$alertAccountAlreadyExists-Button"		= "Correct"
+
+
+/*************************************************************
+ * The overdrawn threshold have to be lesser or equal to the *
+ * non-overdrawn threshold								     */
+
+"$alertAccountPropInvalidOverdrawnThreshold-Title"	= "Invalid threshold..."
+"$alertAccountPropInvalidOverdrawnThreshold-Message"= ""\
+		"The overdrawn threshold have to be less or equal than the no "\
+		"longer overdrawn one."
+"$alertAccountPropInvalidOverdrawnThreshold-Button"		= "Correct"
+
+
+/********************************************************
+ * The account currency change, ask for confirmation... */
+
+"$alertAccountChangeCurrency-Title"		= "Currency change..."
+"$alertAccountChangeCurrency-Message"	= ""\
+		"Th change of the account currency will convert all transactions "\
+		"of this account (and its properties) to the new currency. "\
+		"Considering rounding errors, it will not be possible to undo EXACTLY."
+"$alertAccountChangeCurrency-Yes"		= "Convert all!"
+"$alertAccountChangeCurrency-No"		= "Cancel"
+
+
+/*************************
+ * No linked transaction */
+
+"$alertOpFormXferNoRec-Title"   = "Linked transaction"
+"$alertOpFormXferNoRec-Message" = ""\
+		"The linked transaction was deleted, probably consequent to "\
+		"a purge of the cleared transactions in the transfer account."
+"$alertOpFormXferNoRec-Button"  = "OK"
+
+/*******************************************
+ * Remove link between linked transactions */
+
+"$alertOpFormXferDel-Title"			= "Remove the link"
+"$alertOpFormXferDel-Message"		= ""\
+				"Do you really want to remove the link between these two "\
+				"transactions? This will make them completely independent "\
+				"of one another."
+"$alertOpFormXferDel-No"			= "No"
+"$alertOpFormXferDel-DeleteLink"	= "Remove the link"
+
+/*****************************************************************
+ * Splits sum is lower than transaction sum: just a warning here */
+
+"$alertOpFormSplitsWarning-Title"	= "Splits sum error"
+"$alertOpFormSplitsWarning-Message"	= ""\
+				"The splits sum is lower than the transaction amount."
+"$alertOpFormSplitsWarning-Continue" = "Save anyway"
+"$alertOpFormSplitsWarning-Correct"	= "Correct"
+
+/*************************************************************
+ * Splits sum is greater than transaction sum: it's an error */
+
+"$alertOpFormSplitsError-Title"		= "Splits sum error"
+"$alertOpFormSplitsError-Message"	= ""\
+				"The splits sum is greater than the transaction amount.\n"\
+				"It is not allowed."
+"$alertOpFormSplitsError-Continue"	= "Chg trans. amount"
+"$alertOpFormSplitsError-Correct"	= "Correct"
+
+/**********************************************************************
+ * Xfer splits sum is lower than transaction sum: just a warning here */
+
+"$alertOpFormSplitsXferWarning-Title"	= "Xfer splits sum error"
+"$alertOpFormSplitsXferWarning-Message"	= ""\
+				"The linked transaction is splitted. "\
+				"The splitted sum is lower than the new transaction sum."
+"$alertOpFormSplitsXferWarning-Continue"= "Save anyway"
+"$alertOpFormSplitsXferWarning-Correct"	= "Correct"
+
+/******************************************************************
+ * Xfer splits sum is greater than transaction sum: it's an error */
+
+"$alertOpFormSplitsXferError-Title"		= "Xfer splits sum error"
+"$alertOpFormSplitsXferError-Message"	= ""\
+				"The linked transaction is splitted. "\
+				"The splitted sum is greater than the new transaction sum.\n"\
+				"It is not allowed."
+"$alertOpFormSplitsXferError-Correct"	= "Correct"
+
+/******************
+ * Outdated alarm */
+
+"$alertAlarmBeforeToday-Title"		= "Outdated alarm!"
+"$alertAlarmBeforeToday-Message"	= ""\
+		"The transaction date has passed, so no alarm can be created!"
+"$alertAlarmBeforeToday-Edit"		= "Edit"
+"$alertAlarmBeforeToday-Delete"		= "Delete the alarm"
+
+/***********************************
+ * Transaction delete confirmation */
+
+"$alertTransactionDelete-Title"		= "Transaction delete"
+"$alertTransactionDelete-Message"	= "Do you really want to delete this "\
+									  "transaction?"
+"$alertTransactionDelete-Yes"		= "Yes"
+"$alertTransactionDelete-No"		= "No"
+
+/******************
+ * Delete flagged */
+
+"$alertDeleteMarked-Title"		= "Delete flagged"
+"$alertDeleteMarked-Message"	= "Do you really want to delete all the "\
+								  "flagged transactions in this account? "\
+								  "The deletion can't be undone."
+"$alertDeleteMarked-No"			= "No"
+"$alertDeleteMarked-Delete"		= "Delete flagged"
+
+/*************************************************
+ * Transform flagged transaction to cleared ones */
+
+"$alertMarkedToChecked-Title"		= "Transform flagged"
+"$alertMarkedToChecked-Message"		= "Do you really want to mark all the "\
+					"flagged transactions in this account as cleared? This "\
+					"can't be undone."
+"$alertMarkedToChecked-No"			= "No"
+"$alertMarkedToChecked-Transform"	= "Transform flagged"
+
+/***************************
+ * Delete all transactions */
+
+"$alertDeleteAll-Title"		= "Delete all!"
+"$alertDeleteAll-Message"	= "Do you really want to delete all the "\
+					"transactions in this account? The deletion can't be "\
+					"undone."
+"$alertDeleteAll-No"		= "No"
+"$alertDeleteAll-DeleteAll" = "Delete all!"
+
+/********************************
+ * At the end of flagged screen */
+
+"$alertFlaggedUnflag-Title"		= "Unflag unselected..."
+"$alertFlaggedUnflag-Message"	= "Do you want to unflag the transactions "\
+								  "you just unselected?"
+"$alertFlaggedUnflag-No"		= "No"
+"$alertFlaggedUnflag-Yes"		= "Yes, unflag!"
+
+/**************************************
+ * Search didn't flag any transaction */
+ 
+"$alertSearchNone-Title"	= "Search..."
+"$alertSearchNone-Message"	= "No transaction found."
+"$alertSearchNone-Button"	= "OK"
+
+/*******************************************
+ * Search flagged at least one transaction */
+ 
+"$alertSearchMany-Title"	= "Search..."
+"$alertSearchMany-Message"	= "^1 transaction(s) found and flagged."
+"$alertSearchMany-OK"		= "OK"
+"$alertSearchMany-See"		= "See flagged..."
+
+/**************************************************************
+ * Clearing confirmation when no automatic statement handling */
+
+"$alertClearingConfirm-Title"	= "Clearing confirmation"
+"$alertClearingConfirm-Message"	= "Do you confirm this clearing?"
+"$alertClearingConfirm-OK"		= "Yes"
+"$alertClearingConfirm-Back"	= "No, back"
+"$alertClearingConfirm-Cancel"	= "Cancel all"
+
+/**********************************************************
+ * User statement number is null or empty, ask to confirm */
+ 
+"$alertStatementNumberConfirmEmpty-Title"	= "No statement number"
+"$alertStatementNumberConfirmEmpty-Message"	= "The clearing will be done, "\
+										"but without any statement number.\n"\
+										"Are you sure you want that?"
+"$alertStatementNumberConfirmEmpty-No"		= "No, correct"
+"$alertStatementNumberConfirmEmpty-Yes"		= "Yes!"
+
+/******************************************
+ * Auto clearing, no transaction to clear */
+
+"$alertAutoClearNone-Title"		= "No transaction to clear"
+"$alertAutoClearNone-Message"	= "There is no transaction or all the "\
+					"transactions are already cleared. "\
+                    "So auto clearing would be pointless!"
+"$alertAutoClearNone-OK"		= "Oh well"
+
+/*************************************************
+ * Auto clearing, too many transactions to clear */
+
+"$alertAutoClearTooMany-Title"		= "Too many transactions"
+"$alertAutoClearTooMany-Message"	= ""\
+					"Too many transactions are not cleared. "\
+					"48 transactions can be auto cleared at the most. "\
+					"Clear some transactions to reach this threshold."
+"$alertAutoClearTooMany-OK"			= "OK"
+
+/************************************
+ * Auto clearing, no solution found */
+
+"$alertAutoClearNotFound-Title"		= "Auto clearing"
+"$alertAutoClearNotFound-Message"	= "No combination matches, "\
+				"verify the typed target balance and the `Cleared' amount. "\
+                "If thay are correct, at least one transaction is missing."
+"$alertAutoClearNotFound-OK"		= "OK"
+
+/*******************************************
+ * Repeats view, view original transaction */
+
+"$alertRepeatsViewOrig-Title"	= "Future transaction"
+"$alertRepeatsViewOrig-Message"	= "This transaction don't exist yet.\n"\
+				"Do you want to edit the transaction from which it would be "\
+				"created?"
+"$alertRepeatsViewOrig-No"		= "No"
+"$alertRepeatsViewOrig-Yes"		= "Yes"
+
+/*************************************
+ * No problem after DBase correction */
+
+"$alertAllBasesAreOK-Title"		= "No problem"
+"$alertAllBasesAreOK-Message"	= "No problem detected at all."
+"$alertAllBasesAreOK-OK"		= "OK"
+
+
+/************************************************************************
+ * Alert messages for system errors...
+ ************************************************************************/
+
+"$alertDmErrInvalidDatabaseName-Title"		= "Invalid DBase name"
+"$alertDmErrInvalidDatabaseName-Message"	= ""\
+		"The chosen name contains invalid characters."
+"$alertDmErrInvalidDatabaseName-Button"		= "Correct"
+
+"$alertDmErrAlreadyExists-Title"	= "DBase already exists"
+"$alertDmErrAlreadyExists-Message"	= "A DBase with this name already exists."
+"$alertDmErrAlreadyExists-Button"	= "Correct"
+
+"$alertMemErrNotEnoughSpace-Title"		= "Not enough memory"
+"$alertMemErrNotEnoughSpace-Message"	= ""\
+		"Not enough memory to proceed this operation.\n" \
+		"(^1)"
+"$alertMemErrNotEnoughSpace-Button"		= "OK"
+
+"$alertGenericError-Title"				= "Error..."
+"$alertGenericError-Message"			= ""\
+		"An error with code #^2 occured.\n"\
+		"(^1)\n"\
+		"Contact bug@ma-tirelire.net with this code."
+"$alertGenericError-Button"				= "OK"
+
+
+/************************************************************************
+ * Strings
+ ************************************************************************/
+
+/* Statement number management popup, keep the statement num (47 chars max) */
+"$strStatementNumKeep"   	= "Keep statement #%lu"
+
+/* Statement number management popup, cancel the statement num (47 chars max)*/
+"$strStatementNumCancel" 	= "Cancel the statement number"
+
+/* Statement number management popup, just the number (47 chars max)*/
+"$strStatementNumNumber" 	= "Statement #%lu"
+
+/* Statement number management popup, another statement num (47 chars max) */
+"$strStatementNumAnother"	= "Choose another statement number..."
+
+/* Mode "Unknown" entry (31 chars max) */
+"$strModesListUnknown"	= "Unknown"
+
+/* Type "Unfilled" entry (31 chars max) */
+"$strTypesListUnfiled"	= "Unfilled"
+
+/* "Edit..." entry in Descriptions, Modes, Types and Currencies lists
+ * (31 chars max) */ 
+"$strEditList" = "Edit..."
+
+/* "Any" entry in Modes and Types lists (stats & search popups) 31 chars max */
+"$strAnyList"			= "Any"
+
+/* Note used for created fake transaction when the currency of an
+ * account is changed (63 chars max) */
+"$strConvAccountCurrencyRound" = "Account currency change conversion round"
+
+/* Progress bar label used when computing repeats (50 chars max) */
+"$strProgressBarRepeats"		= "Computing repeats (pass #%d)"
+
+/* Progress bar label used when computing accounts sums (63 chars max) */
+"$strProgressBarAccountsBalances" = "Computing accounts balances..."
+
+/* Progress bar label used when computing the account sum (63 chars max) */
+"$strProgressBarAccountBalance"	= "Computing account balance..."
+
+/* Progress bar label used during a cleared purge (63 chars max) */
+"$strProgressBarPurge"			= "Cleared purge in progress..."
+"$strProgressBarPurgeGather"	= "Gathering cleared..."
+
+/* Progress bar label used when searching auto cheque numbers (63 chars max) */
+"$strProgressBarAutoChequeSearch" = "Searching used cheque #..."
+
+/* Pbar label used when deleting all transactions of an acc. (63 chars max) */
+"$strProgressBarDeleteAllInAccount" = "Deleting account contents..."
+
+/* Progress bar label used when translating flagged -> cleared (63 chars max)*/
+"$strProgressBarFlaggedToCleared"	= "Flagged -> cleared..."
+
+/* Pbar label used when deleting flagged (63 chars max) */
+"$strProgressBarDeleteFlagged"		= "Deleting flagged..."
+
+/* Progress bar label used when manipulating flagged (63 chars max) */
+"$strProgressBarTransformFlagged"	= "Transforming flagged..."
+
+/* Progress bar label used when "go to XXX" search (63 chars max) */
+"$strProgressBarGotoSearch"			= "Go to in progress..."
+
+/* Progress bar label used when changing account currency (63 chars max) */
+"$strProgressBarChangeAccountCurrency"	= "Changing currency..."
+
+/* Progress bar label used when deleting an account (63 chars max) */
+"$strProgressBarDeleteAccount1"		= "Deleting account..."
+"$strProgressBarDeleteAccount2"		= "Cleaning..."
+
+/* Progress bar label used when cloning a database (63 chars max) */
+"$strProgressBarDBItemCloning"		= "Database cloning..."
+
+/* Progress bar label used when computing sum stats (63 chars max) */
+"$strProgressBarStats"				= "Computing amounts..."
+
+/* Progress bar label used when unflagging before searching (63 chars max) */
+"$strProgressBarSearchUnflagAll"	= "Unflagging all..."
+
+/* Progress bar label used while searching (63 chars max) */
+"$strProgressBarSearch"				= "Searching..."
+
+/* Progress bar label used during export (63 chars max) */
+"$strProgressBarExport"				= "Exporting..."
+
+/* Progress bar label used during auto clearing process (63 chars max) */
+"$strProgressBarAutoClearing"		= "Auto clearing..."
+
+/* Auto created types, modes and currencies
+   (%d will be replaced by the ID, let it)
+   (30 chars max including %d) */
+"$strAutoCreatedTypeName"	= "Auto created type #%d"
+/* (30 chars max including %d) */
+"$strAutoCreatedModeName"	= "Auto created mode #%d"
+"$strAutoCreatedCurrencyName"= "#%d"		 /* 3 char max including %d */
+
+
+/* All months in the year (31 chars max for each month) MUST BE CAPITALIZED */
+[$strLongMonths]	 = ["January"
+						"February"
+						"March"
+						"April"
+						"May"
+						"June"
+						"July"
+						"August"
+						"September"
+						"October"
+						"November"
+						"December"]
+
+/* All months in the year in short form */
+[$strShortMonths]	= ["jan" "feb" "mar" "apr" "may" "jun"
+					   "jul" "aug" "sep" "oct" "nov" "dec"]
+
+END

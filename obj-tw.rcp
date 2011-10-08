@@ -1,0 +1,1704 @@
+TRANSLATION "TW"
+BEGIN
+
+/************************************************************************
+ * Put here your language name (in your language), your full name
+ * and your e-mail address (you can set "your-language@Ma-Tirelire.net")
+ ************************************************************************/
+
+"$LanguageLang"		= "Traditional Chinese"
+"$LanguageAuthor"	= "risumfiriri"
+"$LanguageEmail"	= "risumfiriri@gmail.com"
+
+
+/************************************************************************
+ * Default menu (/X are shortcuts)
+ ************************************************************************/
+
+"$DefaultMenu-Edit" = "編輯"
+"$DefaultMenu-Edit-Undo"			= "回復"			/Z
+"$DefaultMenu-Edit-Cut"				= "剪下"				/X
+"$DefaultMenu-Edit-Copy"			= "複製"			/C
+"$DefaultMenu-Edit-Paste"			= "貼上"			/P
+"$DefaultMenu-Edit-SelectAll"		= "全選"		/A
+
+"$DefaultMenu-Misc" = "其他"
+"$DefaultMenu-Misc-About"			= "關於 Ma Tirelire 2"
+
+
+/************************************************************************
+ * Transactions list dialog
+ ************************************************************************/
+
+"$TransListMenu-Account" = "帳戶"
+"$TransListMenu-Account-Clearing"		= "結算..."			/I
+"$TransListMenu-Account-PurgeCleared"	= "刪除已結算..."
+"$TransListMenu-Account-Repeats"		= "檢視循環..."		/R
+"$TransListMenu-Account-DeleteAll" 		= "刪除全部..."
+"$TransListMenu-Account-Properties"		= "屬性..."
+"$TransListMenu-Account-DBProperties"	= "資料庫屬性..."
+"$TransListMenu-Account-Accounts"		= "帳戶列表..."	/O
+"$TransListMenu-Account-DBases"			= "管理資料庫..."	/B
+
+"$TransListMenu-Flagged" = "標記"
+"$TransListMenu-Flagged-Flag"		= "搜尋及標記..."		/H
+"$TransListMenu-Flagged-FlagPage" 	= "標記整頁"			/G
+"$TransListMenu-Flagged-UnflagPage" = "取消整頁標記"
+"$TransListMenu-Flagged-InvertPage"	= "整頁反向標記"
+"$TransListMenu-Flagged-UnflagAll" 	= "取消全部標記"				/U
+"$TransListMenu-Flagged-InvertAll"	= "全部反向標記"
+"$TransListMenu-Flagged-FlagClear" 	= "標記 -> 結算"		/E
+"$TransListMenu-Flagged-DeleteFlag" = "刪除已標記..."
+"$TransListMenu-Flagged-Screen"		= "檢視已標記..."			/V
+
+"$TransListMenu-GoTo" = "移至"
+"$TransListMenu-GoTo-FirstNotClear"	= "第一筆未結算"
+"$TransListMenu-GoTo-NextNotClear"	= "下一筆未結算"
+"$TransListMenu-GoTo-FirstNotFlag"	= "第一筆未標記"
+"$TransListMenu-GoTo-NextNotFlag"	= "下一筆未標記"
+"$TransListMenu-GoTo-FirstNotClearFlag" = "第一筆未結算未標記"
+"$TransListMenu-GoTo-NextNotClearFlag"  = "下一筆未結算未標記"
+"$TransListMenu-GoTo-FirstFlag"		= "第一筆標記"			/F
+"$TransListMenu-GoTo-NextFlag"		= "下一筆標記"			/N
+"$TransListMenu-GoTo-Date"			= "日期..."					/A
+
+"$TransListMenu-Misc" = "其他"
+"$TransListMenu-Misc-Copy"			= "複製總和"				/C
+"$TransListMenu-Misc-Desc"			= "敘述..."			/D
+"$TransListMenu-Misc-Types"			= "類別..."				/T
+"$TransListMenu-Misc-Modes"			= "模式..."				/M
+"$TransListMenu-Misc-Curr"			= "貨幣..."			/Y
+"$TransListMenu-Misc-Stats"			= "統計..."			/S
+"$TransListMenu-Misc-MiniStats"		= "小計..."		/8
+"$TransListMenu-Misc-Prefs"			= "偏好設定..."			/P
+"$TransListMenu-Misc-ExeRepeats"	= "計算循環"
+
+
+/* The circomflex char must be present at the beginning of "^Dates..." item */
+[$TransList-Sums] = ["全部"
+					 "最糟"
+					 "00/00"
+					 "已結算"
+					 "已標記"
+					 "結算/標記"
+					 "00/00"
+					 "00/00"
+					 "^總和設定..." /* !!! Don't delete the '^' char !!! */
+					 "日期..."]
+
+[$TransList-ContextMenu] =  ["複製..."
+							 "刪除..."
+							 "日期..."
+							 "時間..."
+							 "編輯..."
+							 "取消結算"
+							 "取消標記"]
+
+"$strTransListContextMenuClear" 	= "結算"
+"$strTransListContextMenuUnclear" 	= "取消結算"
+"$strTransListContextMenuFlag"		= "標記"
+"$strTransListContextMenuUnflag" 	= "取消標記"
+
+/* Long-clic screen/alarm remainder one "On [date] at [time]" (63 chars max) */
+"$strTransListDateTime"				= "於 %s 於 %s"
+
+/* Long-clic screen, the valuation date (63 chars max) %s is replaced by date*/
+"$strTransListValuationDate"		= "估值日: %s"
+
+/* Long-clic screen: separator between amount and mode (63 chars max) */
+"$strTransListSepAmountMode"		= ", 模式 "
+
+/* Long-clic screen, the cheque number (63 chars max) */
+"$strTransListCheckNum"				= "支票號碼 #%s"
+
+/* Long-clic screen, the statement number (63 chars max) */
+"$strTransListStatementNum"			= "結單號碼 #%s"
+
+/* Long-clic screen, every week repeat (63 chars max.) */
+"$strTransListRepeatWeekly"			= "每週循環"
+
+/* Long-clic screen, every N weeks repeat (63 chars max.) */
+"$strTransListRepeatNweekly"		= "每 %d 週循環"
+
+/* Long-clic screen, every month repeat (63 chars max.) */
+"$strTransListRepeatMonthly"		= "每月循環"
+
+/* Long-clic screen, end of each month repeat (63 chars max.) */
+"$strTransListRepeatMonthlyEnd"		= "每月底循環"
+
+/* Long-clic screen, every N months repeat (63 chars max.) */
+"$strTransListRepeatNmonthly"		= "每 %d 月循環"
+
+/* Long-clic screen, every year repeat (63 chars max.) */
+"$strTransListRepeatAnnually"		= "每年循環"
+
+/* Long-clic screen, every N year repeat (63 chars max.) */
+"$strTransListRepeatNannually"		= "每 %d 年循環"
+
+/* Long-clic screen, transaction type (63 chars max.) */
+"$strTransListType"					= "類別: %s"
+
+/* Long-clic screen, transfer TO ... (63 chars max.) */
+"$strTransListXferTo"				= "轉移到 "
+
+/* Long-clic screen, transfer FROM ... (63 chars max.) */
+"$strTransListXferFrom"				= "轉移自 "
+
+/* Long-clic screen, transfer TO unknown account (63 chars max.) */
+"$strTransListXferToUnknown"		= "轉移到不明帳戶"
+
+/* Long-clic screen, transfer FROM unknown account (63 chars max.) */
+"$strTransListXferFromUnknown"		= "轉移自不明帳戶"
+
+/* Long-clic screen, number of sub-transactions (63 chars max.) */
+"$strTransListNumSplits"			= "%d 個子交易"
+
+/* Title of "Go to date..." dialog (63 chars max.) */
+"$strTransListGotoDate"				= "移至日期..."
+
+
+"$strTransListAccountProp"			= "帳戶屬性..."/*31 chars max*/
+
+
+/************************************************************************
+ * Transaction edit dialog
+ ************************************************************************/
+ 
+"$TransMenu-GoTo"		= "移至"
+"$TransMenu-GoTo-Prev"			= "前一筆"
+"$TransMenu-GoTo-Next"			= "下一筆"
+"$TransMenu-GoTo-PrevNotClear"	= "前一筆未結算"
+"$TransMenu-GoTo-NextNotClear"	= "下一筆未結算"
+"$TransMenu-GoTo-PrevFlag"		= "前一筆已標記"
+"$TransMenu-GoTo-NextFlag"		= "下一筆已標記"
+
+"$TransMenu-Edit"		= "編輯"
+"$TransMenu-Edit-TransCopy"		= "複製交易..."			/O
+
+"$TransMenu-Misc"		= "其他"
+
+
+"$Trans-Date"				= "日期:"
+"$Trans-Desc"				= "敘述"
+
+"$Trans-MainTab"			= "主要"
+
+"$Trans-Mode"				= "模式:"
+"$Trans-ChkNum"				= "#"
+
+"$Trans-OnValueDate"		= "於"
+[$Trans-OnValueDate-Add]	= 22 /*in pixels,to shift value date widget right*/
+
+"$Trans-Type"				= "類別:"
+
+"$Trans-Statement"			= "號碼:"
+"$Trans-Clear"				= "結算"
+
+"$Trans-Xfer"				= "轉移:"
+
+
+"$Trans-RepeatTab"			= "循環"
+
+"$Trans-Repeat"				= "循環:"
+[$Trans-RepeatList]     =  ["從不"
+							"每週"
+							"每兩週"
+							"每月"
+							"每月底"
+							"每兩個月"
+							"每三個月"
+							"每四個月"
+							"每六個月"
+							"每年"
+							"每兩年"]
+
+/* Second item in this list must not contain more than 14 chars */
+[$Trans-RepeatChoices]	=  ["選擇日期..."
+							"不結束"
+							"條件"]
+
+"$Trans-RepeatEndsAt"	= "結束於:"
+"$Trans-RepeatTimes"	= "條件為"
+
+
+"$Trans-BreakdownTab"		= "子交易"
+
+"$Trans-SplitCreate"		= "新建"
+"$Trans-SplitSortBy"		= "於"
+[$Trans-SplitSortList]		= ["敘述" "類別" "金額"]
+
+/* 63 chars max */
+"$strOpFormSplitsRemain"	= "剩餘"
+
+
+"$Trans-CurrencyTab"		= "貨幣"
+
+"$Trans-CurrencyNone"		= "無貨幣..."
+"$Trans-CurrencyInAccount"	= "帳戶:"
+"$Trans-CurrencyRate"		= "匯率:"
+
+
+"$Trans-OK"		= "OK"
+"$Trans-Cancel"	= "取消"
+"$Trans-Delete"	= "刪除"
+
+/* Debit/Credit label with its colon (16 chars max.) */
+[$TransDebCredLabel]	=  ["支出:"
+							"收入:"]
+
+/* Debit/Credit title with its ellipsis (16 chars max.) */
+[$TransDebCredTitle]	=  ["支出..."
+							"收入..."]
+
+/* Title of the date selection dialog (31 chars max) */
+"$OpDate"		= "交易日"
+
+/* Title of the time selection dialog (31 chars max) */
+"$OpTime"		= "交易時間"
+
+/* Title of the value date selection dialog (31 chars max) */
+"$OpValueDate"	= "估值日"
+
+/* Title of the repeat end date selection dialog (31 chars max) */
+"$OpRepeatEndDate"	= "循環結束日"
+
+/* Transfer popup label if no transfer (32 chars max.) */
+"$strOpFormNoXfer" = "無"
+
+/* Value date label if no value date (14 chars max.) */
+"$strOpNoValueDate" = "同一日"
+
+/* Names of Debit/Credit label (31 chars max.) */
+"$strOpFormErrorDebitLabel"		= "支出"
+"$strOpFormErrorCreditLabel"	= "收入"
+
+/* Name of the currency amount field (31 chars max.) */
+"$strOpFormErrorCurrencyAmount"	= "帳戶"
+
+
+/************************************************************************
+ * Edit split dialog
+ ************************************************************************/
+
+"$EditSplit-Amount"				= "金額:"
+"$strEditSplitAmount"			= "金額"
+
+[$Trans-SplitSortByChoices]		=  ["敘述"
+									"類別"
+									"金額"]
+
+
+/************************************************************************
+ * Preferences dialog
+ ************************************************************************/
+
+"$PrefsForm-Title"		= "偏好設定"
+
+"$Prefs-GeneralTab"		= "一般"
+"$Prefs-LeftHandMode"	= "左手模式"
+"$Prefs-SelectFocusedNumFlds" = "自動選擇數字輸入"
+"$Prefs-AccessCode"		= "密碼:"
+"$Prefs-AutoLockAfter"	= "自動上鎖:"
+[$Prefs-AutoLockDelays]	= ["從不" "30 秒" "1 分鐘" "2 分鐘" "5 分鐘"]
+"$Prefs-AutoLockOnPowerOff" = "關機自動上鎖"
+
+"$Prefs-ListsTab"		= "列表"
+"$Prefs-ListFont"		= "使用字型:"
+"$Prefs-ColorTitle"		= "使用顏色..."
+"$Prefs-RepeatColor"	= "循環"
+"$Prefs-XferColor"		= "轉移"
+"$Prefs-CreditColor"	= "收入"
+"$Prefs-DebitColor"		= "支出"
+"$Prefs-BoldFace"		= "粗體"
+
+"$Prefs-TransactionTab"	= "交易"
+"$Prefs-DescReplace"		= "敘述取代"
+"$Prefs-FirstNext"			= "第一筆/下一筆:"
+[$Prefs-FirstNextList]		=  ["未結算"
+								"未標記"
+								"未結算未標記"
+								"已標記"]
+"$Prefs-Os3TimeSelector"	= "OS>3.0 時間選擇"
+
+"$Prefs-Save"			= "儲存"
+"$Prefs-Cancel"			= "取消"
+
+"$Prefs-CodeEnabled"	= "啟用"			/* 16 chars max */
+"$Prefs-CodeDisabled"	= "不啟用"		/* 16 chars max */
+
+
+/************************************************************************
+ * Account properties
+ ************************************************************************/
+
+"$AccountProp-Name"			= "名稱:"
+
+"$AccountProp-GeneralTab"	= "主要設定"
+"$AccountProp-Devise"						= "帳戶貨幣:"
+"$AccountProp-InitialBalance"				= "起始平衡:"
+"$AccountProp-Statements"					= "使用結單號碼"
+"$AccountProp-OverdrawnWarning"				= "透支提醒"
+"$AccountProp-OverdrawnWarningThreshold"	= "閾值:"
+"$AccountProp-OverdrawnThreshold"			= "透支:"
+"$AccountProp-NonOverdrawnThreshold"		= "低於:"
+
+
+"$AccountProp-TransactionTab"= "交易"
+"$AccountProp-KeepLastDate"		= "保留最後輸入日期"
+
+
+"$AccountProp-ChequebookTab"= "支票本"
+"$AccountProp-NumCheques"		= "張支票於每個支票本"
+"$AccountProp-ChequebookList"	= "目前支票本:"
+"$AccountProp-Chequebook1"		= "#1:"
+"$AccountProp-Chequebook2"		= "#2:"
+"$AccountProp-Chequebook3"		= "#3:"
+"$AccountProp-Chequebook4"		= "#4:"
+
+
+"$AccountProp-InfosTab"		= "訊息"
+"$AccountProp-AccountNum"	= "#:"
+"$AccountProp-Notes"		= "註記:"
+
+"$AccountProp-OK"			= "OK"
+"$AccountProp-Cancel"		= "取消"
+"$AccountProp-Delete"		= "刪除"
+
+"$strTitleNewAccountProp"	= "新帳戶"	/* 15 chars max */
+
+"$strAccountPropName"					= "名稱"
+"$strAccountPropInitialBalance"			= "起始平衡"
+"$strAccountPropOverdrawnThreshold"		= "透支"
+"$strAccountPropNonOverdrawnThreshold"	= "不再透支"
+"$strAccountPropNumCheques"				= "_張支票於每個支票本"
+
+
+/************************************************************************
+ * Accounts list dialog
+ ************************************************************************/
+
+"$AccountsListMenu-DBase"	= "資料庫"
+"$AccountsListMenu-Properties"	= "屬性..."
+"$AccountsListMenu-Manage"		= "管理資料庫..."
+
+
+"$AccountsList-New"			= "新增"
+
+/* Items have to be short, because the sum field may be wide... */
+[$AccountsList-SelectList] 	= ["全部"
+							   "選擇的"
+							   "未選擇的"]
+
+"$strAccountsListEditDBs"	= "管理帳戶資料庫..." /* 30 chars max*/
+"$strAccountsListDBProp"	= "資料庫屬性..." /* 30 chars max*/
+"$SumListSumTypePopup"		= "總和於..."
+
+[$AccountsList-ContextMenu]	= ["屬性..."
+							   "開啟..."]
+
+
+/************************************************************************
+ * DBase properties
+ ************************************************************************/
+
+"$strTitleNewDBaseProp"		= "新資料庫"	/* 31 chars max */
+
+"$DBaseProp-Name"			= "名稱:"
+
+"$DBaseProp-GeneralTab"		= "一般"
+"$DBaseProp-Launchable"		= "可執行"
+"$DBaseProp-AutoRepeat"	    = "自動計算循環"
+"$DBaseProp-ViewRepeats"	= "檢視循環"
+"$DBaseProp-ViewRepeatsDays"= "之前天數"
+"$DBaseProp-ConduitUse"		= "使用同步通道"
+
+
+"$DBaseProp-TransListsTab"	= "交易列表"
+"$DBaseProp-SortType"		= "以估值日排序"
+"$DBaseProp-ValueDate"		= "顯示估值日"
+"$DBaseProp-TypeForDesc"	= "以交易類別顯示"
+
+
+"$DBaseProp-SecurityTab"	= "安全"
+"$DBaseProp-AccessCode"		= "資料庫密碼:"
+"$DBaseProp-DenyFind"		= "忽略系統搜尋"
+
+
+"$DBaseProp-NoteTab"		= "註記"
+
+"$DBaseProp-OK"				= "OK"
+"$DBaseProp-Cancel"			= "取消"
+"$DBaseProp-Delete"			= "刪除"
+
+"$strDBasePropName"			= "名稱"
+"$strDBasePropRepeatDays"	= "檢視循環"
+
+
+/************************************************************************
+ * DBases list dialog
+ ************************************************************************/
+ 
+"$DBasesListMenu-Misc" = "其他"
+"$DBasesListMenu-Misc-Correct"	= "檢查並修正資料庫"
+
+"$DBasesList-Title"			= "帳戶資料庫"
+
+"$DBasesList-Open"			= "開啟"
+"$DBasesList-New"			= "新增"
+"$DBasesList-Properties"	= "屬性"
+"$DBasesList-Clone"			= "複製"
+
+/* Name of a cloned database, %s is later replaced by the original
+   database name (15 chars max) */
+"$strDBasesListCloneFmt"	= "%s (複製)"
+
+
+/************************************************************************
+ * Statistics dialog
+ ************************************************************************/
+
+"$Stats-Title"  			= "統計"
+
+[$Stats-Center-Anchor]		= 57		/* Widgets center pos in pixels */
+[$Stats-Center-RightShift]	= 2			/* Pixels to shift to write to right */
+
+"$Stats-Between"			= "起日:"
+"$Stats-BetweenPlus"		= ""
+
+[$Stats-BetweenList]		=  ["本月"
+								"上個月"
+								"上上個月"
+								"月份>" /* !! KEEP the > at end !!! */
+								"今年"
+								"去年"
+								"年份>"	/* !!! KEEP the > at end !!! */
+								"週 開始/結束"
+								"全部"
+								"^前次統計...>"]
+
+/* Shortcut for each previous list entry, the last entry have to be
+enclosed in parenthesis, it shows that the computed date is rounded to
+the begin/end of week (15 char max for each item) */
+[$Stats-BetweenListShortCut]=  ["本月"
+								"上個月"
+								"上上個月"
+								"今年"
+								"去年"
+								"全部"
+								"(週)"]
+
+"$Stats-And"				= "迄日:"
+"$Stats-By"					= "以"
+
+[$Stats-ByList]				=  ["交易類別"
+								"模式"
+								"^週"   	/* !!! KEEP the ^ !!! */
+								"兩週"
+								"月"
+								"季"
+								"年"]
+/*								["^最小./最大./平均"]  !!! KEEP the ^ !!! */
+
+/* One letter shortcut for each previous list entry */
+"$strStatsByListShortCut"	=  "TMW2MQY~"
+
+"$Stats-Type"				= "類別:"
+"$Stats-Mode"				= "模式:"
+
+"$Stats-On"					= "於"
+
+[$Stats-OnList]				=  ["所有交易"
+								"只有支出"
+								"只有收入"
+								"已標記"]
+
+"$Stats-From"				= "由"
+
+"$Stats-ValueDate"			= "使用估值日"
+"$Stats-ExcludeNils"		= "略過空白資料"
+
+"$Stats-View"				= "檢視"
+"$Stats-Cancel"				= "取消"
+
+/* In accounts popup, string to select all accounts (31 chars max) */
+"$strStatsSelectAllAccounts"= "全選"
+
+/* In accounts popup, string to reset to one account (31 chars max) */
+"$strStatsResetAccounts"	= "重置"
+
+/* In accounts popup label, when no room to display all names */
+"$strStatsNAccounts"		= "%d 個帳戶"
+
+/* (31 chars max) */
+"$StatsBegDate"				= "統計開始日期"
+"$StatsEndDate"				= "統計結束日期"
+
+
+/************************************************************************
+ * Stats results dialog
+ ************************************************************************/
+
+ /* MENU */
+"$CustomListMenu-Select" = "選擇"
+"$CustomListMenu-Select-Invert" = "反向選擇"
+"$CustomListMenu-Select-None"	= "全不選"
+"$CustomListMenu-Select-All"	= "全選"
+
+"$CustomListMenu-Misc-Export"	= "匯出..."			/9
+
+
+/* Keep the 3 first items short, because there is no much room on screen */
+[$CustomList-SumTypes]	=  ["全部"
+							"選擇的"
+							"未選擇的"
+							"^反向選擇"  /* !!! Don't delete the '^' char !!! */
+							"全不選"
+							"全選"]
+
+[$CustomList-RefineBy]	=  ["以交易類別過濾"
+							"以交易模式過濾"
+							"檢視全部"]
+
+/* Title of statistics results (31 chars max.) */
+[$strCustomListStatsTitle]	=  ["以 "
+								"類別"
+								"模式"
+								"週"
+								"兩週"
+								"月"
+								"季"
+								"年"]
+
+/* Statistics by week, begining of week : Sunday or Monday */
+/* only the 2 first letters + space */
+[$strClistWeekStartDays] = ["Su "
+							"Mo "]
+
+/* Statistics by week, end of week : Saturday or Sunday */
+/* only the 2 first letters + space */
+[$strClistWeekEndDays]   = ["Sa "
+							"Su "]
+
+/* Statistics by year, label on each line before the #year (58 chars max) */
+"$strClistTypeYear" = "年"
+
+/* Accounts list dialog, long clic: no transaction (31 chars max.) */
+"$strClistAccountsZeroOp" = "無交易"
+
+/* Accounts list dialog, long clic: only one transaction (31 chars max.) */
+"$strClistAccountsOneOp" = "只有一筆交易:"
+
+/* Accounts list dialog, long clic: N transactions (28 chars max.) */
+"$strClistAccountsManyOp" = "%d 筆交易:"
+
+/* Stats results list dialog, long clic: only one trans. split (31 c. max.)*/
+"$strClistTypeOneSplitOp" = "只有一筆子交易"
+
+/* Stats results list dialog, long clic: N transaction splits (28 chars max.)*/
+"$strClistTypeManySplitOp" = "%lu 筆子交易"
+
+/* Stats by type results list dialog, long clic: with one sub-type (31 chars)*/
+"$strClistTypesOneSubType" = "只有一種子交易類別"
+
+/* Stats by type results list dialog, long clic: with N sub-types (28 chars)*/
+"$strClistTypesNSubTypes" = "有 %d 種子交易類別"
+
+/* Flagged screen title (31 chars max) */
+"$strClistFlagged"              = "已標記"
+
+/*
+ * Lists export headers
+ *
+ * Stats / modes */
+[$strExportHeadersStatsMode]	=  ["模式名稱"
+									"金額"
+									"已選擇"]
+
+/* Stats / types */
+[$strExportHeadersStatsTypes]	=  ["類別名稱"
+									"金額"
+									"已選擇"]
+
+/* Stats / periods */
+[$strExportHeadersStatsPeriods]	=  ["週期"
+									"金額"
+									"已選擇"]
+
+/* Stats / transactions */
+[$strExportHeadersStatsTrans]	=  ["日期"
+									"敘述"
+									"金額"
+									"已結算"
+									"已標記"
+									"已選擇"]
+
+/* Flagged transactions list */
+[$strExportHeadersFlaggedTrans]	=  ["日期"
+									"敘述"
+									"金額"
+									"已結算"
+									"已選擇"]
+
+
+/************************************************************************
+ * Clearing intro dialog (called before clearing)
+ ************************************************************************/
+
+"$ClearingIntro-Title"			= "結算中..."
+
+"$ClearingIntro-TargetBalance"	= "平衡目標:"
+
+"$ClearingIntro-OK"				= "下一筆..."
+"$ClearingIntro-Cancel"			= "取消"
+
+"$strClearingIntroTargetBalance" = "平衡目標"
+
+
+/************************************************************************
+ * Auto-clearing intro dialog (called before auto-clearing)
+ ************************************************************************/
+
+"$ClearingAutoConf-Title"			= "自動結算"
+
+"$ClearingAutoConf-UntilDate"		= "交易日至"
+
+"$ClearingAutoConf-NumTransBefore"	= "筆交易之前"
+"$ClearingAutoConf-NumTransAfter"	= "筆交易之後"
+"$ClearingAutoConf-CommentTip"		= "(如果不確定就空白)"
+
+"$ClearingAutoConf-OK"				= "結算"
+"$ClearingAutoConf-Cancel"			= "取消"
+
+"$ClearingAutoConfDate"				= "交易日"
+
+
+/************************************************************************
+ * Clearing list dialog
+ ************************************************************************/
+ 
+/* Char used in the auto clearing button (single char) */
+"$ClearingList-AutoClearChar"   = "C"
+ 
+/* Sort types (31 chars each) */
+[$ClearingList-SortList]		= ["以估值日排序"
+								   "以日期排序"
+								   "以模式排序"
+								   "以類別排序"
+								   "以支票號碼排序"
+								   "以金額排序"]
+ 
+/* First line in cleared list (63 chars max) */
+"$strClearingListClearedSum"	= "已結算總和"
+
+/* Sum types (31 chars max for each) */
+[$strClearingListSumTypes]		= ["已結算" "剩餘"]
+
+
+/************************************************************************
+ * Statement number dialog (called at clearing end)
+ ************************************************************************/
+
+"$StatementNum-Title"			= "結單號碼"
+
+[$StatementNum-List]			= ["上一筆" "下一筆"]
+"$StatementNum-NumLabel"		= "結單號碼:"
+
+"$StatementNum-Balance"			= "平衡"
+
+"$StatementNum-Ask"				= "確認結算?"
+
+"$StatementNum-OK"				= "是"
+"$StatementNum-BackClearing"	= "不, 回去"
+"$StatementNum-CancelClearing"	= "全部取消"
+
+
+/************************************************************************
+ * Repeats list dialog
+ ************************************************************************/
+
+"$RepeatsList-Title"			= "循環"
+
+"$RepeatsListDate"				= "日期限制"
+
+"$strRepeatsListNonRepeatsSum"	= "非循環總和"
+
+/************************************************************************
+ * Desc or modes list dialog
+ ************************************************************************/
+
+/* Title for either desc/macros OR modes list dialog */
+"$strTitleDescList"			= "敘述 / 巨集"	/* 31 chars max */
+"$strTitleModesList"		= "交易模式"		/* 31 chars max */
+
+"$DescModesList-OK"			= "OK"
+"$DescModesList-New"		= "新增"
+
+
+/************************************************************************
+ * Types list dialog
+ ************************************************************************/
+
+"$TypesList-Title"			= "交易類別"
+
+"$TypesList-OK"				= "OK"
+"$TypesList-New"			= "新增"
+"$TypesList-NewUnder"		= "新增於下"
+
+
+/************************************************************************
+ * Search dialog
+ ************************************************************************/
+
+"$Search-Title"			= "搜尋及標記..."
+
+"$Search-Type"			= "類別"
+"$Search-Mode"			= "模式"
+"$Search-Desc"			= "敘述包含"
+"$Search-Amount"		= "金額"
+"$Search-ChequeNumFrom"	= "支票號"
+"$Search-ChequeNumTo"	= "至"
+"$Search-StatementBefore"= ""
+[$Search-StatementList]	= ["只有"
+						   "從"
+						   "至"]
+"$Search-StatementAfter"= "結單號碼"
+
+"$Search-Op"			= "條件"
+/*
+ * AND    = 全部皆是
+ * OR	  = 或
+ * Not OR = 全部皆非
+ */
+[$Search-OpList]		= ["全部皆是" "或" "全部皆非"]
+
+"$Search-Action"		= "動作:"
+[$Search-ActionList]	=  ["標記"
+							"取消全部標記再標記"
+							"取消標記"]
+
+"$Search-Search"		= "搜尋"
+"$Search-Cancel"		= "回去"
+
+/* (31 chars max) */
+"$SearchBegDate"		= "搜尋開始日期"
+"$SearchEndDate"		= "搜尋結束日期"
+
+
+/************************************************************************
+ * Sum dates for the transaction list form
+ ************************************************************************/
+
+"$DateSums-Title"		= "總和設定..."
+
+"$DateSums-On"			= "總和於本月"
+"$DateSums-Month"		= "日"
+"$DateSums-Today"		= "總和於今天後"
+"$DateSums-Days"		= "日"
+"$DateSums-Save"		= "儲存"
+"$DateSums-Cancel"		= "取消"
+
+"$strSumDatesOnDay"		= "總和於本月_日"
+"$strSumDatesTodayDays"	= "總和於今天後_日"
+
+
+/************************************************************************
+ * Enter a numeric password
+ ************************************************************************/
+
+"$Password-Title"	 = "密碼"
+
+"$Password-ClearKey" 		= "C"		/* Only one char! */
+"$Password-OK"		 		= "OK"
+
+"$Password-MaTirelireAccess"= "進入 Ma Tirelire 2"	/* 32 chars max */
+"$Password-DBaseAccess"		= "進入 %s 帳戶"	/* 32 chars max */
+"$Password-Current"			= "輸入目前密碼"	/* 32 chars max */
+"$Password-New"				= "輸入新密碼"		/* 32 chars max */
+"$Password-Again"			= "確定新密碼"	/* 32 chars max */
+
+
+/************************************************************************
+ * Edit type dialog
+ ************************************************************************/
+
+"$EditType-For"				= "為"
+
+[$EditType-SignList]		= ["所有交易"
+							   "只有支出"
+							   "只有收入"]
+
+"$EditType-OnlyIn"			= "類別為"
+
+
+/************************************************************************
+ * Edit description dialog
+ ************************************************************************/
+
+"$EditDesc-OnlyIn"			= "敘述為"
+
+"$EditDesc-Macro"			= "巨集:"
+
+[$EditDesc-SignList]		= ["="
+							   "-"
+							   "+"]
+
+"$EditDesc-Amount"			= "金額:"
+
+"$EditDesc-Mode"			= "模式:"
+
+"$EditDesc-Type"			= "類別:"
+
+"$EditDesc-ChequeAuto"		= "自動支票編號"
+
+"$EditDesc-Account"			= "前往帳戶:"
+
+"$EditDesc-Xfer"			= "轉移到:"
+
+"$EditDesc-AutoSubmit"		= "自動生效"
+
+
+/************************************************************************
+ * Edit mode dialog
+ ************************************************************************/
+
+"$EditMode-Label"			= "模式:"
+"$EditMode-OnlyIn"			= "模式為"
+"$EditMode-ChequeAuto"		= "自動支票編號"
+"$EditMode-ValueDate"		= "估值日:"
+
+"$EditMode-Check1Label1"	= "if date op. <= to"
+"$EditMode-Check1Label2"	= "of month"
+"$EditMode-Check1Label3"	= "估值日 ="
+"$EditMode-Check1Label4"	= "of"
+[$EditMode-Check1List]		= ["本月份"
+							   "下個月"]
+"$EditMode-Check1Label5"	= "(else chosen month + 1)"
+
+"$EditMode-Check2Label1"	= "估值日"
+"$EditMode-Check2Label2"	= "日"
+[$EditMode-Check2List]		= ["之前"
+							   "之後"]
+"$EditMode-Check2Label3"	= "交易日"
+
+"$EditMode-OK"			= "OK"
+[$EditMode-OK-Width]	= 30	/* Width of "OK" button in pixels */
+"$EditMode-Cancel"		= "Cancel"
+[$EditMode-Cancel-Width]= 35	/* Width of "Cancel" button in pixels */
+"$EditMode-Delete"		= "刪除"
+[$EditMode-Delete-Width]= 38	/* Width of "Delete" button in pixels */
+"$EditMode-New"			= "新增"
+[$EditMode-New-Width]	= 31	/* Width of "New" button in pixels */
+
+
+"$strEditModeName"				= "模式"
+"$strEditModeCheck1Day1"		= "< to"
+"$strEditModeCheck1Day2"		= "估值日"
+"$strEditModeCheck2Day"			= "日"
+
+
+/************************************************************************
+ * About dialog
+ ************************************************************************/
+
+"$About-Title"	= "關於 Ma Tirelire 2"
+
+"$About-Freeware"		= "免費軟體"
+"$About-LogoBy"			= "圖標作者為 Gofre 和 Oli"
+"$About-Translators"	= "翻譯者"
+
+
+/************************************************************************
+ * Purge dialog
+ ************************************************************************/
+
+"$Purge-Title"	= "清除交易"
+
+"$Purge-Label"		= "合併已結算交易"
+
+"$Purge-InAccount"	= "in account initial balance"
+"$Purge-ByType"		= "於新交易(依類別)"
+"$Purge-ByMode"		= "於新交易(依模式)"
+
+"$Purge-Between"	= "起日:"
+"$Purge-And"		= "迄日:"
+[$Purge-Center-Anchor] = 41		/* Widgets center pos in pixels */
+
+"$Purge-ValueDate"	= "以估值日"
+
+"$Purge-OK"			= "清除"
+"$Purge-Cancel"		= "取消"
+
+/* (31 chars max) */
+"$PurgeBegDate"		= "清除開始日"
+"$PurgeEndDate"		= "清除結束日"
+
+
+/************************************************************************
+ * Currencies dialog
+ ************************************************************************/
+
+"$CurrenciesList-Title"			= "貨幣"
+"$CurrenciesList-RefCurrency"	= "參考貨幣:"
+"$CurrenciesList-OK"			= "OK"
+"$CurrenciesList-New"			= "新增"
+
+/* The default local currency used when the currencies database is
+ * created. Must be 4 chars max. */
+"$strDefaultLocalCurrency"			= "\200"
+
+/* Same as previous but for OSes < 3.5 (for example the euro symbol,
+ * appears only in OS 3.5)
+ * In "$strDefaultLocalCurrency" If you use symbols that exists in
+ * OSes < 3.5, use the same value here */
+"$strDefaultLocalCurrencyBefore35"	= "E"
+
+/* The ISO-4217 code of the default local currency. Must be 3 chars max. */
+"$strDefaultLocalCurrencyIso"		= "EUR"
+
+
+/************************************************************************
+ * Currency edit dialog
+ ************************************************************************/
+
+"$EditCurrency-InCurrency"		= "貨幣:"
+"$EditCurrency-CurrencyAmount"	= "金額:"
+"$EditCurrency-EqualsTo"		= "等於:"
+"$EditCurrency-Iso4217"			= "ISO-4217 碼:"
+
+"$strEditCurrencyName"			= "貨幣"
+"$strEditCurrencyAmount"		= "金額"
+"$strEditCurrencyRefAmount"		= "等於"
+
+
+/************************************************************************
+ * Reference currency edit dialog
+ ************************************************************************/
+
+"$EditCurrency-RefCurrencyName"	= "參考貨幣:"
+
+"$EditCurrency-OK"				= "OK"
+"$EditCurrency-Cancel"			= "取消"
+
+
+/************************************************************************
+ * Export dialog
+ ************************************************************************/
+
+"$Export-Title"			= "匯出至 memo"
+"$Export-Name"			= "匯出名稱:"
+"$Export-DontSplit"		= "不要分割"
+"$Export-Export"		= "匯出"
+"$Export-Cancel"		= "取消"
+
+"$strExportName"		= "匯出名稱"
+
+
+/************************************************************************
+ * Mini statistics dialog
+ ************************************************************************/
+
+"$MiniStats-Between"	= "起日:"
+"$MiniStats-And"		= "迄日:"
+
+"$MiniStats-Credits"	= "收入:"
+"$MiniStats-Debits"		= "支出:"
+"$MiniStats-Total"		= "總計:"
+
+"$MiniStats-Back"		= "回去"
+"$MiniStats-Statistics" = "統計"
+
+/* (31 chars max) */
+"$MiniStatsBegDate"		= "統計開始日"
+"$MiniStatsEndDate"		= "統計結束日"
+
+
+/************************************************************************
+ * The alarm rings!!!!
+ ************************************************************************/
+
+"$Alarm-Title"	= "Ma Tirelire 2 - 提醒"
+"$Alarm-OK"		= "OK"
+
+
+/************************************************************************
+ * Alert boxes
+ ************************************************************************/
+ 
+/*************************************************************
+ * This application is a beta version, use at own your risks */
+ 
+"$alertBeta-Message"	= "這是 beta 版本.\n"\
+						  "請小心使用.\n"\
+						  "臭蟲請以英文或法文回報到 "\
+						  "bug@Ma-Tirelire.net"
+"$alertBeta-Abort"		= "取消"
+"$alertBeta-Continue"	= "繼續"
+"$alertBeta-ContinueOK"	= "不必再提醒我"
+
+
+/*******************************
+ * Feature not yet implemented */
+
+"$alertNotImplementedXXX-Title"    = "尚未支援"
+"$alertNotImplementedXXX-Message"  = "尚未支援此功能"
+"$alertNotImplementedXXX-Button"   = "好, 我會繼續等待..."
+
+
+/********************
+ * Error in a field */
+
+"$alertErrorField-Title" 	= "錯誤"
+"$alertErrorField-Message" 	= "欄位 `^1' ^2."
+"$alertErrorField-Button" 	= "修正"
+
+/* to fill the previous alert box: "欄位 `XXX' 必須填入" */
+"$alertErrorField-ErrMiss"	= "必須填入"
+
+/* to fill the previous alert box: "欄位 `XXX' 不能空白" */
+"$alertErrorField-ErrNull"	= "不能空白"
+
+
+/******************************
+ * Can't save the transaction */
+
+"$alertCantSave-Title"          = "錯誤"
+"$alertCantSave-Message"        = "無法儲存交易"
+"$alertCantSave-Button"         = "不妙"
+
+
+/***********************************************************************
+ * At least one erroneous transaction detected during the last hotsync */
+
+"$alertHaveToCorrectDB-Title"   = "交易錯誤"
+"$alertHaveToCorrectDB-Message" = "至少一筆交易錯誤 "\
+                    "在上次同步中被發現.\nMa Tirelire 2 能夠 "\
+                    "修正它們, 繼續嗎?"
+"$alertHaveToCorrectDB-No"      = "不"
+"$alertHaveToCorrectDB-Correct" = "好, 修正"
+"$alertHaveToCorrectDB-Quit"    = "不, 放棄"
+
+
+/***********************************************
+ * Report the number of corrected transactions */
+
+"$alertIncorrectDBnumCorrections-Title"   = "修正完畢"
+"$alertIncorrectDBnumCorrections-Message" = "^1 筆交易已修正 "\
+					"於 ^2 個資料庫中 "\
+                    "別忘記確認帳戶..."
+"$alertIncorrectDBnumCorrections-Button"  = "OK"
+
+
+/***************************
+ * Overdrawn account alert */
+
+"$alertOverdrawnAccount-Title"		= "帳戶透支"
+"$alertOverdrawnAccount-Message"	= "此帳戶已透支!"
+"$alertOverdrawnAccount-Button"		= "OK"
+
+
+/************************************
+ * No longer overdrawn account alert */
+
+"$alertNoOverdrawnAccount-Title"	= "不再透支"
+"$alertNoOverdrawnAccount-Message"	= "此帳戶不再透支"
+"$alertNoOverdrawnAccount-Button"	= "OK"
+
+
+/******************************
+ * Purge cleared transactions */
+
+"$alertDeleteCleared-Title"     = "清除已結算"
+"$alertDeleteCleared-Message"   = "確定清除所有 "\
+                    "已結算交易? 操作無法回復"
+"$alertDeleteCleared-No"        = "不"
+"$alertDeleteCleared-Purge"     = "清除"
+
+
+/***********************
+ * No chequebook found */
+
+"$alertNoChequebook-Title"    = "自動支票編號"
+"$alertNoChequebook-Message"  = "此帳戶沒有支票本 "\
+			"編輯帳戶屬性或在此輸入新號碼"
+"$alertNoChequebook-Button"   = "OK"
+
+
+/**************************
+ * All chequebooks filled */
+
+"$alertFilledChequebooks-Title"		= "自動支票編號"
+"$alertFilledChequebooks-Message"	= "所有支票本支票編號 "\
+			"已使用完畢. 請編輯帳戶屬性 "\
+			"或在此輸入新號碼"
+"$alertFilledChequebooks-Button"	= "OK"
+
+
+/**************************
+ * Create new chequebook? */
+
+"$alertNewChequebook-Title"		= "新支票本"
+"$alertNewChequebook-Message"	= "這筆交易的支票編號 "\
+				"不屬於任何支票本. "\
+				"是否以此編號開始建立 "\
+				"新的支票本?"
+"$alertNewChequebook-Create"	= "建立"
+"$alertNewChequebook-No"		= "不"
+
+
+/***************************
+ * Transaction copy : date */
+
+"$alertCopy-Title"		= "複製交易"
+"$alertCopy-Message"	= "複製的交易使用 "\
+						  "哪個日期?"
+"$alertCopy-Today"		= "今天"
+"$alertCopy-Original"	= "原始"
+"$alertCopy-Cancel"		= "取消"
+
+
+/**********************************
+ * Too many repeated transactions */
+
+"$alertTooManyRepeats-Title"	= "循環交易..."
+"$alertTooManyRepeats-Message"	= ""\
+				"似乎有一或多筆循環交易 "\
+				"計算可能會花費相當時間 "\
+				"且佔用記憶體.\n"\
+				"你要不要..."
+"$alertTooManyRepeats-Stop"		= "停止"
+"$alertTooManyRepeats-Continue"	= "繼續"
+
+
+/*************************************
+ * A macro definition can't be empty */
+
+"$alertEmptyMacroDef-Title"	  = "空白的巨集!"
+"$alertEmptyMacroDef-Message" = "巨集不能完全空白"
+"$alertEmptyMacroDef-Button"  = "填入..."
+
+
+/*****************************************************************
+ * When auto-submit is checked, the macro have to be well filled */
+
+"$alertMacroCantAutoSubmit-Title"	= "無法自動生效"
+"$alertMacroCantAutoSubmit-Message" = "如果使用自動生效 "\
+									  "金額必須輸入"
+"$alertMacroCantAutoSubmit-Button"  = "修正..."
+
+
+/************************************
+ * Really delete this description ? */
+
+"$alertDescDelete-Title"	= "刪除敘述"
+"$alertDescDelete-Message"	= "確定刪除敘述?"
+"$alertDescDelete-Yes"		= "是"
+"$alertDescDelete-No"		= "否"
+
+
+/*****************************
+ * Really delete this mode ? */
+
+"$alertModeDelete-Title"	= "刪除交易模式"
+"$alertModeDelete-Message"	= "使用此模式的交易或巨集 "\
+			"將被變更為預設模式. 刪除 ?"
+"$alertModeDelete-Yes"		= "是"
+"$alertModeDelete-No"		= "否"
+
+
+/*****************************
+ * Really delete this type ? */
+
+"$alertTypeDelete-Title"	= "刪除交易類別"
+"$alertTypeDelete-Message"	= "使用此類別的交易或巨集 "\
+			"將被變更為預設模式. 刪除 ?"
+"$alertTypeDelete-Yes"		= "是"
+"$alertTypeDelete-No"		= "否"
+
+
+/*******************************************************
+ * Really want to change subtypes sign for this type ? */
+
+"$alertTypeChangeChildrenSign-Title"	= "子類別符號變更"
+"$alertTypeChangeChildrenSign-Message"	= ""\
+		"所有子類別也會隨之改變. "\
+		"確定?"
+"$alertTypeChangeChildrenSign-Yes"		= "是"
+"$alertTypeChangeChildrenSign-No"		= "否"
+
+
+/**************************************************************
+ * When a type/mode is deleted displays # of modified records */
+
+"$alertRecordsModified-Title"	= "變更的紀錄"
+"$alertRecordsModified-Message"	= "變更紀錄的數量:\n"\
+								  "- 交易: ^1 於 ^2 資料庫\n"\
+								  "- 巨集: ^3"
+"$alertRecordsModified-Button"	= "OK"
+
+
+/************************************************************************
+ * Want to delete a currency but it used as main currency in an account */
+
+"$alertAccountMainCurrency-Title"	 = "受保護的貨幣"
+"$alertAccountMainCurrency-Message"	 = ""\
+		"此貨幣無法被刪除, 因為它是 "\
+		" ^1 個帳戶 及 ^2 個資料庫的主要貨幣"
+"$alertAccountMainCurrency-Button"	 = "OK"
+
+
+/********************************
+ * Really delete this currency? */
+
+"$alertCurrencyDelete-Title"	= "刪除貨幣"
+"$alertCurrencyDelete-Message"	= "使用此貨幣的交易, "\
+		"會變更為參考貨幣. 刪除?"
+"$alertCurrencyDelete-Yes"		= "是"
+"$alertCurrencyDelete-No"		= "否"
+
+
+/**************************************************************
+ * When a currency is deleted displays # of modified records */
+
+"$alertCurrDelRecordsModified-Title"	= "變更的紀錄"
+"$alertCurrDelRecordsModified-Message"	= "^1 筆紀錄變更 "\
+										  "於 ^2 個資料庫中"
+"$alertCurrDelRecordsModified-Button"	= "OK"
+
+
+/***********************************
+ * Bad access code : access denied */
+
+"$alertPasswordBadCode-Title"	= "無法進入"
+"$alertPasswordBadCode-Message"	= "密碼錯誤!\n重試..."
+"$alertPasswordBadCode-Button"	= "OK"
+
+
+/**************************************************
+ * While code change, the two codes must be equal */
+
+"$alertPasswordCodesMustBeEqual-Title"		= "錯了"
+"$alertPasswordCodesMustBeEqual-Message"	= ""\
+		"兩組密碼必須相同!\n重試..."
+"$alertPasswordCodesMustBeEqual-Button"		= "OK"
+
+
+/*********************************************************************
+ * The external DB of currencies is not present, propose to download *
+ * it from http://ma-tirelire.net								     */
+
+"$alertNoExternalCurrencyDB-Title"		= "外掛貨幣檔"
+"$alertNoExternalCurrencyDB-Message"	= ""\
+		"缺少外掛貨幣資料檔 "\
+		"你可以前往 http://ma-tirelire.net/currencies "\
+		"免費下載"
+"$alertNoExternalCurrencyDB-Button"		= "OK"
+
+
+/******************************************************************
+ * The external DB of currencies is present but don't contain the *
+ * reference currency ISO-4217 code								  */
+
+"$alertNoRefInExternalCurrencyDB-Title"		= "外掛貨幣檔"
+"$alertNoRefInExternalCurrencyDB-Message"	= ""\
+		"參考貨幣的 ISO-4217 碼無法於"\
+		"外掛貨幣檔中找到.\n"\
+		"請前往 http://ma-tirelire.net/currencies 獲得詳細資料"
+"$alertNoRefInExternalCurrencyDB-Button"	= "OK"
+
+
+/********************************************************************
+ * The user wants to delete an accounts DB, ask confirmation before *
+ * proceeding...												    */
+
+"$alertDBaseDelete-Title"	= "刪除資料庫"
+"$alertDBaseDelete-Message"	= ""\
+		"確定刪除資料庫?\n"\
+		"一旦刪除, 無法回復..."
+"$alertDBaseDelete-Yes"		= "刪除!"
+"$alertDBaseDelete-No"		= "取消"
+
+
+/****************************************************************
+ * The user wants to delete an account, ask confirmation before *
+ * proceeding...											    */
+
+"$alertAccountDelete-Title"		= "刪除帳戶"
+"$alertAccountDelete-Message"	= ""\
+		"確定刪除帳戶?\n"\
+		"一旦刪除, 無法回復..."
+"$alertAccountDelete-Yes"		= "刪除!"
+"$alertAccountDelete-No"		= "取消"
+
+
+/********************************************
+ * An account already exists with this name */
+
+"$alertAccountAlreadyExists-Title"		= "帳戶已經存在..."
+"$alertAccountAlreadyExists-Message"	= ""\
+		"此帳戶已經存在"
+"$alertAccountAlreadyExists-Button"		= "修正"
+
+
+/*************************************************************
+ * The overdrawn threshold have to be lesser or equal to the *
+ * non-overdrawn threshold								     */
+
+"$alertAccountPropInvalidOverdrawnThreshold-Title"	= "閾值無效..."
+"$alertAccountPropInvalidOverdrawnThreshold-Message"= ""\
+		"閾值必須低於 "\
+		"目前帳戶金額"
+"$alertAccountPropInvalidOverdrawnThreshold-Button"		= "修正"
+
+
+/********************************************************
+ * The account currency change, ask for confirmation... */
+
+"$alertAccountChangeCurrency-Title"		= "貨幣變更..."
+"$alertAccountChangeCurrency-Message"	= ""\
+		"變更貨幣將會把所有此帳戶的交易 "\
+		"轉換為新貨幣. "\
+		"基於匯率差的考慮, 可能無法完全正確回復"
+"$alertAccountChangeCurrency-Yes"		= "全部轉換!"
+"$alertAccountChangeCurrency-No"		= "取消"
+
+
+/*************************
+ * No linked transaction */
+
+"$alertOpFormXferNoRec-Title"   = "連結的交易"
+"$alertOpFormXferNoRec-Message" = ""\
+		"連結的交易被刪除, 可能是由於 "\
+		"已結算的交易被清除"
+"$alertOpFormXferNoRec-Button"  = "OK"
+
+/*******************************************
+ * Remove link between linked transactions */
+
+"$alertOpFormXferDel-Title"			= "刪除連結"
+"$alertOpFormXferDel-Message"		= ""\
+				"確定刪除兩筆交易間的連結? "\
+				"這會使兩筆交易 "\
+				"互不相關"
+"$alertOpFormXferDel-No"			= "不"
+"$alertOpFormXferDel-DeleteLink"	= "刪除連結"
+
+/*****************************************************************
+ * Splits sum is lower than transaction sum: just a warning here */
+
+"$alertOpFormSplitsWarning-Title"	= "子交易總額錯誤"
+"$alertOpFormSplitsWarning-Message"	= ""\
+				"子交易總額不足"
+"$alertOpFormSplitsWarning-Continue" = "忽略"
+"$alertOpFormSplitsWarning-Correct"	= "修正"
+
+/*************************************************************
+ * Splits sum is greater than transaction sum: it's an error */
+
+"$alertOpFormSplitsError-Title"		= "子交易總額錯誤"
+"$alertOpFormSplitsError-Message"	= ""\
+				"子交易總額超出.\n"\
+				"無法被接受"
+"$alertOpFormSplitsError-Continue"	= "改變交易金額"
+"$alertOpFormSplitsError-Correct"	= "修正"
+
+/**********************************************************************
+ * Xfer splits sum is lower than transaction sum: just a warning here */
+
+"$alertOpFormSplitsXferWarning-Title"	= "轉移子交易總額錯誤"
+"$alertOpFormSplitsXferWarning-Message"	= ""\
+				"連結的交易已分割. "\
+				"子交易總額不足"
+"$alertOpFormSplitsXferWarning-Continue"= "忽略"
+"$alertOpFormSplitsXferWarning-Correct"	= "修正"
+
+/******************************************************************
+ * Xfer splits sum is greater than transaction sum: it's an error */
+
+"$alertOpFormSplitsXferError-Title"		= "轉移子交易總額錯誤"
+"$alertOpFormSplitsXferError-Message"	= ""\
+				"連結的交易已分割. "\
+				"子交易總額超過.\n"\
+				"無法被接受"
+"$alertOpFormSplitsXferError-Correct"	= "修正"
+
+/******************
+ * Outdated alarm */
+
+"$alertAlarmBeforeToday-Title"		= "鬧鈴過期!"
+"$alertAlarmBeforeToday-Message"	= ""\
+		"交易日已過, 無法建立鬧鈴!"
+"$alertAlarmBeforeToday-Edit"		= "編輯"
+"$alertAlarmBeforeToday-Delete"		= "刪除鬧鈴"
+
+/***********************************
+ * Transaction delete confirmation */
+
+"$alertTransactionDelete-Title"		= "刪除交易"
+"$alertTransactionDelete-Message"	= "確定刪除這筆 "\
+									  "交易?"
+"$alertTransactionDelete-Yes"		= "是"
+"$alertTransactionDelete-No"		= "否"
+
+/******************
+ * Delete flagged */
+
+"$alertDeleteMarked-Title"		= "刪除已標記"
+"$alertDeleteMarked-Message"	= "確定刪除所有 "\
+								  "已標記的交易? "\
+								  "刪除無法回復"
+"$alertDeleteMarked-No"			= "否"
+"$alertDeleteMarked-Delete"		= "刪除已標記"
+
+/*************************************************
+ * Transform flagged transaction to cleared ones */
+
+"$alertMarkedToChecked-Title"		= "轉換已標記"
+"$alertMarkedToChecked-Message"		= "確定將所有 "\
+					"已標記的交易轉換為已結算? "\
+					"動作無法回復"
+"$alertMarkedToChecked-No"			= "不"
+"$alertMarkedToChecked-Transform"	= "轉換已標記"
+
+/***************************
+ * Delete all transactions */
+
+"$alertDeleteAll-Title"		= "刪除全部!"
+"$alertDeleteAll-Message"	= "確定刪除全部 "\
+					"交易? 一旦刪除 "\
+					"無法回復"
+"$alertDeleteAll-No"		= "不"
+"$alertDeleteAll-DeleteAll" = "刪除全部!"
+
+/********************************
+ * At the end of flagged screen */
+
+"$alertFlaggedUnflag-Title"		= "未選擇取消標記..."
+"$alertFlaggedUnflag-Message"	= "確定將未選擇的交易 "\
+								  "取消標記?"
+"$alertFlaggedUnflag-No"		= "否"
+"$alertFlaggedUnflag-Yes"		= "是, 取消標記!"
+
+/**************************************
+ * Search didn't flag any transaction */
+ 
+"$alertSearchNone-Title"	= "搜尋..."
+"$alertSearchNone-Message"	= "沒有找到交易"
+"$alertSearchNone-Button"	= "OK"
+
+/*******************************************
+ * Search flagged at least one transaction */
+ 
+"$alertSearchMany-Title"	= "搜尋..."
+"$alertSearchMany-Message"	= "找到並標記 ^1 筆交易"
+"$alertSearchMany-OK"		= "OK"
+"$alertSearchMany-See"		= "檢視標記..."
+
+/**************************************************************
+ * Clearing confirmation when no automatic statement handling */
+
+"$alertClearingConfirm-Title"	= "確認結算"
+"$alertClearingConfirm-Message"	= "是否確認結算?"
+"$alertClearingConfirm-OK"		= "是"
+"$alertClearingConfirm-Back"	= "不, 回去"
+"$alertClearingConfirm-Cancel"	= "全部取消"
+
+/**********************************************************
+ * User statement number is null or empty, ask to confirm */
+ 
+"$alertStatementNumberConfirmEmpty-Title"	= "沒有結單號碼"
+"$alertStatementNumberConfirmEmpty-Message"	= "將進行結算, "\
+										"但是沒有結單號碼.\n"\
+										"是否繼續?"
+"$alertStatementNumberConfirmEmpty-No"		= "不, 修正"
+"$alertStatementNumberConfirmEmpty-Yes"		= "是!"
+
+/******************************************
+ * Auto clearing, no transaction to clear */
+
+"$alertAutoClearNone-Title"		= "沒有交易可結算"
+"$alertAutoClearNone-Message"	= "沒有交易或是所有 "\
+					"交易都已結算. "\
+                    "自動結算沒有意義!"
+"$alertAutoClearNone-OK"		= "哦, 好吧"
+
+/*************************************************
+ * Auto clearing, too many transactions to clear */
+
+"$alertAutoClearTooMany-Title"		= "太多交易"
+"$alertAutoClearTooMany-Message"	= ""\
+					"太多交易未結算. "\
+					"最多自動結算 48 筆交易. "\
+					"請先結算部份交易"
+"$alertAutoClearTooMany-OK"			= "OK"
+
+/************************************
+ * Auto clearing, no solution found */
+
+"$alertAutoClearNotFound-Title"		= "自動結算"
+"$alertAutoClearNotFound-Message"	= "沒有符合的交易, "\
+				"請確認所輸入的平衡目標及結算的金額. "\
+                "假使正確, 可能遺失一或數筆交易"
+"$alertAutoClearNotFound-OK"		= "OK"
+
+/*******************************************
+ * Repeats view, view original transaction */
+
+"$alertRepeatsViewOrig-Title"	= "未來的交易"
+"$alertRepeatsViewOrig-Message"	= "此筆交易尚不存在.\n"\
+				"是否建立編輯這個 "\
+				"交易?"
+"$alertRepeatsViewOrig-No"		= "否"
+"$alertRepeatsViewOrig-Yes"		= "是"
+
+/*************************************
+ * No problem after DBase correction */
+
+"$alertAllBasesAreOK-Title"		= "沒有問題"
+"$alertAllBasesAreOK-Message"	= "沒有發現任何錯誤"
+"$alertAllBasesAreOK-OK"		= "OK"
+
+
+/************************************************************************
+ * Alert messages for system errors...
+ ************************************************************************/
+
+"$alertDmErrInvalidDatabaseName-Title"		= "資料庫名稱無效"
+"$alertDmErrInvalidDatabaseName-Message"	= ""\
+		"資料庫名稱含有無效字元"
+"$alertDmErrInvalidDatabaseName-Button"		= "修正"
+
+"$alertDmErrAlreadyExists-Title"	= "資料庫已存在"
+"$alertDmErrAlreadyExists-Message"	= "資料庫已存在"
+"$alertDmErrAlreadyExists-Button"	= "修正"
+
+"$alertMemErrNotEnoughSpace-Title"		= "記憶體不足"
+"$alertMemErrNotEnoughSpace-Message"	= ""\
+		"記憶體不足無法執行此命令.\n" \
+		"(^1)"
+"$alertMemErrNotEnoughSpace-Button"		= "OK"
+
+"$alertGenericError-Title"				= "錯誤..."
+"$alertGenericError-Message"			= ""\
+		"發生錯誤, 代碼 #^2.\n"\
+		"(^1)\n"\
+		"請將錯誤代碼傳送至 bug@ma-tirelire.net "
+"$alertGenericError-Button"				= "OK"
+
+
+/************************************************************************
+ * Strings
+ ************************************************************************/
+
+/* Statement number management popup, keep the statement num (47 chars max) */
+"$strStatementNumKeep"   	= "保持結單號碼 #%lu"
+
+/* Statement number management popup, cancel the statement num (47 chars max)*/
+"$strStatementNumCancel" 	= "取消結單號碼"
+
+/* Statement number management popup, just the number (47 chars max)*/
+"$strStatementNumNumber" 	= "結單號碼 #%lu"
+
+/* Statement number management popup, another statement num (47 chars max) */
+"$strStatementNumAnother"	= "選擇其他結單號碼..."
+
+/* Mode "Unknown" entry (31 chars max) */
+"$strModesListUnknown"	= "未知"
+
+/* Type "Unfilled" entry (31 chars max) */
+"$strTypesListUnfiled"	= "未歸類"
+
+/* "Edit..." entry in Descriptions, Modes, Types and Currencies lists
+ * (31 chars max) */ 
+"$strEditList" = "編輯..."
+
+/* "Any" entry in Modes and Types lists (stats & search popups) 31 chars max */
+"$strAnyList"			= "任何"
+
+/* Note used for created fake transaction when the currency of an
+ * account is changed (63 chars max) */
+"$strConvAccountCurrencyRound" = "帳戶貨幣改變..."
+
+/* Progress bar label used when computing repeats (50 chars max) */
+"$strProgressBarRepeats"		= "計算循環 (完成 #%d)"
+
+/* Progress bar label used when computing accounts sums (63 chars max) */
+"$strProgressBarAccountsBalances" = "計算帳戶平衡..."
+
+/* Progress bar label used when computing the account sum (63 chars max) */
+"$strProgressBarAccountBalance"	= "計算帳戶平衡..."
+
+/* Progress bar label used during a cleared purge (63 chars max) */
+"$strProgressBarPurge"			= "清除結算中..."
+"$strProgressBarPurgeGather"	= "合併結算中..."
+
+/* Progress bar label used when searching auto cheque numbers (63 chars max) */
+"$strProgressBarAutoChequeSearch" = "搜尋支票號碼..."
+
+/* Pbar label used when deleting all transactions of an acc. (63 chars max) */
+"$strProgressBarDeleteAllInAccount" = "刪除帳戶內容中..."
+
+/* Progress bar label used when translating flagged -> cleared (63 chars max)*/
+"$strProgressBarFlaggedToCleared"	= "已標記 -> 已結算..."
+
+/* Pbar label used when deleting flagged (63 chars max) */
+"$strProgressBarDeleteFlagged"		= "刪除已標記..."
+
+/* Progress bar label used when manipulating flagged (63 chars max) */
+"$strProgressBarTransformFlagged"	= "轉換已標記..."
+
+/* Progress bar label used when "go to XXX" search (63 chars max) */
+"$strProgressBarGotoSearch"			= "前往中..."
+
+/* Progress bar label used when changing account currency (63 chars max) */
+"$strProgressBarChangeAccountCurrency"	= "改變貨幣..."
+
+/* Progress bar label used when deleting an account (63 chars max) */
+"$strProgressBarDeleteAccount1"		= "刪除帳戶..."
+"$strProgressBarDeleteAccount2"		= "結算中..."
+
+/* Progress bar label used when cloning a database (63 chars max) */
+"$strProgressBarDBItemCloning"		= "複製資料庫..."
+
+/* Progress bar label used when computing sum stats (63 chars max) */
+"$strProgressBarStats"				= "計算金額..."
+
+/* Progress bar label used when unflagging before searching (63 chars max) */
+"$strProgressBarSearchUnflagAll"	= "取消所有標記..."
+
+/* Progress bar label used while searching (63 chars max) */
+"$strProgressBarSearch"				= "搜尋中..."
+
+/* Progress bar label used during export (63 chars max) */
+"$strProgressBarExport"				= "匯出中..."
+
+/* Progress bar label used during auto clearing process (63 chars max) */
+"$strProgressBarAutoClearing"		= "自動結算中..."
+
+/* Auto created types, modes and currencies
+   (%d will be replaced by the ID, let it)
+   (30 chars max including %d) */
+"$strAutoCreatedTypeName"	= "自動產生類別 #%d"
+/* (30 chars max including %d) */
+"$strAutoCreatedModeName"	= "自動產生模式 #%d"
+"$strAutoCreatedCurrencyName"= "#%d"		 /* 3 char max including %d */
+
+
+/* All months in the year (31 chars max for each month) MUST BE CAPITALIZED */
+[$strLongMonths]	 = ["一月"
+						"二月"
+						"三月"
+						"四月"
+						"五月"
+						"六月"
+						"七月"
+						"八月"
+						"九月"
+						"十月"
+						"十一月"
+						"十二月"]
+
+/* All months in the year in short form */
+[$strShortMonths]	= ["一" "二" "三" "四" "五" "六"
+					   "七" "八" "九" "十" "十一" "十二"]
+
+END

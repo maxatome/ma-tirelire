@@ -1,0 +1,45 @@
+--- pilrc-3.2/font.c.orig	2008-01-12 01:00:56.000000000 +0100
++++ pilrc-3.2/font.c	2008-01-12 01:02:58.000000000 +0100
+@@ -139,6 +139,33 @@
+ 
+ }
+ 
++
++/*-----------------------------------------------------------------------------
++| IsGB
++|      
++|      Check the double byte char is GB2312-80 coded
++-----------------------------------------------------------------------------*/
++static int
++IsGB(unsigned char *cp,
++              int *pdxChar)
++{
++
++  /*
++   * GB2312-80 code rule
++   * first  byte range 0xa1..0xf7             (high byte)
++   * second byte range 0xa1..0xfe             (low  byte)
++   */
++  if ((*cp >= 0xa1 && *cp <= 0xf7)
++      && (*(cp + 1) >= 0xa1 && *(cp + 1) <= 0xfe))
++  {
++    *pdxChar = 13;                               /* not sure about this */
++    return 2;
++  }
++
++  return 0;
++}
++
++
+ /*-----------------------------------------------------------------------------
+ |	IsJapanese
+ |	
+@@ -1353,7 +1380,7 @@
+       pfnChkCode = IsBIG5;
+       break;
+     case fontChineseGB:
+-      Error("GB character widths not yet implemented!");
++      pfnChkCode = IsGB;
+       break;
+     case fontJapanese:
+       pfnChkCode = IsJapanese;

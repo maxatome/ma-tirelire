@@ -1,0 +1,85 @@
+#include "resizedemo_res.h"
+#include "resizeconsts.h"
+
+VERSION ID 1 "1.00"
+APPLICATIONICONNAME ID 1000 "resizedemo"
+
+// Handera support
+HEX "sKst" ID 1000 0x00 0x00 0x00 0x00
+
+// Dana AlphaSmart support
+HEX "wTap" ID 1000
+    0x00 0x00 0x00 0x01
+
+#define BIN_MAIN        0
+#define BIN_ABOUT       1
+
+
+WORDLIST ID resizeIndex
+BEGIN
+     frmMain  frmMain
+     frmAbout frmAbout
+END
+
+MENU ID mnuFrmMain
+BEGIN
+  PULLDOWN "Options"
+  BEGIN
+      MENUITEM "About resizedemo" ID mnuAbout "A"
+  END
+END
+
+
+FORM ID frmMain AT (0 0 160 160)
+NOFRAME
+MENUID mnuFrmMain
+BEGIN
+  TITLE "resizedemo"
+  GRAFFITISTATEINDICATOR AT (150 3)
+  FIELD ID fldMain AT (3 20 145 120) USABLE UNDERLINED MAXCHARS 1000 MULTIPLELINES
+  BUTTON "OK" ID btnOK AT (RIGHT@154 PREVBOTTOM + 2 AUTO AUTO)
+END
+
+WORDLIST ID frmMain
+BEGIN
+    DIA_FORM_USE_BIN // formFlags
+    BIN_MAIN   // bin
+    DIA_STATE_MIN    // preferredState
+    // Object data
+    0             DIA_H_PLUS_DH+DIA_W_PLUS_DW          0 // the form itself
+    fldMain                 DIA_W_PLUS_DW+DIA_H_PLUS_DH 0
+    btnOK                   DIA_Y_PLUS_DH+DIA_X_RIGHT   0
+END
+
+FORM ID frmAbout AT (2 2 156 156)
+MODAL
+BEGIN
+  TITLE "About resizedemo"
+
+  LABEL "resizedemo 1.00" AUTOID AT (CENTER 18) FONT 1
+  LABEL "Copyright © 2004 A. Pruss" AUTOID AT (CENTER PREVBOTTOM + 1) FONT 0
+  LABEL "Licensed under BSD license" AUTOID AT (CENTER PREVBOTTOM+1) FONT 0
+
+  LABEL "Support: ap85@georgetown.edu" AUTOID AT (CENTER PREVBOTTOM + 1 ) FONT 0
+  BUTTON "OK" ID btnOK AT (CENTER BOTTOM@152 AUTO AUTO)
+END
+
+WORDLIST ID frmAbout
+BEGIN
+    DIA_FORM_USE_BIN // formFlags
+    BIN_ABOUT   // bin
+    DIA_STATE_MAX    // preferredState
+    // Object data
+    0             DIA_H_PLUS_DH+DIA_W_PLUS_DW          0 // the form itself
+    btnOK         DIA_Y_PLUS_DH+DIA_X_PLUS_1_2_DW         0
+END
+
+ALERT altNoMem
+ERROR
+BEGIN
+  TITLE "Out of memory"
+  MESSAGE "Not enough memory to continue."
+  BUTTONS "OK"
+END
+
+

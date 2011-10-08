@@ -1,0 +1,2 @@
+#define DIA_SECTION
+#define RESIZE_SECTION

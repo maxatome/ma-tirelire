@@ -1,0 +1,3254 @@
+#include "MaTirelireDefs.h"
+
+#include "obj-fr.rcp"
+#include "obj-en.rcp"
+#include "obj-de.rcp"
+#include "obj-it.rcp"
+#include "obj-tw.rcp"
+#include "obj-pt.rcp"
+#include "obj-br.rcp"
+
+DEFINE DIA_FORM=0
+DEFINE DIA_BIN_MODAL=0
+DEFINE DIA_BIN_LIST=1
+
+/* Start just before FontBucket STRINGs */
+RESETAUTOID 9499
+
+/* Form numbering */
+DEFINE formAuto=1
+
+/* Base indexes for tabs form
+ * Cas particulier pour l'ID 262 à cause d'un bug sur l'OS 3.5 qui fait
+ * apparaître automatiquement la Command Bar d'où baseTab1Begin
+ * http://news.palmos.com/read/messages?id=72824#72824 */
+DEFINE baseTabOut=2
+DEFINE autoCarriageReturnButton=254
+DEFINE baseTabAfterLine=255
+DEFINE baseTab1=256
+DEFINE baseTab1Begin=450
+DEFINE baseTab2=512
+DEFINE baseTab3=768
+DEFINE baseTab4=1024
+DEFINE baseTab5=1280
+DEFINE baseTab6=1536
+DEFINE baseTab7=1792
+DEFINE baseTab8=2048
+
+/* Group indexes -- must be < 255 */
+DEFINE ordGroup=1
+
+/* Form's objects that need to be ordered */
+DEFINE ordObjects=100
+
+/* Special strings */
+DEFINE ordStrings=500
+
+/* Ordered menu entries */
+DEFINE ordMenu=1000
+
+/* Special bitmaps */
+DEFINE ordBitmaps=3000
+
+/* Spécial SumListForm */
+DEFINE SumListTable=ordObjects++
+DEFINE SumListScrollbar=ordObjects++
+DEFINE SumListScrollTop=ordObjects++
+DEFINE SumListScrollBottom=ordObjects++
+DEFINE SumListFull=ordObjects++
+DEFINE SumListMenu=ordObjects++
+
+DEFINE SumListDateUp=ordObjects++
+DEFINE SumListDateDown=ordObjects++
+DEFINE SumListSumTypePopup=ordObjects++
+DEFINE SumListSumTypeList=ordObjects++
+DEFINE SumListSum=ordObjects++
+DEFINE SumListCurrency=ordObjects++
+DEFINE SumListCurrencyList=ordObjects++
+
+DEFINE SumListBack=ordObjects++
+
+DEFINE SumListMenuDesc=ordMenu++
+DEFINE SumListMenuTypes=ordMenu++
+DEFINE SumListMenuModes=ordMenu++
+DEFINE SumListMenuCurr=ordMenu++
+DEFINE SumListMenuPrefs=ordMenu++
+DEFINE SumListMenuApropos=ordMenu++
+
+
+
+ALERT ID 5
+INFORMATION
+BEGIN
+	TITLE "Notice"
+	MESSAGE "^1"
+	BUTTONS "OK"
+END
+
+ALERT ID alertError
+ERROR
+BEGIN
+	TITLE "Unexpected error"
+	MESSAGE "^1\nContact bug@ma-tirelire.net"
+	BUTTONS "OK"
+END
+
+
+/************************************************************************
+ *
+ * Menus
+ *
+ ************************************************************************/
+
+/*
+ * Default menu with edit features
+ */
+MENU ID DefaultEditMenu
+BEGIN
+	PULLDOWN "$DefaultMenu-Edit"
+	BEGIN
+		MENUITEM "$DefaultMenu-Edit-Undo"		ID DefaultMenuUndo
+		MENUITEM "$DefaultMenu-Edit-Cut"		ID DefaultMenuCut
+		MENUITEM "$DefaultMenu-Edit-Copy"		ID DefaultMenuCopy
+		MENUITEM "$DefaultMenu-Edit-Paste"		ID DefaultMenuPaste
+		MENUITEM "$DefaultMenu-Edit-SelectAll"	ID DefaultMenuSelectAll
+	END
+
+	PULLDOWN "$DefaultMenu-Misc"
+	BEGIN
+		MENUITEM "$DefaultMenu-Misc-About"		ID DefaultMenuAbout
+	END
+END
+
+
+/*
+ * Default menu
+ */
+MENU ID DefaultBaseMenu
+BEGIN
+	PULLDOWN "$DefaultMenu-Misc"
+	BEGIN
+		MENUITEM "$DefaultMenu-Misc-About"		ID DefaultMenuAbout
+	END
+END
+
+
+/*
+ * Default SumList menu
+ */
+MENU ID DefaultSumListMenu
+BEGIN
+	PULLDOWN "$DefaultMenu-Misc"
+	BEGIN
+		MENUITEM "$TransListMenu-Misc-Copy"		ID SumListMenuCopy
+		MENUITEM SEPARATOR					  
+		MENUITEM "$DefaultMenu-Misc-About"		ID DefaultMenuAbout
+	END
+END
+
+
+/*
+ * DBases list menu
+ */
+MENU ID DBasesListMenu
+BEGIN
+	PULLDOWN "$DBasesListMenu-Misc"
+	BEGIN
+		MENUITEM "$DBasesListMenu-Misc-Correct" ID DBasesListCorrect
+		MENUITEM SEPARATOR
+		MENUITEM "$DefaultMenu-Misc-About"		ID DefaultMenuAbout
+	END
+END
+
+
+/*
+ * Accounts list menu
+ */
+MENU ID AccountsListMenu
+BEGIN
+	PULLDOWN "$AccountsListMenu-DBase"
+	BEGIN
+		MENUITEM "$AccountsListMenu-Properties"	ID AccountsListProperties
+		MENUITEM "$AccountsListMenu-Manage"		ID AccountsListDBasesManage
+	END
+
+	PULLDOWN "$TransListMenu-Misc"
+    BEGIN
+		MENUITEM "$TransListMenu-Misc-Copy"  ID SumListMenuCopy
+		MENUITEM SEPARATOR					  
+		MENUITEM "$TransListMenu-Misc-Desc"	 ID SumListMenuDesc
+		MENUITEM "$TransListMenu-Misc-Types" ID SumListMenuTypes
+		MENUITEM "$TransListMenu-Misc-Modes" ID SumListMenuModes
+		MENUITEM "$TransListMenu-Misc-Curr"	 ID SumListMenuCurr
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-Misc-Stats"	ID AccountsListMenuStats
+		MENUITEM SEPARATOR
+        MENUITEM "$TransListMenu-Misc-Prefs" ID SumListMenuPrefs
+		MENUITEM "$TransListMenu-Misc-ExeRepeats" ID SumListMenuRepeat
+		MENUITEM SEPARATOR
+		MENUITEM "$DefaultMenu-Misc-About" ID DefaultMenuAbout
+	END
+END
+
+
+/*
+ * Transactions list menu
+ */
+MENU ID TransListMenu
+BEGIN
+    PULLDOWN "$TransListMenu-Account"
+    BEGIN
+		MENUITEM "$TransListMenu-Account-Clearing"	   ID TransListMenuClearing
+        MENUITEM "$TransListMenu-Account-PurgeCleared" ID TransListMenuClearDel
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-Account-Repeats"   ID TransListMenuViewRepeats
+		MENUITEM SEPARATOR
+        MENUITEM "$TransListMenu-Account-DeleteAll"	   ID TransListMenuAllDel
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-Account-Properties" ID TransListMenuProperties
+		MENUITEM "$TransListMenu-Account-DBProperties"
+												ID TransListMenuDBProperties
+        MENUITEM "$TransListMenu-Account-Accounts"	   ID TransListMenuAccounts
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-Account-DBases"	   ID TransListMenuDBases
+    END
+
+    PULLDOWN "$TransListMenu-Flagged"
+    BEGIN
+		MENUITEM "$TransListMenu-Flagged-Flag"		 ID TransListMenuMark
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-Flagged-FlagPage"	 ID TransListMenuMarkPage
+		MENUITEM "$TransListMenu-Flagged-UnflagPage" ID TransListMenuUnmarkPage
+		MENUITEM "$TransListMenu-Flagged-InvertPage" ID TransListMenuInvertPage
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-Flagged-UnflagAll"	 ID TransListMenuUnmarkAll
+		MENUITEM "$TransListMenu-Flagged-InvertAll"  ID TransListMenuInvertAll
+		MENUITEM "$TransListMenu-Flagged-FlagClear"
+												ID TransListMenuMarkedToChecked
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-Flagged-Screen"	 ID TransListMemuMarkView
+		MENUITEM SEPARATOR
+        MENUITEM "$TransListMenu-Flagged-DeleteFlag" ID TransListMenuMarkDel
+	END
+
+    PULLDOWN "$TransListMenu-GoTo"
+	DEFINE TransListMenuGotoFirstNotChecked=ordMenu++
+	DEFINE TransListMenuGotoFirstNotFlag=ordMenu++
+	DEFINE TransListMenuGotoFirstNotClearFlag=ordMenu++
+	DEFINE TransListMenuGotoFirstFlag=ordMenu++
+
+	DEFINE TransListMenuGotoNextNotChecked=ordMenu++
+	DEFINE TransListMenuGotoNextNotFlag=ordMenu++
+	DEFINE TransListMenuGotoNextNotClearFlag=ordMenu++
+	DEFINE TransListMenuGotoNextFlag=ordMenu++
+
+	DEFINE TransListMenuGotoDate=ordMenu++
+
+	DEFINE TransListMenuGotoBase=TransListMenuGotoFirstNotChecked
+    BEGIN
+		MENUITEM "$TransListMenu-GoTo-FirstNotClear"
+										ID TransListMenuGotoFirstNotChecked
+		MENUITEM "$TransListMenu-GoTo-NextNotClear"
+										ID TransListMenuGotoNextNotChecked
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-GoTo-FirstNotFlag"
+										ID TransListMenuGotoFirstNotFlag
+		MENUITEM "$TransListMenu-GoTo-NextNotFlag"
+										ID TransListMenuGotoNextNotFlag
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-GoTo-FirstNotClearFlag"
+										ID TransListMenuGotoFirstNotClearFlag
+		MENUITEM "$TransListMenu-GoTo-NextNotClearFlag"
+										ID TransListMenuGotoNextNotClearFlag
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-GoTo-FirstFlag"
+										ID TransListMenuGotoFirstFlag
+		MENUITEM "$TransListMenu-GoTo-NextFlag"	ID TransListMenuGotoNextFlag
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-GoTo-Date"		ID TransListMenuGotoDate
+    END
+
+    PULLDOWN "$TransListMenu-Misc"
+    BEGIN
+		MENUITEM "$TransListMenu-Misc-Copy"		ID SumListMenuCopy
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-Misc-Desc"		ID SumListMenuDesc
+		MENUITEM "$TransListMenu-Misc-Types"	ID SumListMenuTypes
+		MENUITEM "$TransListMenu-Misc-Modes"	ID SumListMenuModes
+		MENUITEM "$TransListMenu-Misc-Curr"		ID SumListMenuCurr
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-Misc-MiniStats" ID TransListMenuMiniStats
+        MENUITEM "$TransListMenu-Misc-Stats"	ID TransListMenuStats
+		MENUITEM SEPARATOR
+        MENUITEM "$TransListMenu-Misc-Prefs"	ID SumListMenuPrefs
+		MENUITEM "$TransListMenu-Misc-ExeRepeats" ID SumListMenuRepeat
+		MENUITEM SEPARATOR
+		MENUITEM "$DefaultMenu-Misc-About"		ID DefaultMenuAbout
+    END
+END
+
+
+/*
+ * CustomList menu (stats results, flagged screen...)
+ */
+MENU ID CustomListMenu
+BEGIN
+	PULLDOWN "$CustomListMenu-Select"
+	BEGIN
+		MENUITEM "$CustomListMenu-Select-Invert"
+											ID CustomListSelectInvert=ordMenu++
+		MENUITEM "$CustomListMenu-Select-None"
+											ID CustomListSelectNone=ordMenu++
+		MENUITEM "$CustomListMenu-Select-All"
+											ID CustomListSelectAll=ordMenu++
+	END
+	PULLDOWN "$TransListMenu-Misc"
+    BEGIN
+		MENUITEM "$TransListMenu-Misc-Copy"  ID SumListMenuCopy
+		MENUITEM SEPARATOR					  
+		MENUITEM "$CustomListMenu-Misc-Export" ID SumListExport
+		MENUITEM SEPARATOR
+		MENUITEM "$TransListMenu-Misc-Desc"	 ID SumListMenuDesc
+		MENUITEM "$TransListMenu-Misc-Types" ID SumListMenuTypes
+		MENUITEM "$TransListMenu-Misc-Modes" ID SumListMenuModes
+		MENUITEM "$TransListMenu-Misc-Curr"	 ID SumListMenuCurr
+		MENUITEM SEPARATOR
+        MENUITEM "$TransListMenu-Misc-Prefs" ID SumListMenuPrefs
+		MENUITEM SEPARATOR
+		MENUITEM "$DefaultMenu-Misc-About"	 ID DefaultMenuAbout
+	END
+END
+
+
+/*
+ * Transaction menu
+ */
+MENU ID TransMenu
+BEGIN
+	PULLDOWN "$TransMenu-GoTo"
+	DEFINE TransMenuPrev=1051
+	DEFINE TransMenuNext=1054
+	BEGIN
+		MENUITEM "$TransMenu-GoTo-Prev"			ID TransMenuPrev++
+		MENUITEM "$TransMenu-GoTo-Next"			ID TransMenuNext++
+	END
+
+	PULLDOWN "$TransMenu-Edit"
+	BEGIN
+		MENUITEM "$DefaultMenu-Edit-Undo"		ID DefaultMenuUndo
+		MENUITEM "$DefaultMenu-Edit-Cut"		ID DefaultMenuCut
+		MENUITEM "$DefaultMenu-Edit-Copy"		ID DefaultMenuCopy
+		MENUITEM "$DefaultMenu-Edit-Paste"		ID DefaultMenuPaste
+		MENUITEM "$DefaultMenu-Edit-SelectAll"	ID DefaultMenuSelectAll
+		MENUITEM SEPARATOR
+		MENUITEM "$TransMenu-Edit-TransCopy"	ID MenuTransFormCopy
+	END
+
+    PULLDOWN "$TransMenu-Misc"
+    BEGIN
+		MENUITEM "$TransListMenu-Misc-Desc"		ID TransMenuDesc
+		MENUITEM "$TransListMenu-Misc-Types"	ID TransMenuTypes
+		MENUITEM "$TransListMenu-Misc-Modes"	ID TransMenuModes
+		MENUITEM "$TransListMenu-Misc-Curr"		ID TransMenuCurr
+		MENUITEM SEPARATOR
+		MENUITEM "$DefaultMenu-Misc-About"		ID DefaultMenuAbout
+	END
+END
+
+
+/************************************************************************
+ *
+ * Dialog boxes
+ *
+ ************************************************************************/
+
+/* TransListAccounts ne doit pas être en tête, sinon la méthode
+ * -popupListInit:form:infos:selectedAccount: plante sur OS <= 3.5.3 car
+ * FrmGetObjectIndex(oForm->pt_frm, uh_list_id - 1) pointe sur un objet
+ * inexistant... */
+
+FORM TransListFormIdx=formAuto++ AT (0 0 160 160)
+USABLE
+MENUID TransListMenu
+BEGIN
+	TITLE STR(5 + 31 + 15)
+
+	LIST ""	ID TransListDBases AT (80 PREVTOP 30 AUTO) VISIBLEITEMS 1 NONUSABLE
+	LIST ""	ID TransListAccounts AT (0 16-1 30 AUTO) VISIBLEITEMS 1 NONUSABLE
+	
+	BUTTON "%" ID TransListMiniStats AT (RIGHT@160-11-11-9-2 0 10 12) NOFRAME
+
+	FORMBITMAP AT (PREVRIGHT+2 2) BITMAP bmpLock USABLE
+	PUSHBUTTON "" ID TransListToggleCheck AT (PREVLEFT-1 PREVTOP-1 9 10)
+
+    BUTTON "" ID TransListGotoFirst AT (PREVRIGHT+1 PREVTOP-1 11 12) NOFRAME
+	FORMBITMAP AT (PREVLEFT+2 PREVTOP+1) BITMAP bmpFirstChecked USABLE
+
+    BUTTON "" ID TransListGotoNext AT (PREVLEFT+11-2 PREVTOP-1 11 12) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 PREVTOP+1) BITMAP bmpNextChecked USABLE
+
+	LIST [$Prefs-FirstNextList] ID TransListPrefsFirstNextList
+		AT (PREVLEFT PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 4 NONUSABLE
+
+	TABLE ID SumListTable
+		AT (0 16-1 TABLE_WIDTH 12*11+1)
+		ROWS 50 COLUMNS 1 COLUMNWIDTHS TABLE_WIDTH
+
+	FORMBITMAP AT (160-7 PREVTOP+1) BITMAP bmpScrollTop USABLE
+	BUTTON "" ID SumListScrollTop AT (PREVLEFT PREVTOP-1 7 10) NOFRAME
+
+	SCROLLBAR ID SumListScrollbar
+		AT (RIGHT@160 PREVTOP+PREVHEIGHT 7 12*11-(2*PREVHEIGHT))
+		VALUE 0 MIN 0 MAX 100 PAGESIZE 12
+
+	FORMBITMAP AT (160-7 PREVTOP+PREVHEIGHT+1) BITMAP bmpScrollBottom USABLE
+	BUTTON "" ID SumListScrollBottom AT (PREVLEFT PREVTOP-1 7 10) NOFRAME
+
+
+	BUTTON "" ID TransListDebit AT (1 BOTTOM@160-1 14 10)
+	FORMBITMAP AT (PREVLEFT+3 160-12+2) BITMAP bmpMinus USABLE
+
+    BUTTON "" ID TransListCredit AT (1+14+1 BOTTOM@160-1 14 10)
+	FORMBITMAP AT (PREVLEFT+3 160-12+2) BITMAP bmpPlus USABLE
+
+
+	FORMBITMAP AT (PREVLEFT-3+14+2 160-1-10) BITMAP bmpDateUp USABLE
+	REPEATBUTTON "" ID SumListDateUp
+		AT (PREVLEFT-1 PREVTOP-1 7 6) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 PREVTOP+8) BITMAP bmpDateDown USABLE
+	REPEATBUTTON "" ID SumListDateDown
+		AT (PREVLEFT-1 PREVTOP-2 7 6) NOFRAME
+
+	SELECTORTRIGGER "" ID SumListSumTypePopup
+		AT (PREVRIGHT+1 PREVTOP-5 AUTO 10)
+	LIST [$TransList-Sums] ID SumListSumTypeList
+		AT (PREVLEFT BOTTOM@160-1 AUTOLISTWIDTH AUTO) VISIBLEITEMS 10 NONUSABLE
+
+	FIELD ID SumListSum
+		AT (RIGHT@160-7 BOTTOM@160 60 AUTO)
+		RIGHTALIGN MAXCHARS 13 NONEDITABLE FONT LABEL_FONT
+
+	BUTTON "\003" ID SumListFull
+		AT (RIGHT@160 BOTTOM@160 7 11) NOFRAME FONT 4
+
+	LIST [$TransList-ContextMenu] ID TransListActionList
+		AT (0 0 AUTOLISTWIDTH AUTO)	VISIBLEITEMS 7 NONUSABLE
+
+	LIST ""	ID TransListDescList AT (0 0 30 AUTO) VISIBLEITEMS 1 NONUSABLE
+END
+
+GENERICSTRING strTransListAccountProp
+GENERICSTRING strTransListContextMenuClear=ordStrings++
+GENERICSTRING strTransListContextMenuUnclear=ordStrings++
+GENERICSTRING strTransListContextMenuFlag=ordStrings++
+GENERICSTRING strTransListContextMenuUnflag=ordStrings++
+
+GENERICSTRING strTransListDateTime
+GENERICSTRING strTransListValuationDate
+GENERICSTRING strTransListSepAmountMode
+GENERICSTRING strTransListCheckNum
+GENERICSTRING strTransListStatementNum
+GENERICSTRING strTransListRepeatWeekly
+GENERICSTRING strTransListRepeatNweekly
+GENERICSTRING strTransListRepeatMonthly
+GENERICSTRING strTransListRepeatMonthlyEnd
+GENERICSTRING strTransListRepeatNmonthly
+GENERICSTRING strTransListRepeatAnnually
+GENERICSTRING strTransListRepeatNannually
+GENERICSTRING strTransListType
+GENERICSTRING strTransListXferTo
+GENERICSTRING strTransListXferFrom
+GENERICSTRING strTransListXferToUnknown
+GENERICSTRING strTransListXferFromUnknown
+GENERICSTRING strTransListNumSplits
+
+GENERICSTRING strTransListGotoDate
+
+
+// DIA resize infos
+WORDLIST ID TransListFormIdx
+BEGIN
+	DIA_FORM_USE_BIN
+	DIA_BIN_LIST
+	DIA_STATE_MIN
+
+	// Object
+	DIA_FORM					DIA_H_PLUS_DH+DIA_W_PLUS_DW			0
+
+	TransListMiniStats			DIA_X_RIGHT							0
+	bmpLock						DIA_X_RIGHT							0
+	TransListToggleCheck		DIA_X_RIGHT							0
+	TransListGotoFirst			DIA_X_RIGHT							0
+	bmpFirstChecked				DIA_X_RIGHT							0
+	TransListGotoNext			DIA_X_RIGHT							0
+	bmpNextChecked				DIA_X_RIGHT							0
+
+	SumListTable				DIA_H_PLUS_DH+DIA_W_PLUS_DW			0
+	bmpScrollTop				DIA_X_RIGHT							0
+	SumListScrollTop			DIA_X_RIGHT							0
+	SumListScrollbar			DIA_X_RIGHT+DIA_H_PLUS_DH			0
+	bmpScrollBottom				DIA_X_RIGHT+DIA_Y_BOTTOM			0
+	SumListScrollBottom			DIA_X_RIGHT+DIA_Y_BOTTOM			0
+
+	TransListDebit				DIA_Y_BOTTOM						0
+	bmpMinus					DIA_Y_BOTTOM						0
+	TransListCredit				DIA_Y_BOTTOM						0
+	bmpPlus						DIA_Y_BOTTOM						0
+
+	bmpDateUp					DIA_Y_BOTTOM						0
+	SumListDateUp				DIA_Y_BOTTOM						0
+	bmpDateDown					DIA_Y_BOTTOM						0
+	SumListDateDown				DIA_Y_BOTTOM						0
+	SumListSumTypePopup			DIA_Y_BOTTOM						0
+	SumListSumTypeList			DIA_Y_BOTTOM						0
+
+	SumListSum					DIA_X_RIGHT+DIA_Y_BOTTOM			0
+
+	SumListFull					DIA_X_RIGHT+DIA_Y_BOTTOM			0
+END
+
+
+FORM OpFormIdx=formAuto++ AT (0 0 160 160)
+USABLE
+MENUID TransMenu
+DEFAULTBTNID OpCancel
+BEGIN
+	TITLE STR(16)
+
+DEFINE OpOutOfTab=baseTabOut
+
+	BUTTON "X" ID OpPrev=OpOutOfTab++ AT (60 0 13 12) NOFRAME FONT 5
+	BUTTON "X" ID OpNext=OpOutOfTab++ AT (PREVRIGHT 0 13 12) NOFRAME FONT 5
+
+	SELECTORTRIGGER STR(16) ID OpCategoryPopup=OpOutOfTab++
+		AT (RIGHT@159 1 AUTO 11) RIGHTANCHOR
+	LIST "" ID OpCategoryList=OpOutOfTab++
+		AT (156 0 4 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	LABEL "$Trans-Date"	ID OpOutOfTab++	AT (RIGHT@XLEFT YTOP-1) FONT LABEL_FONT
+
+	FORMBITMAP AT (PREVRIGHT YTOP-1) BITMAP bmpDateUp USABLE
+	REPEATBUTTON "" ID OpDateUp=OpOutOfTab++
+		AT (PREVLEFT-1 PREVTOP-1 7 6) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 YTOP-1+9) BITMAP bmpDateDown USABLE
+	REPEATBUTTON "" ID OpDateDown=OpOutOfTab++
+		AT (PREVLEFT-1 PREVTOP-2 7 6) NOFRAME
+	SELECTORTRIGGER STR(14) ID OpDate=OpOutOfTab++
+		AT (PREVLEFT+PREVWIDTH+1 YTOP-1 DATE_REC_WIDTH AUTO) LEFTANCHOR
+
+	SELECTORTRIGGER STR(8) ID OpTime=OpOutOfTab++
+		AT (PREVLEFT+PREVWIDTH+2 PREVTOP AUTO AUTO) LEFTANCHOR
+	PUSHBUTTON "\024" ID OpAlarm=OpOutOfTab++ AT (2 PREVTOP 9 AUTO) FONT 3
+
+	POPUPTRIGGER "$Trans-Desc" ID OpDescPopup=OpOutOfTab++
+		AT (RIGHT@XLEFT_POPUP-6 PREVTOP+LINEFEED AUTO AUTO)
+		LEFTANCHOR FONT LABEL_FONT
+	LIST "" ID OpDescList=OpOutOfTab++
+		AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	LABEL ":" ID OpOutOfTab++ AT (RIGHT@XLEFT PREVTOP) FONT LABEL_FONT
+
+	FIELD ID OpDesc=OpOutOfTab++
+		AT (XRIGHT PREVTOP 98 2*11+1)
+		UNDERLINED MAXCHARS NOTE_MAXCHARS MULTIPLELINES AUTOSHIFT HASSCROLLBAR
+	SCROLLBAR ID OpScrollbar=OpOutOfTab++
+		AT (RIGHT@160 PREVTOP 7 PREVHEIGHT)	VALUE 0 MIN 0 MAX 100 PAGESIZE 12
+
+	BUTTON STR(16) ID OpDebCredLabel=OpOutOfTab++
+		AT (0 PREVTOP+PREVHEIGHT RIGHT@XLEFT+2 AUTO)
+		RIGHTANCHOR NOFRAME FONT LABEL_FONT
+
+	SELECTORTRIGGER "+" ID OpDebCredSign=OpOutOfTab++
+		AT (XRIGHT PREVTOP+1 AUTO AMOUNT_SIGN_HEIGHT-1) RIGHTANCHOR
+	FIELD ID OpAmount=OpOutOfTab++
+		AT (PREVRIGHT+3 PREVTOP-1 AMOUNT_WIDTH AUTO)
+		UNDERLINED MAXCHARS AMOUNT_LEN RIGHTALIGN NUMERIC
+	
+	SELECTORTRIGGER "" ID OpDevise=OpOutOfTab++
+		AT (PREVRIGHT+3 PREVTOP+1 AUTO AMOUNT_SIGN_HEIGHT)
+    LIST "" ID OpDeviseList=OpOutOfTab++
+		AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+DEFINE OpTab1=baseTab1Begin
+	BUTTON "$Trans-MainTab" ID baseTab1
+		AT (XTAB PREVTOP+LINEFEED AUTOWIDTH+5 HTAB) NOFRAME
+
+DEFINE OpTab2=baseTab2
+	BUTTON "$Trans-RepeatTab" ID OpTab2++
+		AT (PREVRIGHT+1 PREVTOP AUTOWIDTH+5 HTAB) NOFRAME
+
+DEFINE OpTab3=baseTab3
+	BUTTON "$Trans-BreakdownTab" ID OpTab3++
+		AT (PREVRIGHT+1 PREVTOP AUTOWIDTH+5 HTAB) NOFRAME
+
+DEFINE OpTab4=baseTab4
+	BUTTON "$Trans-CurrencyTab" ID OpTab4++
+		AT (PREVRIGHT+1 PREVTOP AUTOWIDTH+5 HTAB) NOFRAME
+
+	/***********************************************************************
+     * Main tab
+     */
+    LABEL "$Trans-Mode" ID OpTab1++	AT (RIGHT@XLEFT 80) FONT LABEL_FONT
+
+    POPUPTRIGGER "" ID OpModePopup=OpTab1++
+		AT (XRIGHT-3 PREVTOP 50 AUTO) LEFTANCHOR
+    LIST "" ID OpModeList=OpTab1++
+		AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	SELECTORTRIGGER "$Trans-ChkNum" ID OpCheckNumAuto=OpTab1++
+		AT (3 PREVTOP+LINEFEED AUTOWIDTH+5 AUTO) LEFTANCHOR
+	FIELD ID OpCheckNum=OpTab1++
+		AT (PREVLEFT+PREVWIDTH+2 PREVTOP INT_WIDTH AUTO)
+		UNDERLINED MAXCHARS INT_LEN RIGHTALIGN NUMERIC
+
+	LABEL "$Trans-OnValueDate" ID OpTab1++
+		AT (PREVLEFT+PREVWIDTH+[$Trans-OnValueDate-Add]-5 PREVTOP)
+
+	FORMBITMAP AT (PREVRIGHT+1 PREVTOP) BITMAP bmpDateUp USABLE
+	GADGET ID OpValueDateUpBmp=OpTab1++ AT (PREVLEFT PREVTOP 5 5) NONUSABLE
+	FORMBITMAP AT (PREVLEFT PREVTOP+9) BITMAP bmpDateDown USABLE
+	GADGET ID OpValueDateDownBmp=OpTab1++ AT (PREVLEFT PREVTOP 5 5) NONUSABLE
+
+	REPEATBUTTON "" ID OpValueDateUp=OpTab1++
+		AT (PREVLEFT-1 PREVTOP-10 7 6) NOFRAME
+	REPEATBUTTON "" ID OpValueDateDown=OpTab1++
+		AT (PREVLEFT PREVTOP+8 7 6) NOFRAME
+	SELECTORTRIGGER STR(14) ID OpValueDate=OpTab1++
+		AT (PREVLEFT+PREVWIDTH+1 PREVTOP-7 DATE_REC_WIDTH AUTO) LEFTANCHOR
+
+	LABEL "$Trans-Type" ID OpTab1++
+		AT (RIGHT@XLEFT PREVTOP+LINEFEED) FONT LABEL_FONT
+
+	CHECKBOX "" ID OpPerso=OpTab1++ AT (0 PREVTOP AUTO AUTO)
+
+    POPUPTRIGGER "" ID OpTypePopup=OpTab1++
+		AT (XRIGHT-3 PREVTOP 160-(XRIGHT-3) AUTO) LEFTANCHOR
+    LIST "" ID OpTypeList=OpTab1++
+		AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	LABEL "$Trans-Statement" ID OpTab1++
+		AT (RIGHT@XLEFT PREVTOP+LINEFEED) FONT LABEL_FONT
+	FIELD ID OpStatementNum=OpTab1++
+		AT (XRIGHT PREVTOP INT_WIDTH AUTO)
+		UNDERLINED MAXCHARS INT_LEN RIGHTALIGN NUMERIC
+
+	CHECKBOX "$Trans-Clear" ID OpChecked=OpTab1++
+		AT (PREVRIGHT+2 PREVTOP AUTO AUTO)
+
+	LABEL "$Trans-Xfer" ID OpTab1++
+		AT (RIGHT@XLEFT PREVTOP+LINEFEED) FONT LABEL_FONT
+
+	SELECTORTRIGGER STR(32) ID OpXferPopup=OpTab1++
+		AT (XRIGHT PREVTOP AUTO AUTO) LEFTANCHOR
+	LIST "" ID OpXferList=OpTab1++
+		AT (PREVLEFT PREVTOP 75 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	FORMBITMAP AT (160-10 PREVTOP+1) BITMAP bmpTrash USABLE
+	SELECTORTRIGGER "" ID OpXferDel=OpOutOfTab++
+		AT (RIGHT@159 PREVTOP-1 10 AUTO)
+
+
+	/***********************************************************************
+     * Repeat tab
+     */
+    LABEL "$Trans-Repeat" ID OpTab2++ AT (RIGHT@XLEFT 80) FONT LABEL_FONT
+
+	POPUPTRIGGER "" ID OpRepeatPopup=OpTab2++
+		AT (XRIGHT-3 PREVTOP 70 AUTO) LEFTANCHOR
+	LIST [$Trans-RepeatList] ID OpRepeatList=OpTab2++
+		AT (PREVLEFT PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 11 NONUSABLE
+
+	LABEL "$Trans-RepeatEndsAt" ID OpRepeatEndsAt=OpOutOfTab++
+		AT (RIGHT@XLEFT PREVTOP+LINEFEED) FONT LABEL_FONT
+
+	FORMBITMAP AT (PREVRIGHT 80+LINEFEED) BITMAP bmpDateUp USABLE
+	GADGET ID OpRepeatEndDateUpBmp=OpOutOfTab++
+		AT (PREVLEFT PREVTOP 5 5) NONUSABLE
+	FORMBITMAP AT (PREVLEFT PREVTOP+9) BITMAP bmpDateDown USABLE
+	GADGET ID OpRepeatEndDateDownBmp=OpOutOfTab++
+		AT (PREVLEFT PREVTOP 5 5) NONUSABLE
+
+	REPEATBUTTON "" ID OpRepeatEndDateUp=OpOutOfTab++
+		AT (PREVLEFT-1 PREVTOP-10 7 6) NOFRAME
+	REPEATBUTTON "" ID OpRepeatEndDateDown=OpOutOfTab++
+		AT (PREVLEFT PREVTOP+8 7 6) NOFRAME
+	SELECTORTRIGGER STR(14) ID OpRepeatEndDate=OpOutOfTab++
+		AT (PREVLEFT+PREVWIDTH+1 PREVTOP-7 DATE_REC_WIDTH AUTO) LEFTANCHOR
+
+	LIST [$Trans-RepeatChoices] ID OpRepeatChoices=OpTab2++
+		AT (PREVLEFT PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 3 NONUSABLE
+
+
+	FIELD ID OpRepeatTimes=OpOutOfTab++
+		AT (XRIGHT-3 PREVTOP+LINEFEED 3*5 AUTO)
+		UNDERLINED MAXCHARS 3 RIGHTALIGN NUMERIC
+
+	BUTTON "$Trans-RepeatTimes" ID OpRepeatTimesLabel=OpOutOfTab++
+		AT (PREVRIGHT PREVTOP AUTOWIDTH+4 AUTO) NOFRAME
+
+
+	/***********************************************************************
+     * Splits tab
+	 */
+	LIST "" ID OpSplitList=OpTab3++ AT (1 80+2 158 AUTO) VISIBLEITEMS 4
+
+	BUTTON "$Trans-SplitCreate" ID OpSplitCreate=OpTab3++
+		AT (1 PREVTOP+PREVHEIGHT+4 AUTOWIDTH+4 AUTO)
+	BUTTON "\011" ID OpSplitEdit=OpOutOfTab++
+		AT (PREVRIGHT+3 PREVTOP AUTO 12) FONT 3
+
+	SELECTORTRIGGER "" ID OpSplitLabel=OpOutOfTab++
+		AT (PREVRIGHT+3 PREVTOP AUTO AUTO)
+
+	LABEL "$Trans-SplitSortBy" ID OpSplitSortBy=OpOutOfTab++
+		AT (PREVLEFT+10 PREVTOP)
+	SELECTORTRIGGER "" ID OpSplitSort=OpOutOfTab++
+	 	AT (PREVRIGHT+2 PREVTOP AUTO AUTO)
+	LIST [$Trans-SplitSortByChoices] ID OpSplitSortByChoices=OpOutOfTab++
+		AT (PREVLEFT PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 3 NONUSABLE
+
+
+	/***********************************************************************
+     * Currency tab
+     */
+	 
+	LABEL "$Trans-CurrencyNone" ID OpCurrencyNone=OpOutOfTab++
+		AT (CENTER CENTER@80+32) FONT LABEL_FONT
+
+	LABEL "$Trans-CurrencyInAccount" ID OpCurrencyInAccount=OpOutOfTab++
+		AT (RIGHT@(XLEFT+16) 80) FONT LABEL_FONT
+
+	FIELD ID OpCurrencyAmount=OpOutOfTab++
+		AT (PREVRIGHT+2 PREVTOP AMOUNT_WIDTH AUTO)
+		UNDERLINED MAXCHARS AMOUNT_LEN RIGHTALIGN NUMERIC
+	LABEL STR(4) ID OpCurrencyAccountCurrency1=OpOutOfTab++
+		AT (PREVRIGHT+2 PREVTOP)
+	
+	LABEL "$Trans-CurrencyRate" ID OpCurrencyRateLabel=OpOutOfTab++
+		AT (XOK PREVTOP+LINEFEED)
+
+	/* Première ligne de taux */
+	LABEL STR(7) ID OpCurrency1Num=OpOutOfTab++ AT (XOK PREVTOP+PREVHEIGHT+1)
+	LABEL STR(4) ID OpCurrency1Currency=OpOutOfTab++ AT (PREVRIGHT+2 PREVTOP)
+
+	LABEL "=" ID OpCurrency1Equals=OpOutOfTab++ AT (PREVRIGHT+2 PREVTOP)
+
+	SELECTORTRIGGER STR(21) ID OpCurrency1Rate=OpOutOfTab++
+		AT (PREVRIGHT+2 PREVTOP AUTO AUTO)
+	LABEL STR(4) ID OpCurrency1AccountCurrency2=OpOutOfTab++
+		AT (PREVRIGHT+2 PREVTOP)
+
+	/* Deuxième ligne de taux */
+	LABEL STR(7) ID OpCurrency2Num=OpOutOfTab++ AT (XOK PREVTOP+PREVHEIGHT+3)
+	LABEL STR(4) ID OpCurrency2Currency=OpOutOfTab++ AT (PREVRIGHT+2 PREVTOP)
+
+	LABEL "=" ID OpCurrency2Equals=OpOutOfTab++ AT (PREVRIGHT+2 PREVTOP)
+
+	SELECTORTRIGGER STR(21) ID OpCurrency2Rate=OpOutOfTab++
+		AT (PREVRIGHT+2 PREVTOP AUTO AUTO)
+	LABEL STR(4) ID OpCurrency2AccountCurrency2=OpOutOfTab++
+		AT (PREVRIGHT+2 PREVTOP)
+
+
+	/************************************************************************
+	 * Validation buttons
+	 */
+	BUTTON "$Trans-OK" ID OpOK=autoCarriageReturnButton
+		AT (XOK BOTTOM@160-1 AUTO 10)
+    BUTTON "$Trans-Cancel" ID OpCancel=baseTabAfterLine
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO PREVHEIGHT)
+    BUTTON "$Trans-Delete" ID OpDelete=OpOutOfTab++
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO PREVHEIGHT)
+
+	GRAFFITISTATEINDICATOR 160-10 PREVTOP
+
+	LIST ""	ID OpNumList=OpOutOfTab++ AT (0 0 30 AUTO) VISIBLEITEMS 1 NONUSABLE
+END
+
+GENERICSTRING OpDate
+GENERICSTRING OpTime
+GENERICSTRING OpValueDate
+GENERICSTRING OpRepeatEndDate
+
+STRINGTABLE strOpFormDebCredLabel	"" [$TransDebCredLabel]
+STRINGTABLE strOpFormDebCredTitle	"" [$TransDebCredTitle]
+
+GENERICSTRING strOpFormNoXfer
+GENERICSTRING strOpNoValueDate
+
+GENERICSTRING strOpFormErrorDebitLabel=ordStrings++
+GENERICSTRING strOpFormErrorCreditLabel=ordStrings++
+
+GENERICSTRING strOpFormErrorCurrencyAmount=ordStrings++
+
+STRINGTABLE strOpFormSplitSortList	"" [$Trans-SplitSortList]
+
+GENERICSTRING strOpFormSplitsRemain
+
+
+/************************************************************************
+ * Edit split dialog
+ ************************************************************************/
+
+FORM EditSplitFormIdx=formAuto++ AT (2 70 156 88)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID EditSplitOK=autoCarriageReturnButton
+BEGIN
+	REPEATBUTTON "\002" ID EditSplitPrev
+		AT (45 YTOP_WO_TITLE 12 AUTO) NOFRAME FONT 4
+	LABEL "000/000" ID EditSplitPos AT (PREVRIGHT+3 PREVTOP)
+	REPEATBUTTON "\003" ID EditSplitNext
+		AT (PREVRIGHT+3 PREVTOP 12 AUTO) NOFRAME FONT 4
+
+	/* On utilise OpOutOfTab++ pour avoir des IDs distints de ceux de OpForm
+	 * et ainsi pouvoir les passer dans l'événement Goto */
+	POPUPTRIGGER "$Trans-Desc" ID EditSplitPopup=OpOutOfTab++
+		AT (RIGHT@XLEFT_POPUP-6-2 PREVTOP+LINEFEED AUTO AUTO)
+		LEFTANCHOR FONT LABEL_FONT
+	LIST "" ID EditSplitDescList=OpOutOfTab++
+		AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+	LABEL ":" AUTOID AT (RIGHT@XLEFT-2 PREVTOP) FONT LABEL_FONT
+	
+	FIELD ID EditSplitDesc=OpOutOfTab++
+		AT (XRIGHT-2 PREVTOP 94 2*11+1)
+		UNDERLINED MAXCHARS NOTE_MAXCHARS MULTIPLELINES AUTOSHIFT HASSCROLLBAR
+	SCROLLBAR ID EditSplitScrollbar=OpOutOfTab++
+		AT (RIGHT@156 PREVTOP 7 PREVHEIGHT)	VALUE 0 MIN 0 MAX 100 PAGESIZE 12
+	
+	GRAFFITISTATEINDICATOR XRIGHT-2-13 PREVTOP+LINEFEED
+
+	LABEL "$EditSplit-Amount" AUTOID
+		AT (RIGHT@XLEFT-2 PREVTOP+PREVHEIGHT) FONT LABEL_FONT
+	SELECTORTRIGGER "+" ID EditSplitSign=OpOutOfTab++
+		AT (XRIGHT PREVTOP+1 AUTO AMOUNT_SIGN_HEIGHT-1) RIGHTANCHOR
+	FIELD ID EditSplitAmount=OpOutOfTab++
+		AT (PREVRIGHT+3 PREVTOP-1 AMOUNT_WIDTH AUTO)
+		UNDERLINED MAXCHARS AMOUNT_LEN RIGHTALIGN NUMERIC
+	LABEL STR(4) ID EditSplitCurrency AT (PREVRIGHT+2 PREVTOP)
+
+	LABEL "$Trans-Type" AUTOID
+		AT (RIGHT@XLEFT-2 PREVTOP+PREVHEIGHT) FONT LABEL_FONT
+    POPUPTRIGGER "" ID EditSplitTypePopup=ordObjects++
+		AT (XRIGHT-3-2 PREVTOP 160-(XRIGHT-3) AUTO) LEFTANCHOR
+    LIST "" ID EditSplitTypeList=ordObjects++
+		AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	/* Buttons... */
+	BUTTON "$EditMode-OK" ID EditSplitOK
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED [$EditMode-OK-Width] AUTO)
+
+	BUTTON "$EditMode-Cancel" ID EditSplitCancel
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-Cancel-Width] AUTO)
+
+	BUTTON "$EditMode-Delete" ID EditSplitDelete
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-Delete-Width] AUTO)
+
+	BUTTON "$EditMode-New" ID EditSplitNew
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-New-Width] AUTO)	
+END
+
+GENERICSTRING strEditSplitAmount
+
+
+FORM PrefsFormIdx=formAuto++ AT (2 10 156 148)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID PrefsSave=autoCarriageReturnButton
+BEGIN
+	TITLE "$PrefsForm-Title"
+
+DEFINE PrefsTab1=baseTab1Begin
+	BUTTON "$Prefs-GeneralTab" ID baseTab1
+		AT (XTAB YTOP AUTO HTAB) NOFRAME
+
+DEFINE PrefsTab2=baseTab2
+	BUTTON "$Prefs-ListsTab" ID PrefsTab2++
+		AT (PREVRIGHT+1 PREVTOP AUTO HTAB) NOFRAME
+
+DEFINE PrefsTab3=baseTab3
+	BUTTON "$Prefs-TransactionTab" ID PrefsTab3++
+		AT (PREVRIGHT+1 PREVTOP AUTO HTAB) NOFRAME
+
+DEFINE PrefsOutOfTab=baseTabOut
+
+
+	/***********************************************************************
+     * General tab
+     */
+	CHECKBOX "$Prefs-LeftHandMode" ID PrefsLeftHanded=PrefsTab1++
+		AT (XOK_CHECKBOX YTOP+15 AUTO AUTO)
+
+	CHECKBOX "$Prefs-SelectFocusedNumFlds"
+		ID PrefsSelectFocusedNumFlds=PrefsTab1++
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+
+	/* Code : [Sans] ou [Positionné] */
+	LABEL "$Prefs-AccessCode" ID PrefsTab1++ AT (XOK PREVTOP+LINEFEED+2)
+	SELECTORTRIGGER STR(16) ID PrefsCode=PrefsTab1++
+		AT (PREVRIGHT+3 PREVTOP AUTO AUTO)
+
+	/* Auto-arrêt : 0,30,60,120,300 sec */
+	LABEL "$Prefs-AutoLockAfter" ID PrefsTab1++
+ 		AT (XOK PREVTOP+LINEFEED)
+	POPUPTRIGGER "" ID PrefsTimeoutPopup=PrefsTab1++
+		AT (PREVRIGHT PREVTOP AUTO AUTO) LEFTANCHOR
+	LIST [$Prefs-AutoLockDelays] ID PrefsTimeoutList=PrefsTab1++
+		AT (PREVLEFT PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 5 NONUSABLE
+	POPUPLIST ID PrefsTimeoutPopup PrefsTimeoutList
+	
+	/* Auto-lock when power off */
+	CHECKBOX "$Prefs-AutoLockOnPowerOff"
+		ID PrefsAutoLockOnPowerOff=PrefsTab1++
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+
+
+	/***********************************************************************
+     * Lists tab
+     */
+DEFINE PrefsColor=130
+DEFINE PrefsColorLabel=134		/* PrefsColor + 4 */
+DEFINE PrefsColorReset=136		/* PrefsColorLabel + 2 */
+DEFINE PrefsColorButtonX=58
+DEFINE PrefsColorButtonWidth=44
+
+	/* Police des listes */
+	LABEL "$Prefs-ListFont" ID PrefsTab2++ AT (XOK YTOP+15)
+	SELECTORTRIGGER	"" ID PrefsListFontName=PrefsTab2++
+		AT (XOK+5 PREVTOP+LINEFEED AUTO AUTO)
+
+	LABEL "$Prefs-ColorTitle" ID PrefsTab2++ AT (XOK PREVTOP+LINEFEED)
+
+	LABEL "$Prefs-RepeatColor" ID PrefsTab2++ AT (XOK+4 PREVTOP+LINEFEED)
+	SELECTORTRIGGER "" ID PrefsColor++
+		AT (PrefsColorButtonX PREVTOP PrefsColorButtonWidth AUTO)
+	BUTTON "\010" ID PrefsColorReset++ AT (PREVRIGHT+3 PREVTOP+1 15 10) FONT 3
+	PUSHBUTTON "$Prefs-BoldFace" ID PrefsBoldRepeat=PrefsTab2++
+		AT (PREVRIGHT+4 PREVTOP-1 AUTO AUTO) USABLE FONT LABEL_FONT
+
+	LABEL "$Prefs-XferColor" ID PrefsTab2++ AT (XOK+4 PREVTOP+LINEFEED)
+	SELECTORTRIGGER "" ID PrefsColor++
+		AT (PrefsColorButtonX PREVTOP PrefsColorButtonWidth AUTO)
+	BUTTON "\010" ID PrefsColorReset++ AT (PREVRIGHT+3 PREVTOP+1 15 10) FONT 3
+	PUSHBUTTON "$Prefs-BoldFace" ID PrefsBoldXfer=PrefsTab2++
+		AT (PREVRIGHT+4 PREVTOP-1 AUTO AUTO) USABLE FONT LABEL_FONT
+
+	LABEL "$Prefs-CreditColor" ID PrefsColorLabel++	AT (XOK+4 PREVTOP+LINEFEED)
+	SELECTORTRIGGER "" ID PrefsColor++
+		AT (PrefsColorButtonX PREVTOP PrefsColorButtonWidth AUTO)
+	BUTTON "\010" ID PrefsColorReset++ AT (PREVRIGHT+3 PREVTOP+1 15 10) FONT 3
+
+	LABEL "$Prefs-DebitColor" ID PrefsColorLabel++
+		AT (XOK+4 PREVTOP+LINEFEED-1)
+	SELECTORTRIGGER "" ID PrefsColor++
+		AT (PrefsColorButtonX PREVTOP PrefsColorButtonWidth AUTO)
+	BUTTON "\010" ID PrefsColorReset++ AT (PREVRIGHT+3 PREVTOP+1 15 10) FONT 3
+
+
+	/***********************************************************************
+     * Transaction tab
+     */
+	CHECKBOX "$Prefs-DescReplace" ID PrefsDesc=PrefsTab3++
+		AT (XOK_CHECKBOX YTOP+15 AUTO AUTO)
+
+	/* Action des icones v1 et v+ */
+	FORMBITMAP AT (XOK PREVTOP+LINEFEED) BITMAP bmpFirstChecked USABLE
+	GADGET ID PrefsFirstNextBmp1=PrefsTab3++
+		AT (PREVLEFT PREVTOP 5 5) NONUSABLE
+	LABEL "/" ID PrefsTab3++ AT (PREVLEFT+11 PREVTOP)
+	FORMBITMAP AT (PREVRIGHT+2 PREVTOP) BITMAP bmpNextChecked USABLE
+	GADGET ID PrefsFirstNextBmp2=PrefsTab3++
+		AT (PREVLEFT PREVTOP 5 5) NONUSABLE
+	LABEL "$Prefs-FirstNext" ID PrefsTab3++ AT (PREVLEFT+11+2 PREVTOP)
+
+	POPUPTRIGGER "" ID PrefsFirstNextPopup=PrefsTab3++
+		AT (XOK+5 PREVTOP+LINEFEED AUTO AUTO) LEFTANCHOR
+	LIST [$Prefs-FirstNextList] ID PrefsFirstNextList=PrefsTab3++
+		AT (PREVLEFT PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 4 NONUSABLE
+	POPUPLIST ID PrefsFirstNextPopup PrefsFirstNextList
+
+	CHECKBOX "$Prefs-Os3TimeSelector" ID PrefsTimeBox=PrefsOutOfTab++
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+
+
+	/************************************************************************
+	 * Validation buttons
+	 */
+	BUTTON "$Prefs-Save" ID PrefsSave
+		AT (XOK 148-2-15 AUTO AUTO)
+    BUTTON "$Prefs-Cancel" ID PrefsCancel=PrefsOutOfTab++
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+END
+
+// Code access button contents...
+STRING strPrefsCodeEnable		"$Prefs-CodeEnabled"		/* 16 chars max */
+STRING strPrefsCodeDisable		"$Prefs-CodeDisabled"		/* 16 chars max */
+
+
+FORM AccountPropFormIdx=formAuto++ AT (2 5 156 153)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID AccountPropCancel
+BEGIN
+	TITLE STR(15)
+
+DEFINE AccountPropTabOut=baseTabOut
+	LABEL "$AccountProp-Name" ID AccountPropTabOut++
+		AT (XOK YTOP) FONT LABEL_FONT
+	FIELD ID AccountPropName=AccountPropTabOut++
+		AT (PREVRIGHT+2 PREVTOP 90 AUTO) UNDERLINED MAXCHARS 15 AUTOSHIFT
+
+	CHECKBOX "" ID AccountPropFlag=AccountPropTabOut++
+		AT (PREVRIGHT+4 PREVTOP AUTO AUTO)
+
+	GRAFFITISTATEINDICATOR 160-13 PREVTOP
+
+DEFINE AccountPropTab1=baseTab1Begin
+	BUTTON "$AccountProp-GeneralTab" ID baseTab1
+		AT (XTAB PREVTOP+PREVHEIGHT+6 AUTOWIDTH+4 HTAB) NOFRAME
+
+DEFINE AccountPropTab2=baseTab2
+	BUTTON "$AccountProp-TransactionTab" ID AccountPropTab2++
+		AT (PREVRIGHT+1 PREVTOP AUTOWIDTH+4 HTAB) NOFRAME
+
+DEFINE AccountPropTab3=baseTab3
+	BUTTON "$AccountProp-ChequebookTab" ID AccountPropTab3++
+		AT (PREVRIGHT+1 PREVTOP AUTOWIDTH+4 HTAB) NOFRAME
+
+DEFINE AccountPropTab4=baseTab4
+	BUTTON "$AccountProp-InfosTab" ID AccountPropTab4++
+		AT (PREVRIGHT+1 PREVTOP AUTOWIDTH+4 HTAB) NOFRAME
+
+
+	/***********************************************************************
+     * General tab
+     */
+	LABEL "$AccountProp-Devise" ID AccountPropTab1++ AT (XOK YTOP+32)
+	SELECTORTRIGGER "" ID AccountPropDevise=AccountPropTab1++
+		AT (PREVRIGHT+2 PREVTOP AUTO AUTO)
+    LIST "" ID AccountPropDeviseList=AccountPropTab1++
+        AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	LABEL "$AccountProp-InitialBalance" ID AccountPropTab1++
+		AT (XOK PREVTOP+LINEFEED+1)
+	SELECTORTRIGGER "+" ID AccountPropInitialBalanceSign=AccountPropTab1++
+		AT (PREVRIGHT+2 PREVTOP AUTO AMOUNT_SIGN_HEIGHT) RIGHTANCHOR
+	FIELD ID AccountPropInitialBalance=AccountPropTab1++
+		AT (PREVRIGHT+3 PREVTOP AMOUNT_WIDTH AUTO)
+		UNDERLINED MAXCHARS AMOUNT_LEN RIGHTALIGN NUMERIC
+
+	CHECKBOX "$AccountProp-Statements"
+		ID AccountPropStatements=AccountPropTab1++
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+
+	CHECKBOX "$AccountProp-OverdrawnWarning"
+		ID AccountPropOverdrawnWarning=AccountPropTab1++
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+	LABEL "$AccountProp-OverdrawnWarningThreshold"
+		ID AccountPropOverdrawnLabel1=AccountPropTab1++
+		AT (PREVRIGHT-1 PREVTOP)
+
+	LABEL "$AccountProp-OverdrawnThreshold"
+		ID AccountPropOverdrawnLabel2=AccountPropTab1++
+		AT (XOK_INDENT PREVTOP+LINEFEED)
+	SELECTORTRIGGER "+" ID AccountPropOverdrawnThresholdSign=AccountPropTab1++
+		AT (PREVRIGHT+2 PREVTOP AUTO AMOUNT_SIGN_HEIGHT) RIGHTANCHOR
+	FIELD ID AccountPropOverdrawnThreshold=AccountPropTab1++
+		AT (PREVRIGHT+3 PREVTOP AMOUNT_WIDTH AUTO)
+		UNDERLINED MAXCHARS AMOUNT_LEN RIGHTALIGN NUMERIC
+
+	LABEL "$AccountProp-NonOverdrawnThreshold"
+		ID AccountPropOverdrawnLabel3=AccountPropTab1++
+		AT (XOK_INDENT PREVTOP+LINEFEED)
+	SELECTORTRIGGER "+"
+		ID AccountPropNonOverdrawnThresholdSign=AccountPropTab1++
+		AT (PREVRIGHT+2 PREVTOP AUTO AMOUNT_SIGN_HEIGHT) RIGHTANCHOR
+	FIELD ID AccountPropNonOverdrawnThreshold=AccountPropTab1++
+		AT (PREVRIGHT+3 PREVTOP AMOUNT_WIDTH AUTO)
+		UNDERLINED MAXCHARS AMOUNT_LEN RIGHTALIGN NUMERIC
+
+
+	/***********************************************************************
+     * Transaction tab
+     */
+	CHECKBOX "$AccountProp-KeepLastDate"
+		ID AccountPropKeepLastDate=AccountPropTab2++
+		AT (XOK_CHECKBOX YTOP+32 AUTO AUTO)	
+
+
+	/***********************************************************************
+     * Chequebook tab
+     */
+	FIELD ID AccountPropNumCheques=AccountPropTab3++
+		AT (XOK YTOP+32 10 AUTO) UNDERLINED MAXCHARS 2 RIGHTALIGN NUMERIC
+	LABEL "$AccountProp-NumCheques" ID AccountPropTab3++
+		AT (PREVRIGHT+2 PREVTOP)
+
+	LABEL "$AccountProp-ChequebookList" ID AccountPropTab3++
+		AT (XOK PREVTOP+LINEFEED)
+
+	LABEL "$AccountProp-Chequebook1" ID AccountPropTab3++
+		AT (XOK_INDENT PREVTOP+LINEFEED)
+	LABEL "$AccountProp-Chequebook2" ID AccountPropTab3++
+		AT (XOK_INDENT PREVTOP+LINEFEED)
+	LABEL "$AccountProp-Chequebook3" ID AccountPropTab3++
+		AT (XOK_INDENT PREVTOP+LINEFEED)
+	LABEL "$AccountProp-Chequebook4" ID AccountPropTab3++
+		AT (XOK_INDENT PREVTOP+LINEFEED)
+
+	FIELD ID AccountPropChequebook1=AccountPropTab3++
+		AT (PREVRIGHT+2 PREVTOP-(3*LINEFEED) INT_WIDTH AUTO)
+		UNDERLINED MAXCHARS INT_LEN RIGHTALIGN NUMERIC
+
+	FIELD ID AccountPropChequebook2=AccountPropTab3++
+		AT (PREVLEFT PREVTOP+LINEFEED INT_WIDTH AUTO)
+		UNDERLINED MAXCHARS INT_LEN RIGHTALIGN NUMERIC
+
+	FIELD ID AccountPropChequebook3=AccountPropTab3++
+		AT (PREVLEFT PREVTOP+LINEFEED INT_WIDTH AUTO)
+		UNDERLINED MAXCHARS INT_LEN RIGHTALIGN NUMERIC
+
+	FIELD ID AccountPropChequebook4=AccountPropTab3++
+		AT (PREVLEFT PREVTOP+LINEFEED INT_WIDTH AUTO)
+		UNDERLINED MAXCHARS INT_LEN RIGHTALIGN NUMERIC
+
+
+	/***********************************************************************
+     * Infos tab
+     */
+	LABEL "$AccountProp-AccountNum" ID AccountPropTab4++ AT (XOK YTOP+32)
+	FIELD ID AccountPropAccountNum=AccountPropTab4++
+		AT (PREVRIGHT+2 PREVTOP 125 AUTO) UNDERLINED MAXCHARS 24
+	
+	LABEL "$AccountProp-Notes" ID AccountPropTab4++ AT (XOK PREVTOP+LINEFEED)
+	FIELD ID AccountPropNote=AccountPropTab4++
+		AT (XOK PREVTOP+LINEFEED 156-XOK-1-7-1 4*11+1)
+		UNDERLINED MAXCHARS ACCOUNT_NOTE_LEN
+		MULTIPLELINES AUTOSHIFT HASSCROLLBAR
+	SCROLLBAR ID AccountPropNoteScrollbar=AccountPropTab4++
+		AT (RIGHT@156-1 PREVTOP 7 PREVHEIGHT) VALUE 0 MIN 0 MAX 100 PAGESIZE 12
+
+
+	/************************************************************************
+	 * Validation buttons
+	 */
+	BUTTON "$AccountProp-OK" ID AccountPropOK=autoCarriageReturnButton
+		AT (XOK 152-2-15 AUTO AUTO)
+    BUTTON "$AccountProp-Cancel" ID AccountPropCancel=baseTabAfterLine
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+    BUTTON "$AccountProp-Delete" ID AccountPropDelete=AccountPropTabOut++
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+END
+
+// Title of DBase properties when a new DBase is created
+GENERICSTRING strTitleNewAccountProp
+
+GENERICSTRING strAccountPropName
+GENERICSTRING strAccountPropInitialBalance
+GENERICSTRING strAccountPropOverdrawnThreshold
+GENERICSTRING strAccountPropNonOverdrawnThreshold
+GENERICSTRING strAccountPropNumCheques
+
+
+FORM AccountsListFormIdx=formAuto++ AT (0 0 160 160)
+USABLE
+MENUID AccountsListMenu
+BEGIN
+	TITLE STR(5 + 31)
+
+	LIST ""	ID AccountsListDBases AT (0 16-1 30 AUTO) VISIBLEITEMS 1 NONUSABLE
+	LIST ""	ID AccountsListAccounts
+		AT (80 PREVTOP 30 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	SELECTORTRIGGER "" ID AccountsListSelectPopup
+		AT (RIGHT@160-1 1 AUTO 11) RIGHTANCHOR
+	LIST [$AccountsList-SelectList] ID AccountsListSelectList
+		AT (PREVLEFT 1 AUTOLISTWIDTH AUTO) VISIBLEITEMS 3 NONUSABLE
+
+/* XXXXXXXXXXXXXXX À calculer au run time */
+DEFINE AccountsListSelectListLargest=46
+
+	TABLE ID SumListTable
+		AT (0 16-1 TABLE_WIDTH 12*11+1)
+		ROWS 50 COLUMNS 1 COLUMNWIDTHS TABLE_WIDTH
+
+	FORMBITMAP AT (160-7 PREVTOP+1) BITMAP bmpScrollTop USABLE
+	BUTTON "" ID SumListScrollTop AT (PREVLEFT PREVTOP-1 7 10) NOFRAME
+
+	SCROLLBAR ID SumListScrollbar
+		AT (RIGHT@160 PREVTOP+PREVHEIGHT 7 12*11-(2*PREVHEIGHT))
+		VALUE 0 MIN 0 MAX 100 PAGESIZE 12
+
+	FORMBITMAP AT (160-7 PREVTOP+PREVHEIGHT+1) BITMAP bmpScrollBottom USABLE
+	BUTTON "" ID SumListScrollBottom AT (PREVLEFT PREVTOP-1 7 10) NOFRAME
+
+	BUTTON "$AccountsList-New" ID AccountsListNew
+		AT (1 BOTTOM@160-1 AUTOWIDTH+5 10)
+
+	FORMBITMAP AT (PREVRIGHT+2 PREVTOP) BITMAP bmpDateUp USABLE
+	REPEATBUTTON "" ID SumListDateUp
+		AT (PREVLEFT-1 PREVTOP-1 7 6) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 PREVTOP+8) BITMAP bmpDateDown USABLE
+	REPEATBUTTON "" ID SumListDateDown
+		AT (PREVLEFT-1 PREVTOP-2 7 6) NOFRAME
+
+	SELECTORTRIGGER "" ID SumListSumTypePopup
+		AT (PREVRIGHT+1 PREVTOP-5 AUTO 10)
+	LIST [$TransList-Sums] ID SumListSumTypeList
+		AT (PREVLEFT BOTTOM@160-1 AUTOLISTWIDTH AUTO) VISIBLEITEMS 10 NONUSABLE
+
+	FIELD ID SumListSum	AT (1 BOTTOM@160 60 AUTO)
+		RIGHTALIGN MAXCHARS 13 NONEDITABLE
+
+	SELECTORTRIGGER "" ID SumListCurrency
+		AT (RIGHT@160-8 BOTTOM@160-1 AUTO 10) RIGHTANCHOR
+    LIST "" ID SumListCurrencyList
+        AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+		
+	BUTTON "\003" ID SumListFull
+		AT (RIGHT@160 BOTTOM@160 7 11) NOFRAME FONT 4
+
+	LIST [$AccountsList-ContextMenu] ID AccountsListContextMenu
+		AT (0 0 AUTOLISTWIDTH AUTO) VISIBLEITEMS 2 NONUSABLE
+END
+
+GENERICSTRING strAccountsListEditDBs
+GENERICSTRING strAccountsListDBProp
+GENERICSTRING SumListSumTypePopup
+
+// DIA resize infos
+WORDLIST ID AccountsListFormIdx
+BEGIN
+	DIA_FORM_USE_BIN
+	DIA_BIN_LIST
+	DIA_STATE_MIN
+
+	// Objects
+	DIA_FORM					DIA_H_PLUS_DH+DIA_W_PLUS_DW			0
+	
+	AccountsListSelectPopup		DIA_X_RIGHT							0
+	AccountsListSelectList		DIA_X_RIGHT							0
+
+	SumListTable				DIA_H_PLUS_DH+DIA_W_PLUS_DW			0
+	bmpScrollTop				DIA_X_RIGHT							0
+	SumListScrollTop			DIA_X_RIGHT							0
+	SumListScrollbar			DIA_X_RIGHT+DIA_H_PLUS_DH			0
+	bmpScrollBottom				DIA_X_RIGHT+DIA_Y_BOTTOM			0
+	SumListScrollBottom			DIA_X_RIGHT+DIA_Y_BOTTOM			0
+
+	AccountsListNew				DIA_Y_BOTTOM						0
+
+	bmpDateUp					DIA_Y_BOTTOM						0
+	SumListDateUp				DIA_Y_BOTTOM						0
+	bmpDateDown					DIA_Y_BOTTOM						0
+	SumListDateDown				DIA_Y_BOTTOM						0
+	SumListSumTypePopup			DIA_Y_BOTTOM						0
+	SumListSumTypeList			DIA_Y_BOTTOM						0
+
+	SumListSum					DIA_X_RIGHT+DIA_Y_BOTTOM			0
+
+	SumListCurrency				DIA_X_RIGHT+DIA_Y_BOTTOM			0
+	SumListCurrencyList			DIA_X_RIGHT+DIA_Y_BOTTOM			0
+	SumListFull					DIA_X_RIGHT+DIA_Y_BOTTOM			0
+END
+
+
+FORM DBasePropFormIdx=formAuto++ AT (2 16 156 142)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID DBasePropCancel
+BEGIN
+	TITLE STR(31)
+
+DEFINE DBasePropTabOut=baseTabOut
+	LABEL "$DBaseProp-Name" ID DBasePropTabOut++
+		AT (XOK YTOP) FONT LABEL_FONT
+	FIELD ID DBasePropName=DBasePropTabOut++
+		AT (PREVRIGHT+2 PREVTOP 90 AUTO) UNDERLINED MAXCHARS 32-5-1 AUTOSHIFT
+
+	GRAFFITISTATEINDICATOR 160-13 PREVTOP
+
+DEFINE DBasePropTab1=baseTab1Begin
+	BUTTON "$DBaseProp-GeneralTab" ID baseTab1
+		AT (XTAB PREVTOP+PREVHEIGHT+6 AUTOWIDTH+6 HTAB) NOFRAME
+
+DEFINE DBasePropTab2=baseTab2
+	BUTTON "$DBaseProp-TransListsTab" ID DBasePropTab2++
+		AT (PREVRIGHT+1 PREVTOP AUTOWIDTH+6 HTAB) NOFRAME
+
+DEFINE DBasePropTab3=baseTab3
+	BUTTON "$DBaseProp-SecurityTab" ID DBasePropTab3++
+		AT (PREVRIGHT+1 PREVTOP AUTOWIDTH+6 HTAB) NOFRAME
+
+DEFINE DBasePropTab4=baseTab4
+	BUTTON "$DBaseProp-NoteTab" ID DBasePropTab4++
+		AT (PREVRIGHT+1 PREVTOP AUTOWIDTH+6 HTAB) NOFRAME
+
+
+	/***********************************************************************
+     * General tab
+     */
+
+	CHECKBOX "$DBaseProp-Launchable"
+		ID DBasePropLaunchable=DBasePropTab1++
+		AT (XOK_CHECKBOX YTOP+32 AUTO AUTO)
+
+	CHECKBOX "$DBaseProp-AutoRepeat"
+		ID DBasePropAutoRepeat=DBasePropTab1++
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+
+	LABEL "$DBaseProp-ViewRepeats" ID DBasePropTab1++ AT (XOK PREVTOP+LINEFEED)
+	FIELD ID DBasePropRepeatDays=DBasePropTab1++
+		AT (PREVRIGHT+2 PREVTOP 15 AUTO)
+		UNDERLINED MAXCHARS 3 RIGHTALIGN NUMERIC
+	LABEL "$DBaseProp-ViewRepeatsDays" ID DBasePropTab1++
+		AT (PREVRIGHT+2 PREVTOP)
+
+	CHECKBOX "$DBaseProp-ConduitUse" ID DBasePropRemoveType=DBasePropTab1++
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+
+
+	/***********************************************************************
+     * Transactions list tab
+     */
+
+	CHECKBOX "$DBaseProp-SortType" ID DBasePropSortType=DBasePropTab2++
+		AT (XOK_CHECKBOX YTOP+32 AUTO AUTO)
+
+	CHECKBOX "$DBaseProp-ValueDate" ID DBasePropValueDate=DBasePropTab2++
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+
+	CHECKBOX "$DBaseProp-TypeForDesc" ID DBasePropTypeForDesc=DBasePropTab2++
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+
+
+	/***********************************************************************
+     * Security tab
+     */
+
+	/* Code : [Sans] ou [Positionné] */
+	LABEL "$DBaseProp-AccessCode" ID DBasePropTab3++ AT (XOK YTOP+32)
+	SELECTORTRIGGER STR(16) ID DBasePropCode=DBasePropTab3++
+		AT (XOK+36 PREVTOP+LINEFEED AUTO AUTO)
+	
+	CHECKBOX "$DBaseProp-DenyFind" ID DBasePropDenyFind=DBasePropTab3++
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+
+
+	/***********************************************************************
+     * Notes tab
+     */
+	FIELD ID DBasePropNote=DBasePropTab4++
+		AT (XOK YTOP+32 156-XOK-1-7-1 6*11+1)
+		UNDERLINED MAXCHARS DBASE_NOTE_LEN MULTIPLELINES AUTOSHIFT HASSCROLLBAR
+	SCROLLBAR ID DBasePropNoteScrollbar=DBasePropTab4++
+		AT (RIGHT@156-1 PREVTOP 7 PREVHEIGHT) VALUE 0 MIN 0 MAX 100 PAGESIZE 12
+
+
+	/************************************************************************
+	 * Validation buttons
+	 */
+	BUTTON "$DBaseProp-OK" ID DBasePropOK=autoCarriageReturnButton
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED AUTO AUTO)
+    BUTTON "$DBaseProp-Cancel" ID DBasePropCancel=baseTabAfterLine
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+    BUTTON "$DBaseProp-Delete" ID DBasePropDelete=DBasePropTabOut++
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+END
+
+// Title of DBase properties when a new DBase is created
+GENERICSTRING strTitleNewDBaseProp
+
+GENERICSTRING strDBasePropName
+GENERICSTRING strDBasePropRepeatDays
+
+
+FORM DBasesListFormIdx=formAuto++ AT (2 5 156 153)
+USABLE
+MODAL
+MENUID DBasesListMenu
+DEFAULTBTNID DBasesListOpen=autoCarriageReturnButton
+BEGIN
+	TITLE "$DBasesList-Title"
+
+	LIST ""	ID DBasesList AT (XOK YTOP 156-XOK-XOK AUTO) VISIBLEITEMS 10
+
+    BUTTON "$DBasesList-New" ID DBasesListNew
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED AUTOWIDTH+6 AUTO)
+	BUTTON "$DBasesList-Open" ID DBasesListOpen
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTOWIDTH+6 AUTO)
+    BUTTON "$DBasesList-Properties" ID DBasesListProperties
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTOWIDTH+6 AUTO)
+    BUTTON "$DBasesList-Clone" ID DBasesListClone
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTOWIDTH+6 AUTO)
+END
+
+GENERICSTRING strDBasesListCloneFmt
+
+// DIA resize infos
+WORDLIST ID DBasesListFormIdx
+BEGIN
+	DIA_FORM_USE_BIN
+	DIA_BIN_MODAL
+	DIA_STATE_MIN
+	
+	// Objects
+	DIA_FORM			DIA_H_PLUS_DH+DIA_W_PLUS_DW					0
+
+	DBasesList			DIA_H_PLUS_DH+DIA_W_PLUS_DW+DIA_H_GRANULAR	0
+
+	DBasesListNew		DIA_Y_BOTTOM+DIA_W_PLUS_1_4_DW						0
+	DBasesListOpen		DIA_Y_BOTTOM+DIA_X_PLUS_1_4_DW+DIA_W_PLUS_1_4_DW	0
+	DBasesListProperties DIA_Y_BOTTOM+DIA_X_PLUS_1_2_DW+DIA_W_PLUS_1_4_DW	0
+	DBasesListClone		DIA_Y_BOTTOM+DIA_X_PLUS_3_4_DW+DIA_W_PLUS_1_4_DW	0
+END
+
+
+FORM CustomListFormIdx=formAuto++ AT (0 0 160 160)
+USABLE
+MENUID CustomListMenu
+BEGIN
+	TITLE STR(32)
+
+	LABEL STR(32) ID CustomListLabel AT (RIGHT@160 2)
+
+	TABLE ID SumListTable
+		AT (0 16-1 TABLE_WIDTH 12*11+1)
+		ROWS 50 COLUMNS 1 COLUMNWIDTHS TABLE_WIDTH
+
+	FORMBITMAP AT (160-7 PREVTOP+1) BITMAP bmpScrollTop USABLE
+	BUTTON "" ID SumListScrollTop AT (PREVLEFT PREVTOP-1 7 10) NOFRAME
+
+	SCROLLBAR ID SumListScrollbar
+		AT (RIGHT@160 PREVTOP+PREVHEIGHT 7 12*11-(2*PREVHEIGHT))
+		VALUE 0 MIN 0 MAX 100 PAGESIZE 12
+
+	FORMBITMAP AT (160-7 PREVTOP+PREVHEIGHT+1) BITMAP bmpScrollBottom USABLE
+	BUTTON "" ID SumListScrollBottom AT (PREVLEFT PREVTOP-1 7 10) NOFRAME
+
+	FORMBITMAP AT (1+4 160-2-8) BITMAP bmpBack USABLE
+	BUTTON "" ID CustomListQuit=SumListBack AT (1 BOTTOM@160-1 13 10)
+
+	SELECTORTRIGGER "" ID CustomListPopup
+    	AT (PREVLEFT+PREVWIDTH+2 PREVTOP AUTO 10) LEFTANCHOR
+	LIST [$CustomList-SumTypes] ID CustomListList
+	 	AT (PREVLEFT 160-(3*11) AUTOLISTWIDTH AUTO)	VISIBLEITEMS 6 NONUSABLE
+
+	FIELD ID SumListSum
+		AT (1 BOTTOM@160 60 AUTO)
+		RIGHTALIGN MAXCHARS 13 NONEDITABLE FONT LABEL_FONT
+
+	SELECTORTRIGGER "" ID SumListCurrency
+		AT (RIGHT@160-8 BOTTOM@160-1 AUTO 10) RIGHTANCHOR
+    LIST "" ID SumListCurrencyList
+        AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+		
+	BUTTON "\003" ID SumListFull
+		AT (RIGHT@160 BOTTOM@160 7 11) NOFRAME FONT 4
+
+	LIST [$CustomList-RefineBy] ID CustomListActionList
+		AT (0 0 AUTOLISTWIDTH AUTO)	VISIBLEITEMS 3 NONUSABLE
+END
+
+STRINGTABLE strCustomListStatsTitle	[$strCustomListStatsTitle]
+
+/* 15 characters max, to display a period of time: xx/xx/xx - xx/xx/xx */
+STRING strClistTypePeriodFormat		"%s - %s"
+
+// The days of begin/end of week (only the 2 first letters + space)
+STRINGTABLE strClistWeekStartDays	"" [$strClistWeekStartDays]
+STRINGTABLE strClistWeekEndDays		"" [$strClistWeekEndDays]
+
+// Statistics by year, label on each line before the #year (58 chars max)
+GENERICSTRING strClistTypeYear
+
+// Stats results list dialog, long clic: no transaction (31 chars max.)
+GENERICSTRING strClistAccountsZeroOp
+
+// Stats results list dialog, long clic: only one transaction (31 chars max.)
+GENERICSTRING strClistAccountsOneOp
+
+// Stats results list dialog, long clic: N transactions (28 chars max.)
+GENERICSTRING strClistAccountsManyOp
+
+// Stats results list dialog, long clic: only one splitted trans. (31 c. max.)
+GENERICSTRING strClistTypeOneSplitOp
+
+// Stats results list dialog, long clic: N splitted trans. (28 chars max.)
+GENERICSTRING strClistTypeManySplitOp
+
+// Stats by type results list dialog, long clic: with one sub-type
+GENERICSTRING strClistTypesOneSubType
+
+// Stats by type results list dialog, long clic: with N sub-types
+GENERICSTRING strClistTypesNSubTypes
+
+// Flagged screen title (31 chars max)
+GENERICSTRING strClistFlagged
+
+//
+// Lists export headers
+//
+// Stats / modes
+STRINGTABLE strExportHeadersStatsMode	 "" [$strExportHeadersStatsMode]
+
+// Stats / types
+STRINGTABLE strExportHeadersStatsTypes	 "" [$strExportHeadersStatsTypes]
+
+// Stats / periods
+STRINGTABLE strExportHeadersStatsPeriods "" [$strExportHeadersStatsPeriods]
+
+// Stats / transactions
+STRINGTABLE strExportHeadersStatsTrans	 "" [$strExportHeadersStatsTrans]
+
+// Flagged transactions list
+STRINGTABLE strExportHeadersFlaggedTrans "" [$strExportHeadersFlaggedTrans]
+
+
+// DIA resize infos
+WORDLIST ID CustomListFormIdx
+BEGIN
+	DIA_FORM_USE_BIN
+	DIA_BIN_LIST
+	DIA_STATE_MIN
+
+	// Objects
+	DIA_FORM					DIA_H_PLUS_DH+DIA_W_PLUS_DW			0
+
+	CustomListLabel				DIA_X_RIGHT							0
+
+	SumListTable				DIA_H_PLUS_DH+DIA_W_PLUS_DW			0
+	bmpScrollTop				DIA_X_RIGHT							0
+	SumListScrollTop			DIA_X_RIGHT							0
+	SumListScrollbar			DIA_X_RIGHT+DIA_H_PLUS_DH			0
+	bmpScrollBottom				DIA_X_RIGHT+DIA_Y_BOTTOM			0
+	SumListScrollBottom			DIA_X_RIGHT+DIA_Y_BOTTOM			0
+
+	bmpBack						DIA_Y_BOTTOM						0
+	CustomListQuit				DIA_Y_BOTTOM						0
+
+	CustomListPopup				DIA_Y_BOTTOM						0
+	CustomListList				DIA_Y_BOTTOM						0
+
+	SumListSum					DIA_X_RIGHT+DIA_Y_BOTTOM			0
+
+	SumListCurrency				DIA_X_RIGHT+DIA_Y_BOTTOM			0
+	SumListCurrencyList			DIA_X_RIGHT+DIA_Y_BOTTOM			0
+	SumListFull					DIA_X_RIGHT+DIA_Y_BOTTOM			0
+END
+
+
+//MENUID ClearingListMenu
+FORM ClearingListFormIdx=formAuto++ AT (0 0 160 160)
+USABLE
+MENUID DefaultSumListMenu
+BEGIN
+	TITLE STR(12)
+
+	SELECTORTRIGGER "" ID ClearingListSortPopup
+		AT (RIGHT@160-1 1 AUTO 11) RIGHTANCHOR
+	LIST [$ClearingList-SortList] ID ClearingListSortList
+		AT (PREVLEFT 1 AUTOLISTWIDTH AUTO) VISIBLEITEMS 6 NONUSABLE
+
+	BUTTON "$ClearingList-AutoClearChar" ID ClearingListAutoClear
+		AT (RIGHT@160-@{AUTOLISTWIDTH}-5 1 AUTO 11)
+
+	TABLE ID SumListTable
+		AT (0 16-1 TABLE_WIDTH 12*11+1)
+		ROWS 50 COLUMNS 1 COLUMNWIDTHS TABLE_WIDTH
+
+	FORMBITMAP AT (160-7 PREVTOP+1) BITMAP bmpScrollTop USABLE
+	BUTTON "" ID SumListScrollTop AT (PREVLEFT PREVTOP-1 7 10) NOFRAME
+
+	SCROLLBAR ID SumListScrollbar
+		AT (RIGHT@160 PREVTOP+PREVHEIGHT 7 12*11-(2*PREVHEIGHT))
+		VALUE 0 MIN 0 MAX 100 PAGESIZE 12
+
+	FORMBITMAP AT (160-7 PREVTOP+PREVHEIGHT+1) BITMAP bmpScrollBottom USABLE
+	BUTTON "" ID SumListScrollBottom AT (PREVLEFT PREVTOP-1 7 10) NOFRAME
+
+	FORMBITMAP AT (1+4 160-2-8) BITMAP bmpBack USABLE
+	BUTTON "" ID ClearingListQuit=SumListBack AT (1 BOTTOM@160-1 13 10)
+
+	BUTTON "+/-" ID ClearingListNew AT (PREVRIGHT+1 BOTTOM@160-1 19 10)
+
+	SELECTORTRIGGER STR(32) ID ClearingListPopup
+    	AT (PREVRIGHT+2 PREVTOP AUTO 10) LEFTANCHOR
+
+	FIELD ID SumListSum
+		AT (1 BOTTOM@160 60 AUTO)
+		RIGHTALIGN MAXCHARS 13 NONEDITABLE FONT LABEL_FONT
+
+	BUTTON "\003" ID SumListFull
+		AT (RIGHT@160 BOTTOM@160 7 11) NOFRAME FONT 4
+
+	LIST ""	ID ClearingListDescList AT (0 0 30 AUTO) VISIBLEITEMS 1 NONUSABLE
+END
+
+GENERICSTRING strClearingListClearedSum
+
+STRINGTABLE strClearingListSumTypes "" [$strClearingListSumTypes]
+
+
+// DIA resize infos
+WORDLIST ID ClearingListFormIdx
+BEGIN
+	DIA_FORM_USE_BIN
+	DIA_BIN_LIST
+	DIA_STATE_MIN
+
+	// Objects
+	DIA_FORM					DIA_H_PLUS_DH+DIA_W_PLUS_DW			0
+
+	ClearingListSortPopup		DIA_X_RIGHT							0
+	ClearingListSortList		DIA_X_RIGHT							0
+	ClearingListAutoClear		DIA_X_RIGHT							0
+
+	SumListTable				DIA_H_PLUS_DH+DIA_W_PLUS_DW			0
+	bmpScrollTop				DIA_X_RIGHT							0
+	SumListScrollTop			DIA_X_RIGHT							0
+	SumListScrollbar			DIA_X_RIGHT+DIA_H_PLUS_DH			0
+	bmpScrollBottom				DIA_X_RIGHT+DIA_Y_BOTTOM			0
+	SumListScrollBottom			DIA_X_RIGHT+DIA_Y_BOTTOM			0
+
+	bmpBack						DIA_Y_BOTTOM						0
+	ClearingListQuit			DIA_Y_BOTTOM						0
+	ClearingListNew				DIA_Y_BOTTOM						0
+
+	ClearingListPopup			DIA_Y_BOTTOM						0
+
+	SumListSum					DIA_X_RIGHT+DIA_Y_BOTTOM			0
+
+	SumListFull					DIA_X_RIGHT+DIA_Y_BOTTOM			0
+END
+
+
+FORM RepeatsListFormIdx=formAuto++ AT (0 0 160 160)
+USABLE
+MENUID DefaultSumListMenu
+BEGIN
+	TITLE "$RepeatsList-Title"
+
+	LABEL STR(15) ID RepeatsListAccountName AT (RIGHT@160 2)
+
+	TABLE ID SumListTable
+		AT (0 16-1 TABLE_WIDTH 12*11+1)
+		ROWS 50 COLUMNS 1 COLUMNWIDTHS TABLE_WIDTH
+
+	FORMBITMAP AT (160-7 PREVTOP+1) BITMAP bmpScrollTop USABLE
+	BUTTON "" ID SumListScrollTop AT (PREVLEFT PREVTOP-1 7 10) NOFRAME
+
+	SCROLLBAR ID SumListScrollbar
+		AT (RIGHT@160 PREVTOP+PREVHEIGHT 7 12*11-(2*PREVHEIGHT))
+		VALUE 0 MIN 0 MAX 100 PAGESIZE 12
+
+	FORMBITMAP AT (160-7 PREVTOP+PREVHEIGHT+1) BITMAP bmpScrollBottom USABLE
+	BUTTON "" ID SumListScrollBottom AT (PREVLEFT PREVTOP-1 7 10) NOFRAME
+
+	FORMBITMAP AT (1+4 160-2-8) BITMAP bmpBack USABLE
+	BUTTON "" ID RepeatsListQuit=SumListBack AT (1 BOTTOM@160-1 13 10)
+
+	FORMBITMAP AT (PREVLEFT-3+14+4 160-1-10) BITMAP bmpDateUp USABLE
+	REPEATBUTTON "" ID RepeatsListDateUp=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-1 7 6) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 PREVTOP+8) BITMAP bmpDateDown USABLE
+	REPEATBUTTON "" ID RepeatsListDateDown=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-2 7 6) NOFRAME
+
+	SELECTORTRIGGER "00/00/00" ID RepeatsListDate=ordObjects++
+    	AT (PREVRIGHT+1 PREVTOP-5 AUTO 10) LEFTANCHOR
+
+	FIELD ID SumListSum
+		AT (1 BOTTOM@160 60 AUTO)
+		RIGHTALIGN MAXCHARS 13 NONEDITABLE FONT LABEL_FONT
+
+	BUTTON "\003" ID SumListFull
+		AT (RIGHT@160 BOTTOM@160 7 11) NOFRAME FONT 4
+END
+
+GENERICSTRING RepeatsListDate
+GENERICSTRING strRepeatsListNonRepeatsSum
+
+
+// DIA resize infos
+WORDLIST ID RepeatsListFormIdx
+BEGIN
+	DIA_FORM_USE_BIN
+	DIA_BIN_LIST
+	DIA_STATE_MIN
+
+	// Objects
+	DIA_FORM					DIA_H_PLUS_DH+DIA_W_PLUS_DW			0
+
+	RepeatsListAccountName		DIA_X_RIGHT							0
+
+	SumListTable				DIA_H_PLUS_DH+DIA_W_PLUS_DW			0
+	bmpScrollTop				DIA_X_RIGHT							0
+	SumListScrollTop			DIA_X_RIGHT							0
+	SumListScrollbar			DIA_X_RIGHT+DIA_H_PLUS_DH			0
+	bmpScrollBottom				DIA_X_RIGHT+DIA_Y_BOTTOM			0
+	SumListScrollBottom			DIA_X_RIGHT+DIA_Y_BOTTOM			0
+
+	bmpBack						DIA_Y_BOTTOM						0
+	RepeatsListQuit				DIA_Y_BOTTOM						0
+
+	bmpDateUp					DIA_Y_BOTTOM						0
+	RepeatsListDateUp			DIA_Y_BOTTOM						0
+	bmpDateDown					DIA_Y_BOTTOM						0
+	RepeatsListDateDown			DIA_Y_BOTTOM						0
+	RepeatsListDate				DIA_Y_BOTTOM						0
+
+	SumListSum					DIA_X_RIGHT+DIA_Y_BOTTOM			0
+
+	SumListFull					DIA_X_RIGHT+DIA_Y_BOTTOM			0
+END
+
+
+FORM StatsFormIdx=formAuto++ AT (2 2 156 156)
+USABLE
+MODAL
+MENUID DefaultBaseMenu
+DEFAULTBTNID StatsCancel
+BEGIN
+	TITLE "$Stats-Title"
+
+	POPUPTRIGGER "$Stats-Between" ID StatsPeriodPopup
+		AT (XOK-3 YTOP AUTO AUTO) LEFTANCHOR
+	LIST [$Stats-BetweenList] ID StatsPeriodList
+		AT (PREVLEFT PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 10 NONUSABLE
+
+	LABEL "$Stats-BetweenPlus" AUTOID AT (RIGHT@[$Stats-Center-Anchor] PREVTOP)
+
+	FORMBITMAP AT (PREVRIGHT+[$Stats-Center-RightShift] PREVTOP)
+		BITMAP bmpDateUp USABLE
+	REPEATBUTTON "" ID StatsBegDateUp=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-1 7 6) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 PREVTOP+10) BITMAP bmpDateDown USABLE
+	REPEATBUTTON "" ID StatsBegDateDown=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-2 7 6) NOFRAME
+	SELECTORTRIGGER STR(14) ID StatsBegDate=ordObjects++
+		AT (PREVLEFT+PREVWIDTH+1 PREVTOP-7 DATE_REC_WIDTH AUTO) LEFTANCHOR
+	
+	FORMBITMAP AT (RIGHT@160-16 PREVTOP+(LINEFEED/2)+2)
+		BITMAP bmpDatesBound USABLE
+	PUSHBUTTON "" ID StatsDatesBound AT (PREVRIGHT-1 PREVTOP-2 9 11) FONT 3
+
+	LABEL "$Stats-And" AUTOID
+		AT (RIGHT@[$Stats-Center-Anchor] PREVTOP+(LINEFEED/2+1)+1)
+
+	FORMBITMAP AT (PREVRIGHT+[$Stats-Center-RightShift] PREVTOP)
+		BITMAP bmpDateUp USABLE
+	REPEATBUTTON "" ID StatsEndDateUp=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-1 7 6) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 PREVTOP+10) BITMAP bmpDateDown USABLE
+	REPEATBUTTON "" ID StatsEndDateDown=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-2 7 6) NOFRAME
+	SELECTORTRIGGER STR(14) ID StatsEndDate=ordObjects++
+		AT (PREVLEFT+PREVWIDTH+1 PREVTOP-7 DATE_REC_WIDTH AUTO)	LEFTANCHOR
+
+	LABEL "$Stats-By" AUTOID AT (XOK PREVTOP+LINEFEED)
+
+	POPUPTRIGGER "" ID StatsReqPopup
+		AT (PREVRIGHT PREVTOP AUTO AUTO) LEFTANCHOR
+	LIST [$Stats-ByList] ID StatsReqList
+		AT (PREVLEFT+2 PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 7 NONUSABLE
+    POPUPLIST ID StatsReqPopup StatsReqList
+
+	LABEL "$Stats-Type" ID StatsTypeLabel AT (XOK_INDENT PREVTOP+LINEFEED-1)
+    POPUPTRIGGER "" ID StatsTypePopup=ordObjects++
+		AT (PREVRIGHT-1 PREVTOP 160-4-14-PREVRIGHT-1 AUTO) LEFTANCHOR
+    LIST "" ID StatsTypeList=ordObjects++
+        AT (PREVLEFT+2 PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+	CHECKBOX "" ID StatsTypeChildren AT (RIGHT@160-4 PREVTOP 14 AUTO)
+
+	LABEL "$Stats-Mode" ID StatsModeLabel AT (XOK_INDENT PREVTOP+LINEFEED-1)
+    POPUPTRIGGER "" ID StatsModePopup=ordObjects++
+		AT (PREVRIGHT-1 PREVTOP 160-4-PREVRIGHT-1 AUTO) LEFTANCHOR
+    LIST "" ID StatsModeList=ordObjects++
+        AT (PREVLEFT+2 PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	LABEL "$Stats-On" AUTOID AT (XOK PREVTOP+LINEFEED-1)
+
+	POPUPTRIGGER "" ID StatsDebCredPopup
+		AT (PREVRIGHT PREVTOP AUTO AUTO) LEFTANCHOR
+	LIST [$Stats-OnList] ID StatsDebCredList
+		AT (PREVLEFT+2 PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 4 NONUSABLE
+    POPUPLIST ID StatsDebCredPopup StatsDebCredList
+
+	LABEL "$Stats-From" AUTOID AT (XOK PREVTOP+LINEFEED-1)
+	POPUPTRIGGER STR(100) ID StatsFromAccountsPopup=ordObjects++
+		AT (PREVRIGHT PREVTOP 160-4-PREVRIGHT-1 AUTO) LEFTANCHOR
+	LIST "" ID StatsFromAccountsList=ordObjects++
+        AT (PREVLEFT+2 PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	CHECKBOX "$Stats-ValueDate" ID StatsValDate
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+
+	CHECKBOX "$Stats-ExcludeNils" ID StatsExcludeNils
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+
+	BUTTON "$Stats-View" ID StatsValid=autoCarriageReturnButton
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED AUTO AUTO)
+    BUTTON "$Stats-Cancel" ID StatsCancel
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+
+	LIST [$strLongMonths] ID StatsMonths
+		AT (0 0 AUTOLISTWIDTH AUTO) VISIBLEITEMS 12 NONUSABLE
+
+	LIST "" ID StatsSubPopup AT (0 0 20-1+4 AUTO) VISIBLEITEMS 1 NONUSABLE
+END
+
+GENERICSTRING strStatsSelectAllAccounts
+GENERICSTRING strStatsResetAccounts
+GENERICSTRING strStatsNAccounts
+
+GENERICSTRING StatsBegDate
+GENERICSTRING StatsEndDate
+
+STRINGTABLE	  strStatsBetweenListShortCut	"" [$Stats-BetweenListShortCut]
+GENERICSTRING strStatsByListShortCut
+
+
+FORM ClearingIntroFormIdx=formAuto++ AT (2 103 156 55)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID ClearingIntroCancel
+BEGIN
+	TITLE "$ClearingIntro-Title"
+
+	LABEL "$ClearingIntro-TargetBalance" AUTOID AT (XOK YTOP) FONT LABEL_FONT
+
+	SELECTORTRIGGER "+" ID ClearingIntroTargetBalanceSign=ordObjects++
+		AT (PREVRIGHT+2 PREVTOP AUTO AMOUNT_SIGN_HEIGHT) RIGHTANCHOR
+	FIELD ID ClearingIntroTargetBalance=ordObjects++
+		AT (PREVRIGHT+3 PREVTOP AMOUNT_WIDTH AUTO)
+		UNDERLINED RIGHTALIGN MAXCHARS AMOUNT_LEN NUMERIC
+	LABEL STR(4) ID ClearingIntroCurrency AT (PREVRIGHT+2 PREVTOP)
+
+	BUTTON "$ClearingIntro-OK" ID ClearingIntroOK=autoCarriageReturnButton
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED AUTO AUTO)
+    BUTTON "$ClearingIntro-Cancel" ID ClearingIntroCancel
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+
+	GRAFFITISTATEINDICATOR 160-13 PREVTOP
+END
+
+GENERICSTRING strClearingIntroTargetBalance
+
+
+FORM ClearingAutoConfFormIdx=formAuto++ FORMLINES(3)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID ClearingAutoConfCancel
+BEGIN
+	TITLE "$ClearingAutoConf-Title"
+
+	LABEL "$ClearingAutoConf-UntilDate" AUTOID AT (XOK YTOP)
+
+	FORMBITMAP AT (PREVRIGHT+2 YTOP-1) BITMAP bmpDateUp USABLE
+	REPEATBUTTON "" ID ClearingAutoConfDateUp=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-1 7 6) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 YTOP-1+9) BITMAP bmpDateDown USABLE
+	REPEATBUTTON "" ID ClearingAutoConfDateDown=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-2 7 6) NOFRAME
+	SELECTORTRIGGER STR(14) ID ClearingAutoConfDate=ordObjects++
+		AT (PREVLEFT+PREVWIDTH+1 YTOP-1 DATE_REC_WIDTH AUTO) LEFTANCHOR
+
+	LABEL "$ClearingAutoConf-NumTransBefore" AUTOID AT (XOK PREVTOP+LINEFEED+1)
+	FIELD ID ClearingAutoConfNumTrans
+		AT (PREVRIGHT+2 PREVTOP 10 AUTO)
+		UNDERLINED MAXCHARS 2 RIGHTALIGN NUMERIC
+	LABEL "$ClearingAutoConf-NumTransAfter" AUTOID AT (PREVRIGHT+2 PREVTOP)
+
+	LABEL "$ClearingAutoConf-CommentTip" AUTOID AT (XOK PREVTOP+LINEFEED)
+
+	BUTTON "$ClearingAutoConf-OK"
+		ID ClearingAutoConfOK=autoCarriageReturnButton
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED AUTO AUTO)
+    BUTTON "$ClearingAutoConf-Cancel" ID ClearingAutoConfCancel
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+
+	GRAFFITISTATEINDICATOR 160-13 PREVTOP
+END
+
+GENERICSTRING ClearingAutoConfDate
+
+
+// Height = (# lines, buttons less) x 13 + 8 + 34
+// Y = 160 - Height - 2
+FORM StatementNumFormIdx=formAuto++ AT (2 77 156 81)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID StatementNumOK=autoCarriageReturnButton
+BEGIN
+	TITLE "$StatementNum-Title"
+
+	LABEL "$StatementNum-NumLabel" AUTOID AT (XOK YTOP)
+
+	POPUPTRIGGER "" ID StatementNumPopup
+		AT (PREVRIGHT PREVTOP 15 AUTO) LEFTANCHOR
+    LIST [$StatementNum-List] ID StatementNumList
+        AT (PREVLEFT PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 2 NONUSABLE
+
+	FIELD ID StatementNumNum
+		AT (PREVLEFT+15+1 PREVTOP INT_WIDTH AUTO)
+		UNDERLINED RIGHTALIGN MAXCHARS INT_LEN NUMERIC
+	
+	LABEL "$StatementNum-Balance" AUTOID AT (XOK PREVTOP+LINEFEED)
+	LABEL STR(1+11+1+4) ID StatementNumBalance AT (PREVRIGHT+2 PREVTOP)
+	
+	LABEL "$StatementNum-Ask" AUTOID AT (XOK PREVTOP+LINEFEED)
+	
+	GRAFFITISTATEINDICATOR 160-13 PREVTOP
+
+	BUTTON "$StatementNum-OK" ID StatementNumOK
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED AUTO AUTO)
+    BUTTON "$StatementNum-BackClearing" ID StatementNumBackClearing
+ 		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+    BUTTON "$StatementNum-CancelClearing" ID StatementNumCancelClearing
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+END
+
+
+FORM DescModesListFormIdx=formAuto++ AT (2 5 156 153)
+USABLE
+MODAL
+MENUID DefaultBaseMenu
+DEFAULTBTNID DescModesListOK=autoCarriageReturnButton
+BEGIN
+	TITLE STR(31)
+
+	LIST ""	ID DescModesList AT (XOK YTOP 127 AUTO) VISIBLEITEMS 10
+
+	BUTTON "\005" ID DescModesListPlus
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP 15 26) FONT 3
+
+	BUTTON "\011" ID DescModesListEdit
+		AT (PREVLEFT PREVBOTTOM+16 15 26) FONT 3
+
+	BUTTON "\006" ID DescModesListMinus
+		AT (PREVLEFT PREVBOTTOM+16 15 26) FONT 3
+
+	BUTTON "$DescModesList-OK" ID DescModesListOK
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED AUTO AUTO)
+    BUTTON "$DescModesList-New" ID DescModesListNew
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+END
+
+// Title of modes edition dialog (31 chars max.)
+STRING strTitleModesList=ordStrings++		"$strTitleModesList"
+
+// Title of descriptions edition dialog (31 chars max.)
+STRING strTitleDescList=ordStrings++		"$strTitleDescList"
+
+
+// DIA resize infos
+WORDLIST ID DescModesListFormIdx
+BEGIN
+	DIA_FORM_USE_BIN
+	DIA_BIN_MODAL
+	DIA_STATE_MIN
+
+	// Objects
+	DIA_FORM			DIA_H_PLUS_DH+DIA_W_PLUS_DW					0
+	
+	DescModesList		DIA_H_PLUS_DH+DIA_W_PLUS_DW+DIA_H_GRANULAR	0
+
+	DescModesListPlus	DIA_X_RIGHT									0
+	DescModesListEdit	DIA_X_RIGHT									0
+	DescModesListMinus	DIA_X_RIGHT									0
+
+	DescModesListOK		DIA_Y_BOTTOM+DIA_W_PLUS_1_2_DW						0
+	DescModesListNew	DIA_Y_BOTTOM+DIA_X_PLUS_1_2_DW+DIA_W_PLUS_1_2_DW	0
+END
+
+
+FORM TypesListFormIdx=formAuto++ AT (2 5 156 153)
+USABLE
+MODAL
+MENUID DefaultBaseMenu
+DEFAULTBTNID TypesListOK=autoCarriageReturnButton
+BEGIN
+	TITLE "$TypesList-Title"
+
+	LIST ""	ID TypesList AT (XOK YTOP 127 AUTO) VISIBLEITEMS 10
+
+	BUTTON "\005" ID TypesListPlus
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP 15 17) FONT 3
+
+	BUTTON "\011" ID TypesListEdit
+		AT (PREVLEFT PREVBOTTOM+6 15 17) FONT 3
+
+	BUTTON "\006" ID TypesListMinus
+		AT (PREVLEFT PREVBOTTOM+6 15 17) FONT 3
+
+	BUTTON "\003" ID TypesListUp
+		AT (PREVLEFT PREVBOTTOM+7 15 17) FONT 3
+
+	BUTTON "\004" ID TypesListDown
+		AT (PREVLEFT PREVBOTTOM+6 15 17) FONT 3
+
+	BUTTON "$TypesList-OK" ID TypesListOK
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED AUTO AUTO)
+    BUTTON "$TypesList-New" ID TypesListNew
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+    BUTTON "$TypesList-NewUnder" ID TypesListNewUnder
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+END
+
+
+// DIA resize infos
+WORDLIST ID TypesListFormIdx
+BEGIN
+	DIA_FORM_USE_BIN
+	DIA_BIN_MODAL
+	DIA_STATE_MIN
+
+	// Objects
+	DIA_FORM			DIA_H_PLUS_DH+DIA_W_PLUS_DW					0
+
+	TypesList			DIA_H_PLUS_DH+DIA_W_PLUS_DW+DIA_H_GRANULAR	0
+
+	TypesListPlus		DIA_X_RIGHT									0
+	TypesListEdit		DIA_X_RIGHT									0
+	TypesListMinus		DIA_X_RIGHT									0
+	TypesListUp			DIA_X_RIGHT									0
+	TypesListDown		DIA_X_RIGHT									0
+
+	TypesListOK			DIA_Y_BOTTOM+DIA_W_PLUS_1_3_DW						0
+	TypesListNew		DIA_Y_BOTTOM+DIA_X_PLUS_1_3_DW+DIA_W_PLUS_1_3_DW	0
+	TypesListNewUnder	DIA_Y_BOTTOM+DIA_X_PLUS_2_3_DW+DIA_W_PLUS_1_3_DW	0
+END
+
+
+FORM SearchFormIdx=formAuto++ AT (2 2 156 156)
+USABLE
+MODAL
+MENUID DefaultBaseMenu
+DEFAULTBTNID SearchCancel
+BEGIN
+	TITLE "$Search-Title"
+
+	CHECKBOX "" ID SearchDates AT (XOK_CHECKBOX YTOP-1 AUTO AUTO)
+
+	FORMBITMAP AT (PREVRIGHT YTOP-1) BITMAP bmpDateUp USABLE
+	REPEATBUTTON "" ID SearchBegDateUp=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-1 7 6) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 YTOP-1+9) BITMAP bmpDateDown USABLE
+	REPEATBUTTON "" ID SearchBegDateDown=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-2 7 6) NOFRAME
+	SELECTORTRIGGER STR(8) ID SearchBegDate=ordObjects++
+		AT (PREVLEFT+PREVWIDTH+1 YTOP-1 DATE_SHORT_REC_WIDTH AUTO) LEFTANCHOR
+
+	FORMBITMAP AT (PREVRIGHT+5 PREVTOP+2) BITMAP bmpDatesBound USABLE
+	PUSHBUTTON "" ID SearchDatesBound AT (PREVRIGHT-1 PREVTOP-2 9 11) FONT 3
+
+	FORMBITMAP AT (PREVRIGHT+3 YTOP-1) BITMAP bmpDateUp USABLE
+	REPEATBUTTON "" ID SearchEndDateUp=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-1 7 6) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 YTOP-1+9) BITMAP bmpDateDown USABLE
+	REPEATBUTTON "" ID SearchEndDateDown=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-2 7 6) NOFRAME
+	SELECTORTRIGGER STR(8) ID SearchEndDate=ordObjects++
+		AT (PREVLEFT+PREVWIDTH+1 YTOP-1 DATE_SHORT_REC_WIDTH AUTO) LEFTANCHOR
+
+	CHECKBOX "" ID SearchValueDate AT (RIGHT@160-4 PREVTOP 14 AUTO)
+
+	LABEL "$Search-Type" AUTOID	AT (XOK PREVTOP+LINEFEED)
+    POPUPTRIGGER "" ID SearchTypePopup=ordObjects++
+		AT (PREVRIGHT-1 PREVTOP 160-4-14-PREVRIGHT-1 AUTO) LEFTANCHOR
+    LIST "" ID SearchTypeList=ordObjects++
+        AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+	CHECKBOX "" ID SearchTypeChildren AT (RIGHT@160-4 PREVTOP 14 AUTO)
+
+ 	LABEL "$Search-Mode" AUTOID AT (XOK PREVTOP+LINEFEED)
+    POPUPTRIGGER "" ID SearchModePopup=ordObjects++
+		AT (PREVRIGHT-1 PREVTOP 50 AUTO) LEFTANCHOR
+    LIST "" ID SearchModeList=ordObjects++
+        AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	CHECKBOX "$Search-Desc" ID SearchDesc
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+	FIELD ID SearchDescValue
+		AT (PREVRIGHT+2 PREVTOP 65 AUTO) UNDERLINED MAXCHARS 13
+
+	CHECKBOX "$Search-Amount" ID SearchAmount
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+	POPUPTRIGGER ">" ID SearchAmountPopup
+		AT (PREVRIGHT-2 PREVTOP AUTO AUTO) LEFTANCHOR
+	LIST "=" ">" "<" "[" ID SearchAmountList
+		 AT (PREVLEFT+5 PREVTOP 6-1+4 AUTO) VISIBLEITEMS 4 NONUSABLE
+	POPUPLIST ID SearchAmountPopup SearchAmountList
+	SELECTORTRIGGER "+" ID SearchAmount1Sign=ordObjects++
+		AT (PREVRIGHT+2+8 PREVTOP 11 AMOUNT_SIGN_HEIGHT) RIGHTANCHOR
+	FIELD ID SearchAmount1=ordObjects++
+		AT (PREVRIGHT+2 PREVTOP 30 AUTO)
+		UNDERLINED MAXCHARS AMOUNT_LEN RIGHTALIGN NUMERIC
+	LABEL "-" ID SearchAmountBetween AT (PREVRIGHT+1 PREVTOP)
+	SELECTORTRIGGER "+" ID SearchAmount2Sign=ordObjects++
+		AT (PREVRIGHT+1 PREVTOP 11 AMOUNT_SIGN_HEIGHT) RIGHTANCHOR
+	FIELD ID SearchAmount2=ordObjects++
+		AT (PREVRIGHT+2 PREVTOP 30 AUTO)
+		UNDERLINED MAXCHARS AMOUNT_LEN RIGHTALIGN NUMERIC
+	LABEL "]" ID SearchAmountEnd AT (PREVRIGHT+1 PREVTOP)
+
+	CHECKBOX "$Search-ChequeNumFrom" ID SearchChequeNum
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+	FIELD ID SearchChequeNumFrom
+		AT (PREVRIGHT+2 PREVTOP INT_WIDTH AUTO)
+		UNDERLINED MAXCHARS INT_LEN RIGHTALIGN NUMERIC
+	LABEL "$Search-ChequeNumTo" AUTOID AT (PREVRIGHT+2 PREVTOP)
+	FIELD ID SearchChequeNumTo
+		AT (PREVRIGHT+2 PREVTOP INT_WIDTH AUTO)
+		UNDERLINED MAXCHARS INT_LEN RIGHTALIGN NUMERIC
+
+	CHECKBOX "$Search-StatementBefore" ID SearchStatement
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+	POPUPTRIGGER "" ID SearchStatementPopup
+		AT (PREVRIGHT-3 PREVTOP 50 AUTO) LEFTANCHOR
+    LIST [$Search-StatementList] ID SearchStatementList
+        AT (PREVLEFT+5 PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 3 NONUSABLE
+	POPUPLIST ID SearchStatementPopup SearchStatementList
+	LABEL "$Search-StatementAfter" AUTOID AT (PREVRIGHT+2+8 PREVTOP)
+	FIELD ID SearchStatementNum
+		AT (PREVRIGHT PREVTOP 35 AUTO)
+		UNDERLINED MAXCHARS INT_LEN RIGHTALIGN NUMERIC
+
+	LABEL "$Search-Op" AUTOID AT (XOK_INDENT PREVTOP+LINEFEED)
+	POPUPTRIGGER "" ID SearchOpPopup
+		AT (PREVRIGHT-1 PREVTOP AUTO AUTO) LEFTANCHOR
+	LIST [$Search-OpList] ID SearchOpList
+		AT (PREVLEFT+5 PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 3 NONUSABLE
+	POPUPLIST ID SearchOpPopup SearchOpList
+
+	LABEL "$Search-Action" AUTOID AT (XOK PREVTOP+LINEFEED)
+	POPUPTRIGGER "" ID SearchActionPopup
+		AT (PREVRIGHT-1 PREVTOP AUTO AUTO) LEFTANCHOR
+	LIST [$Search-ActionList] ID SearchActionList
+		AT (PREVLEFT+5 PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 3 NONUSABLE
+	POPUPLIST ID SearchActionPopup SearchActionList
+
+	BUTTON "$Search-Search" ID SearchSearch=autoCarriageReturnButton
+		AT (XOK PREVTOP+LINEFEED-1+BUTLINEFEED-2 AUTO AUTO)
+    BUTTON "$Search-Cancel" ID SearchCancel
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+
+	GRAFFITISTATEINDICATOR 160-13 PREVTOP
+END
+
+GENERICSTRING SearchBegDate
+GENERICSTRING SearchEndDate
+
+
+//
+// Sum dates for the transaction list form
+// Height = (# lines, buttons less) x 13 + 8 + 34
+// Y = 160 - Height - 2
+FORM SumDatesFormIdx=formAuto++ AT (2 90 156 68)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID SumDatesSave=autoCarriageReturnButton
+BEGIN
+	TITLE "$DateSums-Title"
+
+	LABEL "$DateSums-On" AUTOID AT (XOK YTOP)
+	FIELD ID SumDatesOnDay
+		AT (PREVRIGHT+2 PREVTOP 10 AUTO)
+		UNDERLINED MAXCHARS 2 RIGHTALIGN NUMERIC
+	LABEL "$DateSums-Month" AUTOID AT (PREVRIGHT+4 PREVTOP)
+
+	LABEL "$DateSums-Today" AUTOID AT (XOK PREVTOP+LINEFEED)
+	FIELD ID SumDatesTodayDays
+		AT (PREVRIGHT+2 PREVTOP 10 AUTO)
+		UNDERLINED MAXCHARS 2 RIGHTALIGN NUMERIC
+	LABEL "$DateSums-Days" AUTOID AT (PREVRIGHT+4 PREVTOP)
+
+	BUTTON "$DateSums-Save" ID SumDatesSave
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED AUTO AUTO)
+    BUTTON "$DateSums-Cancel" ID SumDatesCancel
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+
+	GRAFFITISTATEINDICATOR 160-13 PREVTOP
+END
+
+GENERICSTRING strSumDatesOnDay
+GENERICSTRING strSumDatesTodayDays
+
+
+/************************************************************************
+ * Enter a numeric password
+ ************************************************************************/
+
+// Ici pas de formAuto++
+FORM PasswordFormIdx=127 AT (2 2 156 156)
+USABLE
+MODAL
+BEGIN
+	TITLE "$Password-Title"
+
+	LABEL STR(64) ID PasswordLabel AT (XOK YTOP)
+
+	BUTTON "1" ID Password1=1
+		AT (XOK+1 PREVTOP+LINEFEED+7 30 22)	BOLDFRAME FONT LABEL_FONT
+	BUTTON "2" ID Password2=2
+		AT (PREVRIGHT+8 PREVTOP PREVWIDTH PREVHEIGHT) BOLDFRAME FONT LABEL_FONT
+	BUTTON "3" ID Password3=3
+		AT (PREVRIGHT+8 PREVTOP PREVWIDTH PREVHEIGHT) BOLDFRAME FONT LABEL_FONT
+	BUTTON "0" ID Password0=0
+		AT (PREVRIGHT+8 PREVTOP PREVWIDTH PREVHEIGHT) BOLDFRAME FONT LABEL_FONT
+
+	BUTTON "4" ID Password4=4
+		AT (XOK+1 PREVBOTTOM+8 PREVWIDTH PREVHEIGHT) BOLDFRAME FONT LABEL_FONT
+	BUTTON "5" ID Password5=5
+		AT (PREVRIGHT+8 PREVTOP PREVWIDTH PREVHEIGHT) BOLDFRAME FONT LABEL_FONT
+	BUTTON "6" ID Password6=6
+		AT (PREVRIGHT+8 PREVTOP PREVWIDTH PREVHEIGHT) BOLDFRAME FONT LABEL_FONT
+	BUTTON "$Password-ClearKey" ID PasswordC
+		AT (PREVRIGHT+8 PREVTOP PREVWIDTH PREVHEIGHT*2+8)
+		BOLDFRAME FONT LABEL_FONT
+
+	BUTTON "7" ID Password7=7
+		AT (XOK+1 PREVTOP+22+8 PREVWIDTH 22) BOLDFRAME FONT LABEL_FONT
+	BUTTON "8" ID Password8=8
+		AT (PREVRIGHT+8 PREVTOP PREVWIDTH PREVHEIGHT) BOLDFRAME FONT LABEL_FONT
+	BUTTON "9" ID Password9=9
+		AT (PREVRIGHT+8 PREVTOP PREVWIDTH PREVHEIGHT) BOLDFRAME FONT LABEL_FONT
+
+	BUTTON "$Password-OK" ID PasswordOk=autoCarriageReturnButton
+		AT (XOK+1 PREVBOTTOM+8 PREVWIDTH*2+8 PREVHEIGHT)
+		BOLDFRAME FONT LABEL_FONT
+
+	LABEL STR(8) ID PasswordHidden AT (PREVRIGHT+18 PREVTOP+8) FONT LABEL_FONT
+	LABEL STR(8) ID PasswordValue AT (PREVLEFT PREVTOP) FONT LABEL_FONT
+END
+
+STRING PasswordMaTirelire	"$Password-MaTirelireAccess"	/* 40 chars max */
+STRING PasswordDataBase		"$Password-DBaseAccess"			/* 40 chars max */
+STRING PasswordPresent		"$Password-Current"				/* 40 chars max */
+STRING PasswordNew			"$Password-New"					/* 40 chars max */
+STRING PasswordAgain		"$Password-Again"				/* 40 chars max */
+
+
+// DIA resize infos
+WORDLIST ID PasswordFormIdx
+BEGIN
+	DIA_FORM_USE_BIN
+	DIA_BIN_MODAL
+	DIA_STATE_MIN
+
+	// Objects
+	DIA_FORM		DIA_H_PLUS_DH+DIA_W_PLUS_DW					0
+
+	Password1		DIA_W_PLUS_1_4_DW+DIA_H_PLUS_1_4_DH						0
+	Password2 		DIA_W_PLUS_1_4_DW+DIA_X_PLUS_1_4_DW+DIA_H_PLUS_1_4_DH	0
+	Password3 		DIA_W_PLUS_1_4_DW+DIA_X_PLUS_1_2_DW+DIA_H_PLUS_1_4_DH	0
+	Password0 		DIA_W_PLUS_1_4_DW+DIA_X_PLUS_3_4_DW+DIA_H_PLUS_1_4_DH	0
+
+	Password4 		DIA_W_PLUS_1_4_DW+DIA_H_PLUS_1_4_DH+DIA_Y_PLUS_1_4_DH	0
+	Password5 		DIA_W_PLUS_1_4_DW+DIA_X_PLUS_1_4_DW \
+					+DIA_H_PLUS_1_4_DH+DIA_Y_PLUS_1_4_DH					0
+	Password6 		DIA_W_PLUS_1_4_DW+DIA_X_PLUS_1_2_DW \
+					+DIA_H_PLUS_1_4_DH+DIA_Y_PLUS_1_4_DH					0
+	PasswordC 		DIA_W_PLUS_1_4_DW+DIA_X_PLUS_3_4_DW \
+					+DIA_H_PLUS_1_2_DH+DIA_Y_PLUS_1_4_DH					0
+
+	Password7 		DIA_W_PLUS_1_4_DW+DIA_H_PLUS_1_4_DH+DIA_Y_PLUS_1_2_DH	0
+	Password8 		DIA_W_PLUS_1_4_DW+DIA_X_PLUS_1_4_DW \
+					+DIA_H_PLUS_1_4_DH+DIA_Y_PLUS_1_2_DH					0
+	Password9 		DIA_W_PLUS_1_4_DW+DIA_X_PLUS_1_2_DW \
+					+DIA_H_PLUS_1_4_DH+DIA_Y_PLUS_1_2_DH					0
+
+	PasswordOk		DIA_W_PLUS_1_2_DW+DIA_H_PLUS_1_4_DH+DIA_Y_PLUS_3_4_DH	0
+
+	PasswordHidden	DIA_Y_PLUS_DH+DIA_X_PLUS_DW								0
+END
+
+/************************************************************************
+ * Edit type dialog
+ ************************************************************************/
+
+FORM EditTypeFormIdx=formAuto++ AT (2 91 156 67)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID EditTypeOK=autoCarriageReturnButton
+BEGIN
+
+	LABEL "$EditType-For" AUTOID AT (XOK YTOP_WO_TITLE)
+
+	LABEL "" ID EditTypeSignLabelInsteadPopup AT (PREVRIGHT+2 PREVTOP)
+
+	POPUPTRIGGER "" ID EditTypeSignPopup
+		AT (PREVLEFT-3 PREVTOP AUTO AUTO) LEFTANCHOR
+	LIST [$EditType-SignList] ID EditTypeSignList
+		AT (PREVLEFT+5 PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 3 NONUSABLE
+	POPUPLIST ID EditTypeSignPopup EditTypeSignList
+
+	LABEL "$EditMode-Label"	AUTOID AT (XOK PREVTOP+LINEFEED) FONT LABEL_FONT
+	FIELD ID EditTypeLabel
+		AT (PREVRIGHT+2 PREVTOP 98 AUTO) UNDERLINED MAXCHARS 30 AUTOSHIFT
+
+	GRAFFITISTATEINDICATOR PREVRIGHT+4 PREVTOP
+
+	LABEL "$EditType-OnlyIn" AUTOID AT (XOK PREVTOP+LINEFEED)
+	FIELD ID EditTypeOnlyIn
+		AT (PREVRIGHT+2 PREVTOP 82 AUTO) UNDERLINED MAXCHARS 23 AUTOSHIFT
+
+	/* Buttons... */
+	BUTTON "$EditMode-OK" ID EditTypeOK
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED [$EditMode-OK-Width] AUTO)
+
+	BUTTON "$EditMode-Cancel" ID EditTypeCancel
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-Cancel-Width] AUTO)
+
+	BUTTON "$EditMode-Delete" ID EditTypeDelete
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-Delete-Width] AUTO)
+
+	BUTTON "$EditMode-New" ID EditTypeNew
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-New-Width] AUTO)
+END
+
+
+/************************************************************************
+ * Edit description dialog
+ ************************************************************************/
+
+FORM EditDescFormIdx=formAuto++ AT (2 2 156 156)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID EditDescOK=autoCarriageReturnButton
+BEGIN
+
+	FIELD ID EditDescLabel=ordObjects++
+		AT (XOK YTOP_WO_TITLE 143 2*11+1)
+		UNDERLINED MAXCHARS 255 AUTOSHIFT MULTIPLELINES HASSCROLLBAR
+	SCROLLBAR ID EditDescScrollbar=ordObjects++
+		AT (RIGHT@160-5 PREVTOP 7 PREVHEIGHT) VALUE 0 MIN 0 MAX 100 PAGESIZE 12
+
+	LABEL "$EditDesc-OnlyIn" AUTOID AT (XOK PREVTOP+PREVHEIGHT+1)
+	FIELD ID EditDescOnlyIn
+		AT (PREVRIGHT+2 PREVTOP 82 AUTO) UNDERLINED MAXCHARS 23 AUTOSHIFT
+
+	LABEL "$EditDesc-Macro" AUTOID AT (XOK PREVTOP+LINEFEED) FONT LABEL_FONT
+
+	GRAFFITISTATEINDICATOR 160-13 PREVTOP
+
+	FIELD ID EditDescShortcut
+		AT (PREVLEFT-9-3 PREVTOP 9 AUTO) UNDERLINED MAXCHARS 1
+	LABEL "\026" AUTOID AT (PREVLEFT-9-3 PREVTOP) FONT LABEL_FONT
+
+	LABEL "$EditDesc-Account" AUTOID AT (XOK+4 PREVTOP+LINEFEED)
+	FIELD ID EditDescAccount
+		AT (PREVRIGHT+2 PREVTOP 75 AUTO) UNDERLINED MAXCHARS 15 AUTOSHIFT
+
+	LABEL "$EditDesc-Amount" AUTOID AT (XOK+4 PREVTOP+LINEFEED)
+
+	POPUPTRIGGER "" ID EditDescSignPopup
+		AT (PREVRIGHT-1 PREVTOP AUTO AUTO) LEFTANCHOR
+	LIST [$EditDesc-SignList] ID EditDescSignList
+		AT (PREVLEFT+5 PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 3 NONUSABLE
+	POPUPLIST ID EditDescSignPopup EditDescSignList
+
+	FIELD ID EditDescAmount
+		AT (PREVRIGHT+2+8 PREVTOP 53 AUTO)
+		UNDERLINED MAXCHARS 13 RIGHTALIGN NUMERIC
+
+	LABEL "$EditDesc-Mode" AUTOID AT (XOK+4 PREVTOP+LINEFEED)
+	POPUPTRIGGER "" ID EditDescModePopup=ordObjects++
+		AT (PREVRIGHT-1 PREVTOP 160-4-PREVRIGHT-1 AUTO) LEFTANCHOR
+    LIST "" ID EditDescModeList=ordObjects++
+		AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	LABEL "$EditDesc-Type" AUTOID AT (XOK+4 PREVTOP+LINEFEED)
+	POPUPTRIGGER "" ID EditDescTypePopup=ordObjects++
+		AT (PREVRIGHT-1 PREVTOP 160-4-PREVRIGHT-1 AUTO) LEFTANCHOR
+    LIST "" ID EditDescTypeList=ordObjects++
+		AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	LABEL "$EditDesc-Xfer" AUTOID AT (XOK+4 PREVTOP+LINEFEED)
+	FIELD ID EditDescXfer
+		AT (PREVRIGHT+2 PREVTOP 75 AUTO) UNDERLINED MAXCHARS 15 AUTOSHIFT
+
+	CHECKBOX "$EditDesc-ChequeAuto" ID EditDescChequeAuto
+		AT (XOK+2 PREVTOP+LINEFEED AUTO AUTO)
+
+	CHECKBOX "$EditDesc-AutoSubmit" ID EditDescAutoSubmit
+		AT (PREVRIGHT+6 PREVTOP AUTO AUTO)
+
+	/* Buttons... */
+	BUTTON "$EditMode-OK" ID EditDescOK
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED [$EditMode-OK-Width] AUTO)
+
+	BUTTON "$EditMode-Cancel" ID EditDescCancel
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-Cancel-Width] AUTO)
+
+	BUTTON "$EditMode-Delete" ID EditDescDelete
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-Delete-Width] AUTO)
+
+	BUTTON "$EditMode-New" ID EditDescNew
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-New-Width] AUTO)
+END
+
+
+/************************************************************************
+ * Edit mode dialog
+ ************************************************************************/
+
+FORM EditModeFormIdx=formAuto++ AT (2 13 156 145)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID EditModeOK=autoCarriageReturnButton
+BEGIN
+
+	LABEL "$EditMode-Label"	AUTOID AT (XOK YTOP_WO_TITLE) FONT LABEL_FONT
+	FIELD ID EditModeLabel
+		AT (PREVRIGHT+2 PREVTOP 98 AUTO) UNDERLINED MAXCHARS 31 AUTOSHIFT
+
+	GRAFFITISTATEINDICATOR PREVRIGHT+4 PREVTOP
+
+	LABEL "$EditMode-OnlyIn" AUTOID AT (XOK PREVTOP+LINEFEED)
+	FIELD ID EditModeOnlyIn
+		AT (PREVRIGHT+2 PREVTOP 82 AUTO) UNDERLINED MAXCHARS 23 AUTOSHIFT
+
+	CHECKBOX "$EditMode-ChequeAuto" ID EditModeChequeAuto
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+
+	LABEL "$EditMode-ValueDate" AUTOID
+		AT (XOK PREVTOP+LINEFEED) FONT LABEL_FONT
+
+	/* First checkbox */
+	CHECKBOX "$EditMode-Check1Label1" ID EditModeCheck1
+		AT (XOK PREVTOP+LINEFEED AUTO AUTO)
+	FIELD ID EditModeCheck1Day1
+		AT (PREVRIGHT+2 PREVTOP 10 AUTO)
+		UNDERLINED MAXCHARS 2 RIGHTALIGN NUMERIC
+	LABEL "$EditMode-Check1Label2" AUTOID AT (PREVRIGHT+2 PREVTOP)
+
+	LABEL "$EditMode-Check1Label3" AUTOID AT (XOK+17 PREVTOP+LINEFEED)
+	FIELD ID EditModeCheck1Day2
+		AT (PREVRIGHT+2 PREVTOP 10 AUTO)
+		UNDERLINED MAXCHARS 2 RIGHTALIGN NUMERIC
+	LABEL "$EditMode-Check1Label4" AUTOID AT (PREVRIGHT+2 PREVTOP)
+
+	POPUPTRIGGER "" ID EditModeCheck1Popup
+		AT (PREVRIGHT-1 PREVTOP AUTO AUTO) LEFTANCHOR
+	LIST [$EditMode-Check1List] ID EditModeCheck1List
+		AT (PREVLEFT+5 PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 2 NONUSABLE
+	POPUPLIST ID EditModeCheck1Popup EditModeCheck1List
+
+	LABEL "$EditMode-Check1Label5" AUTOID AT (XOK+17 PREVTOP+LINEFEED)
+
+	/* Second checkbox */
+	CHECKBOX "$EditMode-Check2Label1" ID EditModeCheck2
+		AT (XOK PREVTOP+LINEFEED AUTO AUTO)
+	FIELD ID EditModeCheck2Day
+		AT (PREVRIGHT+2 PREVTOP 10 AUTO)
+		UNDERLINED MAXCHARS 2 RIGHTALIGN NUMERIC
+	LABEL "$EditMode-Check2Label2" AUTOID AT (PREVRIGHT+2 PREVTOP)
+
+	POPUPTRIGGER "" ID EditModeCheck2Popup
+		AT (XOK+17-3 PREVTOP+LINEFEED AUTO AUTO) LEFTANCHOR
+	LIST [$EditMode-Check2List] ID EditModeCheck2List
+		AT (PREVLEFT PREVTOP AUTOLISTWIDTH AUTO) VISIBLEITEMS 2 NONUSABLE
+	POPUPLIST ID EditModeCheck2Popup EditModeCheck2List
+
+	LABEL "$EditMode-Check2Label3" AUTOID AT (PREVRIGHT+2+12 PREVTOP)
+
+	/* Buttons... */
+	BUTTON "$EditMode-OK" ID EditModeOK
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED [$EditMode-OK-Width] AUTO)
+
+	BUTTON "$EditMode-Cancel" ID EditModeCancel
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-Cancel-Width] AUTO)
+
+	BUTTON "$EditMode-Delete" ID EditModeDelete
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-Delete-Width] AUTO)
+
+	BUTTON "$EditMode-New" ID EditModeNew
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-New-Width] AUTO)
+END
+
+GENERICSTRING strEditModeName
+GENERICSTRING strEditModeCheck1Day1
+GENERICSTRING strEditModeCheck1Day2
+GENERICSTRING strEditModeCheck2Day
+
+
+/************************************************************************
+ * About dialog
+ ************************************************************************/
+
+FORM AboutFormIdx=formAuto++ AT (2 2 156 156)
+USABLE
+MODAL
+DEFAULTBTNID AboutYop=autoCarriageReturnButton
+BEGIN
+	TITLE "$About-Title"
+
+	FORMBITMAP AT (6 18) BITMAP bmpMaTirelire USABLE
+
+	LABEL "Ma Tirelire v@VERSION@" AUTOID AT (44 PREVTOP) FONT LABEL_FONT
+	/* BETA */ LABEL "- bZZZZ" AUTOID AT (PREVRIGHT+2 PREVTOP)
+	LABEL "$About-Freeware"	AUTOID AT (44 PREVTOP+LINEFEED)
+
+	LABEL "Copyright 2001-2008 Maxime Soulé" AUTOID AT (CENTER PREVTOP+LINEFEED)
+	LABEL "$About-LogoBy" AUTOID AT (CENTER PREVTOP+LINEFEED)
+
+	FIELD ID AboutText=ordObjects++
+		AT (XOK PREVTOP+LINEFEED 156-XOK-1-7-1 5*11+1)
+		MULTIPLELINES HASSCROLLBAR NONEDITABLE MAXCHARS 4096
+	SCROLLBAR ID AboutScrollbar=ordObjects++
+		AT (RIGHT@156-1 PREVTOP 7 PREVHEIGHT) VALUE 0 MIN 0 MAX 100 PAGESIZE 12
+
+	LABEL "http://Ma-Tirelire.net" AUTOID AT (RIGHT@160-6 160-LINEFEED-4)
+	LABEL "info@Ma-Tirelire.net" AUTOID AT (RIGHT@160-6 PREVTOP-LINEFEED)
+
+	BUTTON "Yep" ID AboutYop AT (XOK BOTTOM@160-9 51 18)
+END
+
+
+/************************************************************************
+ * Purge dialog
+ ************************************************************************/
+
+FORM PurgeFormIdx=formAuto++ AT (2 22 156 136)
+USABLE
+MODAL
+MENUID DefaultBaseMenu
+DEFAULTBTNID PurgeCancel
+BEGIN
+	TITLE "$Purge-Title"
+
+	LABEL "$Purge-Label" AUTOID	AT (XOK YTOP)
+
+	CHECKBOX "$Purge-InAccount" ID PurgeInAccount
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO) GROUP 1
+	CHECKBOX "$Purge-ByType" ID PurgeByType
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO) GROUP 1
+	CHECKBOX "$Purge-ByMode" ID PurgeByMode
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO) GROUP 1
+
+	LABEL "$Purge-Between" AUTOID
+		AT (RIGHT@[$Purge-Center-Anchor] PREVTOP+LINEFEED+1)
+
+	/* $Stats-Center-RightShift is correct here */
+	FORMBITMAP AT (PREVRIGHT+[$Stats-Center-RightShift] PREVTOP)
+		BITMAP bmpDateUp USABLE
+	REPEATBUTTON "" ID PurgeBegDateUp=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-1 7 6) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 PREVTOP+10) BITMAP bmpDateDown USABLE
+	REPEATBUTTON "" ID PurgeBegDateDown=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-2 7 6) NOFRAME
+	SELECTORTRIGGER STR(14) ID PurgeBegDate=ordObjects++
+		AT (PREVLEFT+PREVWIDTH+1 PREVTOP-7 DATE_REC_WIDTH AUTO) LEFTANCHOR
+
+	FORMBITMAP AT (RIGHT@160-16 PREVTOP+(LINEFEED/2)+2)
+		BITMAP bmpDatesBound USABLE
+	PUSHBUTTON "" ID PurgeDatesBound AT (PREVRIGHT-1 PREVTOP-2 9 11) FONT 3
+
+	LABEL "$Purge-And" AUTOID
+		AT (RIGHT@[$Purge-Center-Anchor] PREVTOP+(LINEFEED/2+1)+1)
+
+	/* $Stats-Center-RightShift is correct here */
+	FORMBITMAP AT (PREVRIGHT+[$Stats-Center-RightShift] PREVTOP)
+		BITMAP bmpDateUp USABLE
+	REPEATBUTTON "" ID PurgeEndDateUp=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-1 7 6) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 PREVTOP+10) BITMAP bmpDateDown USABLE
+	REPEATBUTTON "" ID PurgeEndDateDown=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-2 7 6) NOFRAME
+	SELECTORTRIGGER STR(14) ID PurgeEndDate=ordObjects++
+		AT (PREVLEFT+PREVWIDTH+1 PREVTOP-7 DATE_REC_WIDTH AUTO)	LEFTANCHOR
+
+	CHECKBOX "$Purge-ValueDate" ID PurgeValDate
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED+1 AUTO AUTO)
+
+	BUTTON "$Purge-OK" ID PurgeOK=autoCarriageReturnButton
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED AUTO AUTO)
+    BUTTON "$Purge-Cancel" ID PurgeCancel
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+END
+
+GENERICSTRING PurgeBegDate
+GENERICSTRING PurgeEndDate
+
+
+/************************************************************************
+ * Currency dialog
+ ************************************************************************/
+
+FORM CurrenciesListFormIdx=formAuto++ AT (2 3 156 155)
+USABLE
+MODAL
+MENUID DefaultBaseMenu
+DEFAULTBTNID CurrenciesListOK=autoCarriageReturnButton
+BEGIN
+	TITLE "$CurrenciesList-Title"
+
+	LABEL "$CurrenciesList-RefCurrency" AUTOID AT (XOK YTOP) FONT LABEL_FONT
+
+	POPUPTRIGGER "" ID CurrenciesRefPopup=ordObjects++
+		AT (PREVRIGHT PREVTOP AUTO AUTO) LEFTANCHOR
+	LIST "" ID CurrenciesRefList=ordObjects++
+        AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	LIST ""	ID CurrenciesList
+		AT (XOK PREVTOP+LINEFEED 127 AUTO) VISIBLEITEMS 9
+
+	BUTTON "\005" ID CurrenciesListPlus
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP 15 25) FONT 3
+
+	BUTTON "\011" ID CurrenciesListEdit
+		AT (PREVLEFT PREVBOTTOM+12 15 25) FONT 3
+
+	BUTTON "\006" ID CurrenciesListMinus
+		AT (PREVLEFT PREVBOTTOM+12 15 25) FONT 3
+
+	BUTTON "$CurrenciesList-OK" ID CurrenciesListOK
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED AUTO AUTO)
+    BUTTON "$CurrenciesList-New" ID CurrenciesListNew
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+
+	LABEL "\023" ID CurrenciesListBeforeDate AT (PREVRIGHT+5 PREVTOP) FONT 3
+	LABEL STR(9 + 9) ID CurrenciesListDate AT (PREVRIGHT+3 PREVTOP)
+END
+
+STRING strDefaultLocalCurrency			"$strDefaultLocalCurrency"
+STRING strDefaultLocalCurrencyBefore35	"$strDefaultLocalCurrencyBefore35"
+STRING strDefaultLocalCurrencyIso		"$strDefaultLocalCurrencyIso"
+
+
+// DIA resize infos
+WORDLIST ID CurrenciesListFormIdx
+BEGIN
+	DIA_FORM_USE_BIN
+	DIA_BIN_MODAL
+	DIA_STATE_MIN
+
+	// Objects
+	DIA_FORM			DIA_H_PLUS_DH+DIA_W_PLUS_DW					0
+	
+	CurrenciesList		DIA_H_PLUS_DH+DIA_W_PLUS_DW+DIA_H_GRANULAR	0
+
+	CurrenciesListPlus	DIA_X_RIGHT									0
+	CurrenciesListEdit	DIA_X_RIGHT									0
+	CurrenciesListMinus	DIA_X_RIGHT									0
+	
+	CurrenciesListBeforeDate	DIA_Y_BOTTOM+DIA_X_RIGHT			0
+	CurrenciesListDate			DIA_Y_BOTTOM+DIA_X_RIGHT			0
+
+	CurrenciesListOK	DIA_Y_BOTTOM+DIA_W_PLUS_1_2_DW						0
+	CurrenciesListNew	DIA_Y_BOTTOM+DIA_X_PLUS_1_2_DW+DIA_W_PLUS_1_2_DW	0
+END
+
+
+/************************************************************************
+ * Currency edit dialog
+ ************************************************************************/
+
+FORM EditCurrencyFormIdx=formAuto++ AT (2 52 156 106)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID EditCurrencyOK=autoCarriageReturnButton
+BEGIN
+
+	GRAFFITISTATEINDICATOR 160-13 XOK
+
+	LABEL "$EditCurrency-InCurrency" AUTOID
+		AT (XOK YTOP_WO_TITLE) FONT LABEL_FONT
+	FIELD ID EditCurrencyName
+		AT (PREVRIGHT+2 PREVTOP 28 AUTO) UNDERLINED MAXCHARS 4
+
+	SELECTORTRIGGER "\023" ID EditCurrencyExternalPopup
+		AT (PREVRIGHT+4 PREVTOP AUTO AUTO) FONT 3
+	LIST "" ID EditCurrencyExternalList
+		AT (PREVLEFT PREVTOP 10 AUTO) VISIBLEITEMS 1 NONUSABLE
+
+	LABEL "$EditCurrency-CurrencyAmount" AUTOID
+		AT (XOK+5 PREVTOP+LINEFEED)
+	FIELD ID EditCurrencyAmount
+		AT (PREVLEFT+15 PREVTOP+LINEFEED 94 AUTO)
+		UNDERLINED MAXCHARS 21 RIGHTALIGN NUMERIC
+
+	LABEL "$EditCurrency-EqualsTo" AUTOID
+		AT (XOK+5 PREVTOP+LINEFEED)
+	FIELD ID EditCurrencyRefAmount
+		AT (PREVLEFT+15 PREVTOP+LINEFEED 94 AUTO)
+		UNDERLINED MAXCHARS 21 RIGHTALIGN NUMERIC
+	LABEL "XXX" ID EditCurrencyReference AT (PREVRIGHT+2 PREVTOP)
+
+	LABEL "$EditCurrency-Iso4217" AUTOID
+		AT (XOK PREVTOP+LINEFEED)
+	FIELD ID EditCurrencyIso4217
+		AT (PREVRIGHT+2 PREVTOP 23 AUTO) UNDERLINED MAXCHARS 3
+
+	BUTTON "$EditMode-OK" ID EditCurrencyOK
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED
+			[$EditMode-OK-Width] AUTO)
+
+	BUTTON "$EditMode-Cancel" ID EditCurrencyCancel
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-Cancel-Width] AUTO)
+
+	BUTTON "$EditMode-Delete" ID EditCurrencyDelete
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-Delete-Width] AUTO)
+
+	BUTTON "$EditMode-New" ID EditCurrencyNew
+		AT (PREVLEFT+PREVWIDTH+4 PREVTOP [$EditMode-New-Width] AUTO)
+
+	LIST ""	ID EditCurrencyIso4217List
+		AT (0 0 30 AUTO) VISIBLEITEMS 1 NONUSABLE
+END
+
+GENERICSTRING strEditCurrencyName
+GENERICSTRING strEditCurrencyAmount
+GENERICSTRING strEditCurrencyRefAmount
+
+
+/************************************************************************
+ * Reference currency edit dialog
+ ************************************************************************/
+
+FORM EditReferenceCurrencyFormIdx=formAuto++ AT (2 103 156 55)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID EditCurrencyOK=autoCarriageReturnButton
+BEGIN
+	GRAFFITISTATEINDICATOR 160-13 XOK
+	
+	LABEL "$EditCurrency-RefCurrencyName" AUTOID
+		AT (XOK YTOP_WO_TITLE) FONT LABEL_FONT
+	LABEL "$EditCurrency-Iso4217" AUTOID
+		AT (RIGHT@PREVRIGHT PREVTOP+LINEFEED)
+
+	FIELD ID EditCurrencyName
+		AT (PREVRIGHT+2 YTOP_WO_TITLE 28 AUTO) UNDERLINED MAXCHARS 4
+	FIELD ID EditCurrencyIso4217
+		AT (PREVLEFT PREVTOP+LINEFEED 23 AUTO) UNDERLINED MAXCHARS 3
+
+	BUTTON "$EditCurrency-OK" ID EditCurrencyOK
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED AUTO AUTO)
+
+	BUTTON "$EditCurrency-Cancel" ID EditCurrencyCancel
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+
+	LIST ""	ID EditCurrencyIso4217List
+		AT (0 0 30 AUTO) VISIBLEITEMS 1 NONUSABLE
+END
+
+
+/************************************************************************
+ * Reference currency edit dialog
+ ************************************************************************/
+
+// Height = (# lines, buttons less) x 13 + 8 + 35
+// Y = 160 - Height - 2
+FORM ExportFormIdx=formAuto++ AT (2 89 156 69)
+USABLE
+MODAL
+MENUID DefaultEditMenu
+DEFAULTBTNID ExportCancel
+BEGIN
+	TITLE "$Export-Title"
+
+    LABEL "$Export-Name" AUTOID AT (XOK YTOP) FONT LABEL_FONT
+
+	FIELD ID ExportName
+		AT (PREVRIGHT+3 PREVTOP 70 AUTO) UNDERLINED MAXCHARS 23 AUTOSHIFT
+	
+	CHECKBOX "$Export-DontSplit" ID ExportDontSplit
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED+1 AUTO AUTO)
+
+    BUTTON "$Export-Export" ID ExportExport=autoCarriageReturnButton
+		AT (XOK PREVTOP+LINEFEED+BUTLINEFEED AUTO AUTO)
+    BUTTON "$Export-Cancel" ID ExportCancel
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+
+    GRAFFITISTATEINDICATOR 160-13 PREVTOP
+END
+ 
+GENERICSTRING strExportName
+
+
+FORM MiniStatsFormIdx=formAuto++ FORMLINES(6, 1)
+USABLE
+MODAL
+MENUID DefaultBaseMenu
+DEFAULTBTNID MiniStatsOK
+BEGIN
+	TITLE STR(15)
+	
+	LABEL "$MiniStats-Between" AUTOID
+		AT (RIGHT@[$Purge-Center-Anchor] YTOP)
+
+	FORMBITMAP AT (PREVRIGHT+[$Stats-Center-RightShift] PREVTOP)
+		BITMAP bmpDateUp USABLE
+	REPEATBUTTON "" ID MiniStatsBegDateUp=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-1 7 6) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 PREVTOP+10) BITMAP bmpDateDown USABLE
+	REPEATBUTTON "" ID MiniStatsBegDateDown=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-2 7 6) NOFRAME
+	SELECTORTRIGGER STR(14) ID MiniStatsBegDate=ordObjects++
+		AT (PREVLEFT+PREVWIDTH+1 PREVTOP-7 DATE_REC_WIDTH AUTO) LEFTANCHOR
+
+	FORMBITMAP AT (RIGHT@160-16 PREVTOP+(LINEFEED/2)+2)
+		BITMAP bmpDatesBound USABLE
+	PUSHBUTTON "" ID MiniStatsDatesBound AT (PREVRIGHT-1 PREVTOP-2 9 11) FONT 3
+
+	LABEL "$MiniStats-And" AUTOID
+		AT (RIGHT@[$Purge-Center-Anchor] PREVTOP+(LINEFEED/2+1)+1)
+
+	FORMBITMAP AT (PREVRIGHT+[$Stats-Center-RightShift] PREVTOP)
+		BITMAP bmpDateUp USABLE
+	REPEATBUTTON "" ID MiniStatsEndDateUp=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-1 7 6) NOFRAME
+	FORMBITMAP AT (PREVLEFT+1 PREVTOP+10) BITMAP bmpDateDown USABLE
+	REPEATBUTTON "" ID MiniStatsEndDateDown=ordObjects++
+		AT (PREVLEFT-1 PREVTOP-2 7 6) NOFRAME
+	SELECTORTRIGGER STR(14) ID MiniStatsEndDate=ordObjects++
+		AT (PREVLEFT+PREVWIDTH+1 PREVTOP-7 DATE_REC_WIDTH AUTO)	LEFTANCHOR
+
+	CHECKBOX "$Stats-ValueDate" ID MiniStatsValDate
+		AT (XOK_CHECKBOX PREVTOP+LINEFEED AUTO AUTO)
+
+	LABEL "$MiniStats-Credits" AUTOID AT (RIGHT@60 PREVTOP+LINEFEED)
+	FIELD ID MiniStatsCredits
+		AT (PREVRIGHT+2 PREVTOP 57 AUTO) RIGHTALIGN MAXCHARS 12 NONEDITABLE
+	FIELD ID MiniStatsCreditsPercent
+		AT (PREVRIGHT+4 PREVTOP 15 AUTO) RIGHTALIGN MAXCHARS 3 NONEDITABLE
+	LABEL "%" ID MiniStatsCreditsPercentLabel AT (PREVRIGHT PREVTOP)
+
+	LABEL "$MiniStats-Debits" AUTOID AT (RIGHT@60 PREVTOP+LINEFEED)
+	FIELD ID MiniStatsDebits
+		AT (PREVRIGHT+2 PREVTOP 57 AUTO) RIGHTALIGN MAXCHARS 12 NONEDITABLE
+	FIELD ID MiniStatsDebitsPercent
+		AT (PREVRIGHT+4 PREVTOP 15 AUTO) RIGHTALIGN MAXCHARS 3 NONEDITABLE
+	LABEL "%" ID MiniStatsDebitsPercentLabel AT (PREVRIGHT PREVTOP)
+
+	LABEL "$MiniStats-Total" AUTOID AT (RIGHT@60 PREVTOP+LINEFEED)
+	FIELD ID MiniStatsTotal
+		AT (PREVRIGHT+2 PREVTOP 57 AUTO) RIGHTALIGN MAXCHARS 12 NONEDITABLE
+	LABEL STR(4) ID MiniStatsCurrency AT (PREVRIGHT+2 PREVTOP)
+
+	BUTTON "$MiniStats-Back" ID MiniStatsOK=autoCarriageReturnButton
+		AT (XOK PREVTOP+PREVHEIGHT+BUTLINEFEED AUTO AUTO)
+	BUTTON "$MiniStats-Statistics" ID MiniStatsStatistics
+		AT (PREVLEFT+PREVWIDTH+6 PREVTOP AUTO AUTO)
+END
+
+GENERICSTRING MiniStatsBegDate
+GENERICSTRING MiniStatsEndDate
+
+
+/************************************************************************
+ * The alarm rings!!!!
+ *
+ * No formAuto++ here
+ ************************************************************************/
+
+FORM AlarmFormIdx AT (2 2 156 156)
+USABLE
+MODAL
+BEGIN
+	TITLE "$Alarm-Title"
+
+	GADGET ID AlarmGadget AT (0 0 10 10) NONUSABLE
+
+	BUTTON "$Alarm-OK" ID AlarmOk=autoCarriageReturnButton
+		AT (XOK 156-XOK-26 156-XOK-XOK 26)
+END
+
+
+// ***********************************************************************
+//
+// Alert boxes
+//
+// ***********************************************************************
+
+ALERT ID alertBeta
+INFORMATION
+BEGIN
+	TITLE "Ma Tirelire v2.0 beta - bZZZZ"
+	MESSAGE "$alertBeta-Message"
+	BUTTONS "$alertBeta-Abort" "$alertBeta-Continue" "$alertBeta-ContinueOK"
+END
+
+GENERICALERT alertNotImplementedXXX INFORMATION
+
+
+GENERICALERT alertErrorField INFORMATION
+STRING strFldErrMiss  			"$alertErrorField-ErrMiss"
+STRING strFldErrNull  			"$alertErrorField-ErrNull"
+
+GENERICALERT alertCantSave ERROR
+
+GENERICALERT alertHaveToCorrectDB WARNING [ No Correct *Quit ]
+GENERICALERT alertIncorrectDBnumCorrections INFORMATION
+
+GENERICALERT alertOverdrawnAccount WARNING
+GENERICALERT alertNoOverdrawnAccount WARNING
+
+GENERICALERT alertDeleteCleared WARNING [ *No Purge ]
+
+GENERICALERT alertNoChequebook WARNING
+
+GENERICALERT alertFilledChequebooks WARNING
+
+GENERICALERT alertNewChequebook CONFIRMATION [ *Create No ]
+
+GENERICALERT alertCopy INFORMATION [ Today Original *Cancel]
+
+GENERICALERT alertTooManyRepeats CONFIRMATION [ *Stop Continue ]
+
+GENERICALERT alertEmptyMacroDef ERROR
+
+GENERICALERT alertMacroCantAutoSubmit ERROR
+
+GENERICALERT alertDescDelete WARNING [ *No Yes ]
+
+GENERICALERT alertModeDelete WARNING [ *No Yes ]
+
+GENERICALERT alertTypeDelete WARNING [ *No Yes ]
+
+GENERICALERT alertTypeChangeChildrenSign CONFIRMATION [ *Yes No ]
+
+GENERICALERT alertRecordsModified INFORMATION
+
+GENERICALERT alertAccountMainCurrency INFORMATION
+
+GENERICALERT alertCurrencyDelete WARNING [ *No Yes ]
+
+GENERICALERT alertCurrDelRecordsModified INFORMATION
+
+GENERICALERT alertPasswordBadCode ERROR
+
+GENERICALERT alertPasswordCodesMustBeEqual ERROR
+
+GENERICALERT alertNoExternalCurrencyDB INFORMATION
+
+GENERICALERT alertNoRefInExternalCurrencyDB INFORMATION
+
+GENERICALERT alertDBaseDelete WARNING [ *No Yes ]
+
+GENERICALERT alertAccountDelete WARNING [ *No Yes ]
+
+GENERICALERT alertAccountAlreadyExists ERROR
+
+GENERICALERT alertAccountPropInvalidOverdrawnThreshold ERROR
+
+GENERICALERT alertAccountChangeCurrency WARNING [ *No Yes ]
+
+GENERICALERT alertOpFormXferNoRec INFORMATION
+
+GENERICALERT alertOpFormXferDel WARNING [ *No DeleteLink ]
+
+GENERICALERT alertOpFormSplitsWarning WARNING [ *Continue Correct ]
+GENERICALERT alertOpFormSplitsError ERROR [ *Continue Correct ]
+GENERICALERT alertOpFormSplitsXferWarning WARNING [ *Continue Correct ]
+GENERICALERT alertOpFormSplitsXferError ERROR [ Correct ]
+
+GENERICALERT alertAlarmBeforeToday CONFIRMATION [ Edit *Delete ]
+
+GENERICALERT alertTransactionDelete WARNING [ *No Yes ]
+
+GENERICALERT alertDeleteMarked WARNING [ *No Delete ]
+
+GENERICALERT alertMarkedToChecked CONFIRMATION [ *No Transform ]
+
+GENERICALERT alertDeleteAll WARNING [ *No DeleteAll ]
+
+GENERICALERT alertFlaggedUnflag CONFIRMATION [ *No Yes ]
+
+GENERICALERT alertSearchNone INFORMATION
+GENERICALERT alertSearchMany INFORMATION [ *OK See ]
+
+GENERICALERT alertClearingConfirm CONFIRMATION [ *OK Back Cancel ]
+
+GENERICALERT alertStatementNumberConfirmEmpty CONFIRMATION [ *No Yes ]
+
+GENERICALERT alertAutoClearNone ERROR [ OK ]
+GENERICALERT alertAutoClearTooMany ERROR [ OK ]
+GENERICALERT alertAutoClearNotFound INFORMATION [ OK ]
+
+GENERICALERT alertRepeatsViewOrig CONFIRMATION [ *No Yes ]
+
+GENERICALERT alertAllBasesAreOK INFORMATION [ OK ]
+
+
+// Alert messages for system errors...
+GENERICALERT alertDmErrInvalidDatabaseName ERROR
+GENERICALERT alertDmErrAlreadyExists ERROR
+GENERICALERT alertMemErrNotEnoughSpace ERROR
+GENERICALERT alertGenericError ERROR
+
+
+// ***********************************************************************
+//
+// String IDs
+//
+// ***********************************************************************
+
+//
+// FontBucket strings (from FontBucket.r)
+// System
+STRING ID 9500	"Palm OS"		// Palm name
+// Bold
+STRING ID 9550	"B"				// String to represent the BOLD setting
+// VGA Font Name
+STRING ID 9504	"Palm OS"		// To the user, this is a built-in font, 
+								// so map to the same name
+
+
+// Entries used in statement number management popups...
+GENERICSTRING strStatementNumKeep
+GENERICSTRING strStatementNumCancel
+GENERICSTRING strStatementNumNumber
+GENERICSTRING strStatementNumAnother
+
+// Mode "Unknown" entry (31 chars max)
+GENERICSTRING strModesListUnknown
+
+// Type "Unfiled" entry (31 chars max)
+GENERICSTRING strTypesListUnfiled
+
+// "Edit..." entry in Descriptions, Modes and Types lists
+GENERICSTRING strEditList
+
+// "Any" entry in Modes and Types lists (stats and search popups)
+GENERICSTRING strAnyList
+
+// Note used for created fake transaction when the currency of an
+// account is changed
+GENERICSTRING strConvAccountCurrencyRound
+
+// Progress bars labels...
+GENERICSTRING strProgressBarRepeats
+GENERICSTRING strProgressBarAccountsBalances
+GENERICSTRING strProgressBarAccountBalance
+GENERICSTRING strProgressBarPurge
+GENERICSTRING strProgressBarPurgeGather
+GENERICSTRING strProgressBarAutoChequeSearch
+GENERICSTRING strProgressBarDeleteAllInAccount
+GENERICSTRING strProgressBarFlaggedToCleared
+GENERICSTRING strProgressBarDeleteFlagged
+GENERICSTRING strProgressBarTransformFlagged
+GENERICSTRING strProgressBarGotoSearch
+GENERICSTRING strProgressBarChangeAccountCurrency
+GENERICSTRING strProgressBarDeleteAccount1
+GENERICSTRING strProgressBarDeleteAccount2
+GENERICSTRING strProgressBarDBItemCloning
+GENERICSTRING strProgressBarStats
+GENERICSTRING strProgressBarSearchUnflagAll
+GENERICSTRING strProgressBarSearch
+GENERICSTRING strProgressBarExport
+GENERICSTRING strProgressBarAutoClearing
+//GENERICSTRING strProgressBar
+
+// Auto created types, modes and currencies
+GENERICSTRING strAutoCreatedTypeName
+GENERICSTRING strAutoCreatedModeName
+GENERICSTRING strAutoCreatedCurrencyName
+
+
+// ***********************************************************************
+//
+// Bitmaps
+//
+// ***********************************************************************
+
+BITMAPFAMILYEX ID bmpMaTirelire
+COMPRESS
+BEGIN
+    BITMAP "bmp/MaTirelire-bitmap-1bpp.bmp" BPP 1 
+    BITMAP "bmp/MaTirelire-bitmap-8bpp.bmp" BPP 8 TRANSPARENT 0 255 0 DENSITY 1
+    BITMAP "bmp/MaTirelire-bitmap-16bpp-hd.bmp" BPP 16 TRANSPARENT 0 255 0 DENSITY 2
+END
+
+
+BITMAPFAMILYEX ID bmpFirstChecked
+BEGIN
+	BITMAP "bmp/first_checked.bmp" BPP 1
+	BITMAP "bmp/first_checked-hd.bmp" BPP 1 DENSITY 2 COMPRESS
+END
+
+BITMAPFAMILYEX ID bmpNextChecked
+BEGIN
+	BITMAP "bmp/next_checked.bmp" BPP 1
+	BITMAP "bmp/next_checked-hd.bmp" BPP 1 DENSITY 2 COMPRESS
+END
+
+
+BITMAPFAMILYEX ID bmpPlus
+BEGIN
+	BITMAP "bmp/plus.bmp" BPP 1
+END
+
+BITMAPFAMILYEX ID bmpMinus
+BEGIN
+	BITMAP "bmp/minus.bmp" BPP 1
+END
+
+
+BITMAPFAMILYEX ID bmpScrollTop
+BEGIN
+	BITMAP "bmp/scroll_top.bmp" BPP 1
+	BITMAP "bmp/scroll_top-hd.bmp" BPP 1 DENSITY 2 COMPRESS
+END
+
+BITMAPFAMILYEX ID bmpScrollBottom
+BEGIN
+	BITMAP "bmp/scroll_bottom.bmp" BPP 1
+	BITMAP "bmp/scroll_bottom-hd.bmp" BPP 1 DENSITY 2 COMPRESS
+END
+
+
+BITMAPFAMILYEX ID bmpDateUp
+BEGIN
+	BITMAP "bmp/date_up.bmp" BPP 1
+	BITMAP "bmp/date_up-hd.bmp" BPP 1 DENSITY 2 COMPRESS
+END
+
+BITMAPFAMILYEX ID bmpDateDown
+BEGIN
+	BITMAP "bmp/date_down.bmp" BPP 1
+	BITMAP "bmp/date_down-hd.bmp" BPP 1 DENSITY 2 COMPRESS
+END
+
+BITMAPFAMILYEX ID bmpDatesBound
+BEGIN
+	BITMAP "bmp/dates_bound.bmp" BPP 1
+	BITMAP "bmp/dates_bound-hd.bmp" BPP 1 DENSITY 2 COMPRESS
+END
+
+
+BITMAPFAMILYEX ID bmpLock
+BEGIN
+	BITMAP "bmp/lock.bmp" BPP 1
+	BITMAP "bmp/lock-hd.bmp" BPP 1 DENSITY 2 COMPRESS
+END
+
+
+BITMAPFAMILYEX ID bmpBack
+BEGIN
+	BITMAP "bmp/back.bmp" BPP 1
+	BITMAP "bmp/back-hd.bmp" BPP 1 DENSITY 2 COMPRESS
+END
+
+
+BITMAPFAMILYEX ID bmpTrash
+BEGIN
+	BITMAP "bmp/trash.bmp" BPP 1
+	BITMAP "bmp/trash-hd.bmp" BPP 1 DENSITY 2 COMPRESS
+END
+
+
+BITMAPFAMILYEX ID bmpPopup=ordBitmaps++
+BEGIN
+	BITMAP "bmp/popup.bmp" BPP 1
+	BITMAP "bmp/popup-hd.bmp" BPP 1 DENSITY 2 COMPRESS
+END
+
+
+BITMAPFAMILYEX ID bmpPopupOld=ordBitmaps++
+BEGIN
+	BITMAP "bmp/popup_old.bmp" BPP 1
+END
+
+
+APPLICATIONICONNAME 1000 "MaTirelire2"
+
+ICONFAMILYEX
+BEGIN
+	BITMAP "bmp/MaTirelire-1bpp.bmp" BPP 1 DENSITY 1
+	BITMAP "bmp/MaTirelire-8bpp.bmp" BPP 8 TRANSPARENT 0 255 0 DENSITY 1
+	BITMAP "bmp/MaTirelire-16bpp.bmp"    BPP 16 TRANSPARENT 0 255 0 DENSITY 1
+
+	BITMAP "bmp/MaTirelire-16bpp-hd.bmp" BPP 16 TRANSPARENT 0 255 0 DENSITY 2
+END
+
+SMALLICONFAMILYEX
+BEGIN
+	BITMAP "bmp/MaTirelire-sm-1bpp.bmp" BPP 1 DENSITY 1
+	BITMAP "bmp/MaTirelire-sm-16bpp.bmp"    BPP 16 TRANSPARENT 0 255 0 DENSITY 1
+
+	BITMAP "bmp/MaTirelire-sm-16bpp-hd.bmp" BPP 16 TRANSPARENT 0 255 0 DENSITY 2
+END
+
+// WORDLIST automaticaly generated by devices2wordlist.pl. ** DO NOT MODIFY **
+WORDLIST ID wlstIso4217
+BEGIN
+    // Largest width for each letter (from A to Z)
+    19 19 17 18 15 15 20 18 15 18 20 17 22
+    19 20 17 17 17 17 22 18 18 19 17 15 20
+
+    // Each currency...
+      131   160   363   387   422   448   562   626   643   710 
+      812  1036  1059  1139  1157  1229  1251  1285  1411  1443 
+     1473  1579  1603  1645  1743  1809  1827  2051  2149  2277 
+     2415  2488  2511  2594  2627  2703  2724  2831  2858  3212 
+     3365  3402  3535  3875  4234  4303  4653  4687  4705  4753 
+     5388  5411  5455  5669  6191  6283  6351  6370  6415  6531 
+     6565  6691  6768  6915  7491  7595  7722  7782  7813  8305 
+     8335  8562  8591  8625  8707  8753  8778  8811  9359  9603 
+     9667  9720 10386 10450 10481 10629 10742 10806 10947 11011 
+    11059 11274 11311 11601 11811 11851 11883 11909 11947 12035 
+    12291 12395 12480 12611 12682 12723 12751 12846 12907 12945 
+    12977 13002 13037 13073 13100 13315 13517 13582 13670 13770 
+    13809 14115 14737 15361 15501 15562 15599 15697 15725 15972 
+    16134 16401 17867 18065 18117 18449 18467 18513 18531 18570 
+    18627 18671 18707 18762 18795 18898 18923 18979 19043 19106 
+    19215 19243 19681 19762 19852 19875 19919 20011 20067 20131 
+    20163 20274 20487 20695 21059 21268 21298 21633 21923 22165 
+    23123 23557 23558 23572 23619 23665 24005 24035 24037 24051 
+    24721 25617 25994 26307 
+END
+
+
+////////////////////////////////////////////////////////////////////////
+//
+// DIA infos
+//
+////////////////////////////////////////////////////////////////////////
+
+WORDLIST ID wlstDIAInfos
+BEGIN
+	TransListFormIdx			TransListFormIdx
+	//OpFormIdx					OpFormIdx
+	AccountsListFormIdx			AccountsListFormIdx
+	DBasesListFormIdx			DBasesListFormIdx
+	DescModesListFormIdx		DescModesListFormIdx
+	TypesListFormIdx			TypesListFormIdx
+	PasswordFormIdx				PasswordFormIdx
+	CurrenciesListFormIdx		CurrenciesListFormIdx
+	CustomListFormIdx			CustomListFormIdx
+	ClearingListFormIdx			ClearingListFormIdx
+	RepeatsListFormIdx			RepeatsListFormIdx
+END
+
+// Handera support
+HEX "sKst" ID 1000 0x00 0x00 0x00 0x00
+
+// Dana AlphaSmart
+HEX "wTap" ID 1000 0x00 0x00 0x00 0x01
+
+
+STRINGTABLE strLongMonths=ordStrings++	"" [$strLongMonths]
+
+STRINGTABLE strShortMonths=ordStrings++	"" [$strShortMonths]
+
+LAUNCHERCATEGORY ID 1000 "Main"
+
+VERSION "2.1.2"
+
+STRING strTranslators	"@TRANSLATORS@"

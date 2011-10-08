@@ -1,0 +1,1675 @@
+TRANSLATION "BR"
+BEGIN
+
+/************************************************************************
+ * Put here your language name (in your language), your full name
+ * and your e-mail address (you can set "your-language@Ma-Tirelire.net")
+ ************************************************************************/
+
+"$LanguageLang"		= "Brezhoneg"
+"$LanguageAuthor"	= "Rémi Chéno"
+"$LanguageEmail"	= "remi.cheno@gmail.com"
+
+
+/************************************************************************
+ * Default menu (/X are shortcuts)
+ ************************************************************************/
+
+"$DefaultMenu-Edit" 				= "Aozañ"
+"$DefaultMenu-Edit-Undo"			= "Nullañ"			/Z
+"$DefaultMenu-Edit-Cut"				= "Troc'hañ"			/X
+"$DefaultMenu-Edit-Copy"			= "Eilañ"			/C
+"$DefaultMenu-Edit-Paste"			= "Pegañ"			/P
+"$DefaultMenu-Edit-SelectAll"			= "Diuzañ an holl"		/A
+
+"$DefaultMenu-Misc" 				= "Pep seurt"
+"$DefaultMenu-Misc-About"			= "Diwar-benn Ma Tirelire 2"
+
+
+/************************************************************************
+ * Transactions list dialog
+ ************************************************************************/
+
+"$TransListMenu-Account" 			= "Kont"
+"$TransListMenu-Account-Clearing"		= "O viziañ..."			/O
+"$TransListMenu-Account-PurgeCleared"		= "Skarzhañ ar re biziet..."
+"$TransListMenu-Account-Repeats"		= "Diskwel adoberioù..."	/A
+"$TransListMenu-Account-DeleteAll" 		= "Dilemel an holl..."
+"$TransListMenu-Account-Properties"		= "Perzhioù..."
+"$TransListMenu-Account-DBProperties"		= "Perzhioù an diaz..."
+"$TransListMenu-Account-Accounts"		= "Roll ar c'hontoù..."		/R
+"$TransListMenu-Account-DBases"			= "Merañ an diazoù..."		/Z
+
+"$TransListMenu-Flagged" 			= "Merk"
+"$TransListMenu-Flagged-Flag"			= "Klask & merkañ..."		/E
+"$TransListMenu-Flagged-FlagPage" 		= "Merkañ ar bajenn"		/F
+"$TransListMenu-Flagged-UnflagPage" 		= "Diverkañ ar bajenn"
+"$TransListMenu-Flagged-InvertPage"		= "Eilpennañ ar bajenn"
+"$TransListMenu-Flagged-UnflagAll" 		= "Diverkañ an holl"		/H
+"$TransListMenu-Flagged-InvertAll"		= "Merkañ an holl"
+"$TransListMenu-Flagged-FlagClear" 		= "Merket -> Biziet"		/V
+"$TransListMenu-Flagged-DeleteFlag" 		= "Dilemel ar re merket..."
+"$TransListMenu-Flagged-Screen"			= "Diskwel ar re merket..."	/W
+
+"$TransListMenu-GoTo" 				= "Mont da"
+"$TransListMenu-GoTo-FirstNotClear"		= "Kentañ diviziet"
+"$TransListMenu-GoTo-NextNotClear"		= "Diviziet da heul"
+"$TransListMenu-GoTo-FirstNotFlag"		= "Kentañ diverket"
+"$TransListMenu-GoTo-NextNotFlag"		= "Diverket da heul"
+"$TransListMenu-GoTo-FirstNotClearFlag" 	= "Kentañ diviziet, diverket"
+"$TransListMenu-GoTo-NextNotClearFlag"  	= "Diviziet, diverket da heul"
+"$TransListMenu-GoTo-FirstFlag"			= "Kentañ merket"		/I
+"$TransListMenu-GoTo-NextFlag"			= "Merket da heul"		/L
+"$TransListMenu-GoTo-Date"			= "Deiziad..."			/N
+
+"$TransListMenu-Misc" 				= "Pep seurt"
+"$TransListMenu-Misc-Copy"			= "Eilañ ar sammad"		/U
+"$TransListMenu-Misc-Desc"			= "Diskrivadurioù..."		/D
+"$TransListMenu-Misc-Types"			= "Seurtoù..."			/T
+"$TransListMenu-Misc-Modes"			= "Gizioù..."			/G
+"$TransListMenu-Misc-Curr"			= "Moneizioù..."		/M
+"$TransListMenu-Misc-Stats"			= "Stadegoù..."			/S
+"$TransListMenu-Misc-MiniStats"			= "Stadegoù verr..."		/B
+"$TransListMenu-Misc-Prefs"			= "Keflunadurioù..."		/K
+"$TransListMenu-Misc-ExeRepeats"		= "Jediñ an adoberioù"
+
+
+/* The circomflex char must be present at the beginning of "^Dates..." item */
+[$TransList-Sums] 	= [	"An holl"
+				"D'ar gwashañ"
+				"00/00"
+				"Biziet"
+				"Merket"
+				"Merk./Biz."
+				"00/00"
+				"00/00"
+				"^Deiziadoù..." /* !!! Don't delete the '^' char !!! */
+				"D'an deiz..."]
+
+[$TransList-ContextMenu]= [	"Eilañ..."
+				"Dilemel..."
+				"Deiziad..."
+				"Euriad..."
+				"Aozañ..."
+				"Diviziañ"
+				"Diverkañ"]
+
+"$strTransListContextMenuClear" 	= "Biziañ"
+"$strTransListContextMenuUnclear" 	= "Diviziañ"
+"$strTransListContextMenuFlag"		= "Merkañ"
+"$strTransListContextMenuUnflag" 	= "Diverkañ"
+
+/* Long-clic screen/alarm remainder one "On [date] at [time]" (63 chars max) */
+"$strTransListDateTime"			= "D'ar %s da %s"
+
+/* Long-clic screen, the valuation date (63 chars max) %s is replaced by date*/
+"$strTransListValuationDate"		= "Deiz ar gwerzh d'ar %s"
+
+/* Long-clic screen: separator between amount and mode (63 chars max) */
+"$strTransListSepAmountMode"		= ", dre "
+
+/* Long-clic screen, the cheque number (63 chars max) */
+"$strTransListCheckNum"			= "Chekenn niv. %s"
+
+/* Long-clic screen, the statement number (63 chars max) */
+"$strTransListStatementNum"		= "Stad kont niv. %s"
+
+/* Long-clic screen, every week repeat (63 chars max.) */
+"$strTransListRepeatWeekly"		= "Adgraet bep sizhun"
+
+/* Long-clic screen, every N weeks repeat (63 chars max.) */
+"$strTransListRepeatNweekly"		= "Adgraet bep %d sizhun"
+
+/* Long-clic screen, every month repeat (63 chars max.) */
+"$strTransListRepeatMonthly"		= "Adgraet bep miz"
+
+/* Long-clic screen, end of each month repeat (63 chars max.) */
+"$strTransListRepeatMonthlyEnd"		= "Adgraet e dibenn bep miz"
+
+/* Long-clic screen, every N months repeat (63 chars max.) */
+"$strTransListRepeatNmonthly"		= "Adgraet bep %d miz"
+
+/* Long-clic screen, every year repeat (63 chars max.) */
+"$strTransListRepeatAnnually"		= "Adgraet bep bloaz"
+
+/* Long-clic screen, every N year repeat (63 chars max.) */
+"$strTransListRepeatNannually"		= "Adgraet bep %d bloaz"
+
+/* Long-clic screen, transaction type (63 chars max.) */
+"$strTransListType"			= "Seurt : %s"
+
+/* Long-clic screen, transfer TO ... (63 chars max.) */
+"$strTransListXferTo"			= "Treuzkas da "
+
+/* Long-clic screen, transfer FROM ... (63 chars max.) */
+"$strTransListXferFrom"			= "Treuzkas eus "
+
+/* Long-clic screen, transfer TO unknown account (63 chars max.) */
+"$strTransListXferToUnknown"		= "Treuzkas d'ur gont dianav"
+
+/* Long-clic screen, transfer FROM unknown account (63 chars max.) */
+"$strTransListXferFromUnknown"		= "Treuzkas eus ur gont dianav"
+
+/* Long-clic screen, number of sub-transactions (63 chars max.) */
+"$strTransListNumSplits"		= "%d a isoberiadennoù"
+
+/* Title of "Go to date..." dialog (63 chars max.) */
+"$strTransListGotoDate"			= "Mont d'an deiz..."
+
+
+"$strTransListAccountProp"		= "Perzhioù ar gont..." /*31 chars max*/
+
+
+/************************************************************************
+ * Transaction edit dialog
+ ************************************************************************/
+ 
+"$TransMenu-GoTo"			= "Mont da"
+"$TransMenu-GoTo-Prev"			= "Kent"
+"$TransMenu-GoTo-Next"			= "War-lerc'h"
+"$TransMenu-GoTo-PrevNotClear"		= "Kent diviziet"
+"$TransMenu-GoTo-NextNotClear"		= "Diviziet da heul"
+"$TransMenu-GoTo-PrevFlag"		= "Kent merket"
+"$TransMenu-GoTo-NextFlag"		= "Merket da heul"
+
+"$TransMenu-Edit"			= "Aozañ"
+"$TransMenu-Edit-TransCopy"		= "Eilañ an oberiadenn..."			/O
+
+"$TransMenu-Misc"			= "A bep seurt"
+
+
+"$Trans-Date"				= "Deiz :"
+"$Trans-Desc"				= "Deskr."
+
+"$Trans-MainTab"			= "Braz"
+
+"$Trans-Mode"				= "Giz :"
+"$Trans-ChkNum"				= "niv."
+
+"$Trans-OnValueDate"			= "D'ar"
+[$Trans-OnValueDate-Add]		= 30 /*in pixels,to shift value date widget right*/
+
+"$Trans-Type"				= "Seurt :"
+
+"$Trans-Statement"			= "Stad :"
+"$Trans-Clear"				= "Biziet"
+
+"$Trans-Xfer"				= "Treuzkas :"
+
+
+"$Trans-RepeatTab"			= "Adober"
+
+"$Trans-Repeat"				= "Adober :"
+[$Trans-RepeatList]     =  [	"Biken"
+				"Bep sizhun"
+				"Bep 2 sizhun"
+				"Bep miz"
+				"Dibenn ar miz"
+				"Bep 2 viz"
+				"Bep 3 miz"
+				"Bep 4 miz"
+				"Bep 6 miz"
+				"Bep bloaz"
+				"Bep 2 vloaz"]
+
+/* Second item in this list must not contain more than 14 chars */
+[$Trans-RepeatChoices]	=  [	"Dibab an deiz..."
+				"Dibaouez"
+				"Diouzh reveziadennoù"]
+
+"$Trans-RepeatEndsAt"	= "Paouez da :"
+"$Trans-RepeatTimes"	= "reveziadenn"
+
+
+"$Trans-BreakdownTab"		= "Isoberiadennoù"
+
+"$Trans-SplitCreate"		= "Nevez"
+"$Trans-SplitSortBy"		= "diouzh"
+[$Trans-SplitSortList]		= ["deskr." "seurt" "hollad"]
+
+/* 63 chars max */
+"$strOpFormSplitsRemain"	= "O chom"
+
+
+"$Trans-CurrencyTab"		= "Moneiz"
+
+"$Trans-CurrencyNone"		= "Moneiz ebet..."
+"$Trans-CurrencyInAccount"	= "E kont :"
+"$Trans-CurrencyRate"		= "Feur eskemm :"
+
+
+"$Trans-OK"		= "Mat eo"
+"$Trans-Cancel"		= "Nullañ"
+"$Trans-Delete"		= "Dilemel"
+
+/* Debit/Credit label with its colon (16 chars max.) */
+[$TransDebCredLabel]	=  [	"Dle :"
+				"Kred :"]
+
+/* Debit/Credit title with its ellipsis (16 chars max.) */
+[$TransDebCredTitle]	=  [	"Dle..."
+				"Kred..."]
+
+/* Title of the date selection dialog (31 chars max) */
+"$OpDate"		= "Deiz an oberadenn"
+
+/* Title of the time selection dialog (31 chars max) */
+"$OpTime"		= "Eur an oberadenn"
+
+/* Title of the value date selection dialog (31 chars max) */
+"$OpValueDate"		= "Deiz ar gwezh"
+
+/* Title of the repeat end date selection dialog (31 chars max) */
+"$OpRepeatEndDate"	= "Dibenn an adober"
+
+/* Transfer popup label if no transfer (32 chars max.) */
+"$strOpFormNoXfer" 	= "Deiz ebet"
+
+/* Value date label if no value date (14 chars max.) */
+"$strOpNoValueDate" 	= "Ar memes deiz"
+
+/* Names of Debit/Credit label (31 chars max.) */
+"$strOpFormErrorDebitLabel"	= "Dle"
+"$strOpFormErrorCreditLabel"	= "Kred"
+
+/* Name of the currency amount field (31 chars max.) */
+"$strOpFormErrorCurrencyAmount"	= "E kont"
+
+
+/************************************************************************
+ * Edit split dialog
+ ************************************************************************/
+
+"$EditSplit-Amount"			= "Hollad :"
+"$strEditSplitAmount"			= "Hollad"
+
+[$Trans-SplitSortByChoices]		=  [	"deskr."
+						"seurt"
+						"hollad"]
+
+
+/************************************************************************
+ * Preferences dialog
+ ************************************************************************/
+
+"$PrefsForm-Title"		= "Keflunadurioù"
+
+"$Prefs-GeneralTab"		= "Dre vras"
+"$Prefs-LeftHandMode"		= "Giz kleizidi"
+"$Prefs-SelectFocusedNumFlds" 	= "Emzibab tachadoù niverel"
+"$Prefs-AccessCode"		= "Kod tremen :"
+"$Prefs-AutoLockAfter"		= "Prennañ goude :"
+[$Prefs-AutoLockDelays]		= ["Biken" "30 eil" "1 mun" "2 vun" "5 mun"]
+"$Prefs-AutoLockOnPowerOff" 	= "Prennañ en ur lazhañ"
+
+"$Prefs-ListsTab"		= "Rolloù"
+"$Prefs-ListFont"		= "Fontoù implijet e rolloù :"
+"$Prefs-ColorTitle"		= "Doareennoù al linennoù evit..."
+"$Prefs-RepeatColor"		= "Adober"
+"$Prefs-XferColor"		= "Treuzkas"
+"$Prefs-CreditColor"		= "Kredoù"
+"$Prefs-DebitColor"		= "Dleoù"
+"$Prefs-BoldFace"		= "druz"
+
+"$Prefs-TransactionTab"		= "Oberenn"
+"$Prefs-DescReplace"		= "An diskrivadurioù e-lerc'h "
+"$Prefs-FirstNext"		= "kentañ/war-lerc'h :"
+[$Prefs-FirstNextList]		=  [	"diviziet"
+					"diverket"
+					"diviziet, diverket"
+					"merket"]
+"$Prefs-Os3TimeSelector"	= "Diuzer an eur e-giz OS>3.0"
+
+"$Prefs-Save"			= "Enrollañ"
+"$Prefs-Cancel"			= "Nullañ"
+
+"$Prefs-CodeEnabled"	= "En-dro"		/* 16 chars max */
+"$Prefs-CodeDisabled"	= "Sac'het"		/* 16 chars max */
+
+
+/************************************************************************
+ * Account properties
+ ************************************************************************/
+
+"$AccountProp-Name"			= "Anv :"
+
+"$AccountProp-GeneralTab"		= "Dre vras"
+"$AccountProp-Devise"			= "Moneiz ar gont :"
+"$AccountProp-InitialBalance"		= "Balañs deraouiñ :"
+"$AccountProp-Statements"		= "Renañ stadoù kont"
+"$AccountProp-OverdrawnWarning"		= "Kemenn an dibourvez"
+"$AccountProp-OverdrawnWarningThreshold"= ", harzoù :"
+"$AccountProp-OverdrawnThreshold"	= "Dibourvezet :"
+"$AccountProp-NonOverdrawnThreshold"	= "Pourvezet :"
+
+
+"$AccountProp-TransactionTab"		= "Treuzkas"
+"$AccountProp-KeepLastDate"		= "Mont gant deiziad diwezhañ"
+
+
+"$AccountProp-ChequebookTab"		= "Chekennaouegoù"
+"$AccountProp-NumCheques"		= "niv. a chekennoù"
+"$AccountProp-ChequebookList"		= "Chekennaoueg war ober :"
+"$AccountProp-Chequebook1"		= "niv. 1:"
+"$AccountProp-Chequebook2"		= "niv. 2:"
+"$AccountProp-Chequebook3"		= "niv. 3:"
+"$AccountProp-Chequebook4"		= "niv. 4:"
+
+
+"$AccountProp-InfosTab"			= "Titouroù"
+"$AccountProp-AccountNum"		= "Niv. :"
+"$AccountProp-Notes"			= "Evezh. :"
+
+"$AccountProp-OK"			= "Mat eo"
+"$AccountProp-Cancel"			= "Nullañ"
+"$AccountProp-Delete"			= "Dilemel"
+
+"$strTitleNewAccountProp"		= "Kont nevez"	/* 15 chars max */
+
+"$strAccountPropName"			= "Anv"
+"$strAccountPropInitialBalance"		= "Balañs deraouiñ"
+"$strAccountPropOverdrawnThreshold"	= "Dibourvezet"
+"$strAccountPropNonOverdrawnThreshold"	= "Pourvezet"
+"$strAccountPropNumCheques"		= "chek. e bep chekennaoueg"
+
+
+/************************************************************************
+ * Accounts list dialog
+ ************************************************************************/
+
+"$AccountsListMenu-DBase"		= "Diaz"
+"$AccountsListMenu-Properties"		= "Keflunadurioù..."
+"$AccountsListMenu-Manage"		= "Renañ an diazoù..."
+
+
+"$AccountsList-New"			= "Nevez"
+
+/* Items have to be short, because the sum field may be wide... */
+[$AccountsList-SelectList] 		= [	"An holl"
+						"Diuzet"
+						"N'eo ket diuzet"]
+
+"$strAccountsListEditDBs"	= "Renañ diazoù ar c'hontoù..." /* 30 chars max*/
+"$strAccountsListDBProp"	= "Keflunadurioù an diazoù..." /* 30 chars max*/
+"$SumListSumTypePopup"		= "Sammañ d'an deiz-mañ..."
+
+[$AccountsList-ContextMenu]	= [	"Keflunadurioù..."
+					"Digeriñ..."]
+
+
+/************************************************************************
+ * DBase properties
+ ************************************************************************/
+
+"$strTitleNewDBaseProp"		= "Diaz nevez"	/* 31 chars max */
+
+"$DBaseProp-Name"		= "Anv :"
+
+"$DBaseProp-GeneralTab"		= "Dre vras"
+"$DBaseProp-Launchable"		= "Erounezadus"
+"$DBaseProp-AutoRepeat"	    	= "Jediñ adoberioù emgefreek"
+"$DBaseProp-ViewRepeats"	= "Diskwel adoberioù"
+"$DBaseProp-ViewRepeatsDays"	= "deiz a-raok deiziad"
+"$DBaseProp-ConduitUse"		= "Implijout ar san"
+
+
+"$DBaseProp-TransListsTab"	= "Rolloù ober."
+"$DBaseProp-SortType"		= "Rummañ diouzh deiz ar gwerzh"
+"$DBaseProp-ValueDate"		= "Diskwel deiz ar gwerzh"
+"$DBaseProp-TypeForDesc"	= "Diskwel seurt e-plas diskriv."
+
+
+"$DBaseProp-SecurityTab"	= "Surentez"
+"$DBaseProp-AccessCode"		= "Kod tremen :"
+"$DBaseProp-DenyFind"		= "Nac'h klask a-vras"
+
+
+"$DBaseProp-NoteTab"		= "Evezhiadenn"
+
+"$DBaseProp-OK"			= "Mat eo"
+"$DBaseProp-Cancel"		= "Nullañ"
+"$DBaseProp-Delete"		= "Dilemel"
+
+"$strDBasePropName"		= "Anv"
+"$strDBasePropRepeatDays"	= "Diswkel adoberioù"
+
+
+/************************************************************************
+ * DBases list dialog
+ ************************************************************************/
+ 
+"$DBasesListMenu-Misc" = "Misc"
+"$DBasesListMenu-Misc-Correct"		= "Gwiriañ & difaziañ diazoù"
+
+"$DBasesList-Title"			= "Diazoù ar c'hontoù"
+
+"$DBasesList-Open"			= "Digeriñ"
+"$DBasesList-New"			= "New"
+"$DBasesList-Properties"		= "Kefl."
+"$DBasesList-Clone"			= "Eilañ"
+
+/* Name of a cloned database, %s is later replaced by the original
+   database name (15 chars max) */
+"$strDBasesListCloneFmt"		= "Eil eus %s"
+
+
+/************************************************************************
+ * Statistics dialog
+ ************************************************************************/
+
+"$Stats-Title"  		= "Stadegoù"
+
+[$Stats-Center-Anchor]		= 57		/* Widgets center pos in pixels */
+[$Stats-Center-RightShift]	= 2			/* Pixels to shift to write to right */
+
+"$Stats-Between"		= "Etre :"
+"$Stats-BetweenPlus"		= ""
+
+[$Stats-BetweenList]		=  [	"Ar miz-mañ"
+					"Miz diwezhañ"
+					"Miz eildiwezhañ"
+					"Mizvezh>" /* !! KEEP the > at end !!! */
+					"Ar bloaz-mañ"
+					"Warlene"
+					"Bloavezh>"	/* !!! KEEP the > at end !!! */
+					"Sizunvezh"
+					"An holl"
+					"^Stagedoù diwezhañ...>"]
+
+/* Shortcut for each previous list entry, the last entry have to be
+enclosed in parenthesis, it shows that the computed date is rounded to
+the begin/end of week (15 char max for each item) */
+[$Stats-BetweenListShortCut]	=  [	"Miz-mañ"
+					"Miz diw."
+					"Eildiw."
+					"Bloaz-m."
+					"Bloaz diw."
+					"Holl"
+					"Sizhun"]
+
+"$Stats-And"			= "hag :"
+"$Stats-By"			= "Diouzh"
+
+[$Stats-ByList]			=  [	"Seurt oberiadenn"
+			       		"Giz paeañ"
+					"^Sizhunvezh"   	/* !!! KEEP the ^ !!! */
+					"2 sizhunvezh"
+					"Mizvezh"
+					"Trimizvezh"
+					"Blaovezh"]
+/*					["^Nebeut./Barr/Keidenn"]  !!! KEEP the ^ !!! */
+
+/* One letter shortcut for each previous list entry */
+"$strStatsByListShortCut"	=  "TGSDM3B~"
+
+"$Stats-Type"			= "Seurt :"
+"$Stats-Mode"			= "Giz :"
+
+"$Stats-On"			= "Diwar"
+
+[$Stats-OnList]			=  [	"An holl ober."
+					"Dleoù hepken"
+					"Kredoù hepken"
+					"Ar re merket"]
+
+"$Stats-From"			= "Diwar"
+
+"$Stats-ValueDate"		= "Diouzh deiz ar gwerzh"
+"$Stats-ExcludeNils"		= "Hep holladoù null"
+
+"$Stats-View"			= "Diskwel"
+"$Stats-Cancel"			= "Nullañ"
+
+/* In accounts popup, string to select all accounts (31 chars max) */
+"$strStatsSelectAllAccounts"	= "Diuzañ an holl"
+
+/* In accounts popup, string to reset to one account (31 chars max) */
+"$strStatsResetAccounts"	= "Adderaouiñ"
+
+/* In accounts popup label, when no room to display all names */
+"$strStatsNAccounts"		= "%d a gontoù"
+
+/* (31 chars max) */
+"$StatsBegDate"				= "Deiz kentañ stadegoù"
+"$StatsEndDate"				= "Deiz diwezhañ stadegoù"
+
+
+/************************************************************************
+ * Stats results dialog
+ ************************************************************************/
+
+ /* MENU */
+"$CustomListMenu-Select" 	= "Diuzañ"
+"$CustomListMenu-Select-Invert" = "Eilpennañ"
+"$CustomListMenu-Select-None"	= "Diuz ebet"
+"$CustomListMenu-Select-All"	= "Diuzañ an holl"
+
+"$CustomListMenu-Misc-Export"	= "Ezporzhiañ..."			/9
+
+
+/* Keep the 3 first items short, because there is no much room on screen */
+[$CustomList-SumTypes]	=  [	"An holl"
+				"Diuzet"
+				"Ket diuzet"
+				"^Eilpennañ"  /* !!! Don't delete the '^' char !!! */
+				"Diuz ebet"
+				"Diuzañ an holl"]
+
+[$CustomList-RefineBy]	=  [	"Spisañ diouzh seurt oberiadenn"
+				"Spisañ diouzh giz paeañ"
+				"Diskwel an holl"]
+
+/* Title of statistics results (31 chars max.) */
+[$strCustomListStatsTitle]	=  [	"Diouzh "
+					"seurt"
+					"giz"
+					"sizhunvezh"
+					"2 sizhunvezh"
+					"mizvezh"
+					"trimizvezh"
+					"bloavezh"]
+
+/* Statistics by week, begining of week : Sunday or Monday */
+/* only the 2 first letters + space */
+[$strClistWeekStartDays] = ["Su "
+			    "Lu "]
+
+/* Statistics by week, end of week : Saturday or Sunday */
+/* only the 2 first letters + space */
+[$strClistWeekEndDays]   = ["Sa "
+			    "Su "]
+
+/* Statistics by year, label on each line before the #year (58 chars max) */
+"$strClistTypeYear" 	= "Bloazh"
+
+/* Accounts list dialog, long clic: no transaction (31 chars max.) */
+"$strClistAccountsZeroOp" = "Oberiadenn ebet"
+
+/* Accounts list dialog, long clic: only one transaction (31 chars max.) */
+"$strClistAccountsOneOp" = "1 oberiadenn hepken e :"
+
+/* Accounts list dialog, long clic: N transactions (28 chars max.) */
+"$strClistAccountsManyOp" = "%d oberiadenn e :"
+
+/* Stats results list dialog, long clic: only one trans. split (31 c. max.)*/
+"$strClistTypeOneSplitOp" = "1 isoberiadenn hepken"
+
+/* Stats results list dialog, long clic: N transaction splits (28 chars max.)*/
+"$strClistTypeManySplitOp" = "%lu isoberiadenn"
+
+/* Stats by type results list dialog, long clic: with one sub-type (31 chars)*/
+"$strClistTypesOneSubType" = "Gant 1 isseurt hepken"
+
+/* Stats by type results list dialog, long clic: with N sub-types (28 chars)*/
+"$strClistTypesNSubTypes" = "Gant %d isseurt"
+
+/* Flagged screen title (31 chars max) */
+"$strClistFlagged"              = "Merket"
+
+/*
+ * Lists export headers
+ *
+ * Stats / modes */
+[$strExportHeadersStatsMode]	=  [	"Anv giz"
+					"Hollad"
+					"Diuzet"]
+
+/* Stats / types */
+[$strExportHeadersStatsTypes]	=  [	"Anv seurt"
+					"Hollad"
+					"Diuzet"]
+
+/* Stats / periods */
+[$strExportHeadersStatsPeriods]	=  [	"Treziad"
+					"Hollad"
+					"Diuzet"]
+
+/* Stats / transactions */
+[$strExportHeadersStatsTrans]	=  [	"Deiziad"
+					"Diskrivadur"
+					"Hollad"
+					"Biziet"
+					"Merket"
+					"Diuzet"]
+
+/* Flagged transactions list */
+[$strExportHeadersFlaggedTrans]	=  [	"Deiziad"
+					"Diskrivadur"
+					"Hollad"
+					"Biziet"
+					"Merket"]
+
+
+/************************************************************************
+ * Clearing intro dialog (called before clearing)
+ ************************************************************************/
+
+"$ClearingIntro-Title"		= "O viziañ..."
+
+"$ClearingIntro-TargetBalance"	= "Pal ar balañs :"
+
+"$ClearingIntro-OK"		= "War-lerc'h..."
+"$ClearingIntro-Cancel"		= "Nullañ"
+
+"$strClearingIntroTargetBalance" = "Pal ar balañs"
+
+
+/************************************************************************
+ * Auto-clearing intro dialog (called before auto-clearing)
+ ************************************************************************/
+
+"$ClearingAutoConf-Title"	= "Biziañ emgefreek"
+
+"$ClearingAutoConf-UntilDate"		= "Oberiadennoù betek"
+
+"$ClearingAutoConf-NumTransBefore"	= "Dres war "
+"$ClearingAutoConf-NumTransAfter"	= "oberiadenn"
+"$ClearingAutoConf-CommentTip"		= "(goullo mard eo dianav)"
+
+"$ClearingAutoConf-OK"			= "Biziañ"
+"$ClearingAutoConf-Cancel"		= "Nullañ"
+
+"$ClearingAutoConfDate"			= "Oberiadennoù betek"
+
+
+/************************************************************************
+ * Clearing list dialog
+ ************************************************************************/
+ 
+/* Char used in the auto clearing button (single char) */
+"$ClearingList-AutoClearChar"   = "B"
+ 
+/* Sort types (31 chars each) */
+[$ClearingList-SortList]	= ["Diouzh deiz gw."
+				   "Diouzh deiz"
+				   "Diouzh giz"
+				   "Diouzh seurt"
+				   "Diouzh niv. ch."
+				   "Diouzh hollad"]
+ 
+/* First line in cleared list (63 chars max) */
+"$strClearingListClearedSum"	= "Sammad ar re biziet"
+
+/* Sum types (31 chars max for each) */
+[$strClearingListSumTypes]	= ["Biziet" "Laosket"]
+
+
+/************************************************************************
+ * Statement number dialog (called at clearing end)
+ ************************************************************************/
+
+"$StatementNum-Title"		= "Niv. ar stad"
+
+[$StatementNum-List]		= ["Diwezhañ" "War-lerc'h"]
+"$StatementNum-NumLabel"	= "Niverenn ar stad :"
+
+"$StatementNum-Balance"		= "Evit ar balañs"
+
+"$StatementNum-Ask"		= "Mat eo gant ar biziañ-mañ ?"
+
+"$StatementNum-OK"		= "Mat eo"
+"$StatementNum-BackClearing"	= "Mont war-gil"
+"$StatementNum-CancelClearing"	= "Nullañ"
+
+
+/************************************************************************
+ * Repeats list dialog
+ ************************************************************************/
+
+"$RepeatsList-Title"		= "Adoberioù"
+
+"$RepeatsListDate"		= "Deiziad harz"
+
+"$strRepeatsListNonRepeatsSum"	= "Sammad hep adob."
+
+/************************************************************************
+ * Desc or modes list dialog
+ ************************************************************************/
+
+/* Title for either desc/macros OR modes list dialog */
+"$strTitleDescList"		= "Diskrivadurioù/Makroioù"	/* 31 chars max */
+"$strTitleModesList"		= "Giz paeañ"			/* 31 chars max */
+
+"$DescModesList-OK"		= "Mat eo"
+"$DescModesList-New"		= "Nevez"
+
+
+/************************************************************************
+ * Types list dialog
+ ************************************************************************/
+
+"$TypesList-Title"		= "Seurt oberiadennoù"
+
+"$TypesList-OK"			= "Mat eo"
+"$TypesList-New"		= "Nevez"
+"$TypesList-NewUnder"		= "Nevez islive"
+
+
+/************************************************************************
+ * Search dialog
+ ************************************************************************/
+
+"$Search-Title"			= "Klask ha merkañ..."
+
+"$Search-Type"			= "Seurt"
+"$Search-Mode"			= "Giz"
+"$Search-Desc"			= "Diskriv. gant"
+"$Search-Amount"		= "Hollad"
+"$Search-ChequeNumFrom"		= "Chk"
+"$Search-ChequeNumTo"		= "betek"
+"$Search-StatementBefore"	= ""
+[$Search-StatementList]		= ["Hepken" "Adalek" "Betek"]
+"$Search-StatementAfter"	= "oberiadenn niv."
+
+"$Search-Op"			= "Diferadennoù liammet gant"
+/*
+ * AND    = all tests must be OK
+ * OR	  = at least one test must be OK
+ * Not OR = all tests must be false
+ */
+[$Search-OpList]		= ["HAG" "PE " "NAG"]
+
+"$Search-Action"		= "Ober :"
+[$Search-ActionList]	=  ["Merkañ" "Diverkañ an holl ha merkañ" "Diverkañ"]
+
+"$Search-Search"		= "Klask"
+"$Search-Cancel"		= "War-gil"
+
+/* (31 chars max) */
+"$SearchBegDate"		= "Klask adalek"
+"$SearchEndDate"		= "Klask betek"
+
+
+/************************************************************************
+ * Sum dates for the transaction list form
+ ************************************************************************/
+
+"$DateSums-Title"		= "Deiziadoù ar sammadoù..."
+
+"$DateSums-On"			= "Sammad d'ar"
+"$DateSums-Month"		= "e miz-mañ"
+"$DateSums-Today"		= "Sammad hiziv +"
+"$DateSums-Days"		= "devezh"
+"$DateSums-Save"		= "Enrollañ"
+"$DateSums-Cancel"		= "Nullañ"
+
+"$strSumDatesOnDay"		= "Sammad d'ar..."
+"$strSumDatesTodayDays"		= "Sammad hiziv +..."
+
+
+/************************************************************************
+ * Enter a numeric password
+ ************************************************************************/
+
+"$Password-Title"		= "Kod tremen"
+
+"$Password-ClearKey" 		= "C"		/* Only one char! */
+"$Password-OK"		 	= "Mat eo"
+
+"$Password-MaTirelireAccess"	= "Evit dont tre Ma Tirelire 2"	/* 32 chars max */
+"$Password-DBaseAccess"		= "Evit dont tre kontoù %s"	/* 32 chars max */
+"$Password-Current"		= "Roit ar c'hod oberiant"	/* 32 chars max */
+"$Password-New"			= "Roit ar c'hod nevez"		/* 32 chars max */
+"$Password-Again"		= "Kadarnait ar c'hod nevez"	/* 32 chars max */
+
+
+/************************************************************************
+ * Edit type dialog
+ ************************************************************************/
+
+"$EditType-For"			= "Evit"
+
+[$EditType-SignList]		= [	"An holl oberiadennoù"
+					"Dleoù hepken"
+					"Kredoù hepken"]
+
+"$EditType-OnlyIn"		= "Hepken e"
+
+
+/************************************************************************
+ * Edit description dialog
+ ************************************************************************/
+
+"$EditDesc-OnlyIn"		= "Hepken e"
+
+"$EditDesc-Macro"		= "Makro :"
+
+[$EditDesc-SignList]		= ["="
+				   "-"
+				   "+"]
+
+"$EditDesc-Amount"		= "Hollad :"
+
+"$EditDesc-Mode"		= "Giz :"
+
+"$EditDesc-Type"		= "Seurt :"
+
+"$EditDesc-ChequeAuto"		= "Chekenn niv."
+
+"$EditDesc-Account"		= "Mont da gont :"
+
+"$EditDesc-Xfer"		= "Treuzkas da :"
+
+"$EditDesc-AutoSubmit"		= "Gwir. emgefreek"
+
+
+/************************************************************************
+ * Edit mode dialog
+ ************************************************************************/
+
+"$EditMode-Label"		= "Tikedenn :"
+"$EditMode-OnlyIn"		= "Hepken e"
+"$EditMode-ChequeAuto"		= "Diuzañ gant niv. chek. emgefreek"
+"$EditMode-ValueDate"		= "Deiz ar gwerzh :"
+
+"$EditMode-Check1Label1"	= "mar deiz ob. <= d'ar"
+"$EditMode-Check1Label2"	= "e miz"
+"$EditMode-Check1Label3"	= "deiz ar gwerzh ="
+"$EditMode-Check1Label4"	= "e "
+[$EditMode-Check1List]		= ["miz-bremañ" "miz war-lerc'h"]
+"$EditMode-Check1Label5"	= "(anez miz dibabet + 1)"
+
+"$EditMode-Check2Label1"	= "deiz ar gwerzh"
+"$EditMode-Check2Label2"	= "devezh"
+[$EditMode-Check2List]		= ["a-raok" "goude"]
+"$EditMode-Check2Label3"	= "deiz an oberiadenn"
+
+"$EditMode-OK"			= "Mat eo"
+[$EditMode-OK-Width]		= 40	/* Width of "OK" button in pixels */
+"$EditMode-Cancel"		= "Nullañ"
+[$EditMode-Cancel-Width]	= 40	/* Width of "Cancel" button in pixels */
+"$EditMode-Delete"		= "Dilemel"
+[$EditMode-Delete-Width]	= 40	/* Width of "Delete" button in pixels */
+"$EditMode-New"			= "Nevez"
+[$EditMode-New-Width]		= 40	/* Width of "New" button in pixels */
+
+
+"$strEditModeName"		= "Tikedenn"
+"$strEditModeCheck1Day1"	= "< d'ar"
+"$strEditModeCheck1Day2"	= "deiz ar gwerzh"
+"$strEditModeCheck2Day"		= "devezh"
+
+
+/************************************************************************
+ * About dialog
+ ************************************************************************/
+
+"$About-Title"			= "Diwar-benn Ma Tirelire 2"
+
+"$About-Freeware"		= "Digoust"
+"$About-LogoBy"			= "Arlun gant Gofre & Oli"
+"$About-Translators"		= "Troet gant"
+
+
+/************************************************************************
+ * Purge dialog
+ ************************************************************************/
+
+"$Purge-Title"		= "Spurjañ oberiadennoù"
+
+"$Purge-Label"		= "Dastum oberiadennoù biziet"
+
+"$Purge-InAccount"	= "e balañs deraouiñ ar gont"
+"$Purge-ByType"		= "e oberiad. nevez diouzh seurt"
+"$Purge-ByMode"		= "e oberiad. nevez diouzh giz"
+
+"$Purge-Between"	= "Etre :"
+"$Purge-And"		= "hag :"
+[$Purge-Center-Anchor] = 41		/* Widgets center pos in pixels */
+
+"$Purge-ValueDate"	= "diouzh deiz ar gwerzh"
+
+"$Purge-OK"		= "Spurjañ"
+"$Purge-Cancel"		= "Nullañ"
+
+/* (31 chars max) */
+"$PurgeBegDate"		= "Deroù ar spurjañ"
+"$PurgeEndDate"		= "Dibenn ar spurjañ"
+
+
+/************************************************************************
+ * Currencies dialog
+ ************************************************************************/
+
+"$CurrenciesList-Title"		= "Monneizoù"
+"$CurrenciesList-RefCurrency"	= "Monneiz-dave :"
+"$CurrenciesList-OK"		= "Mat eo"
+"$CurrenciesList-New"		= "Nevez"
+
+/* The default local currency used when the currencies database is
+ * created. Must be 4 chars max. */
+"$strDefaultLocalCurrency"	= "\200"
+
+/* Same as previous but for OSes < 3.5 (for example the euro symbol,
+ * appears only in OS 3.5)
+ * In "$strDefaultLocalCurrency" If you use symbols that exists in
+ * OSes < 3.5, use the same value here */
+"$strDefaultLocalCurrencyBefore35"	= "E"
+
+/* The ISO-4217 code of the default local currency. Must be 3 chars max. */
+"$strDefaultLocalCurrencyIso"	= "EUR"
+
+
+/************************************************************************
+ * Currency edit dialog
+ ************************************************************************/
+
+"$EditCurrency-InCurrency"	= "E monneiz :"
+"$EditCurrency-CurrencyAmount"	= "an hollad :"
+"$EditCurrency-EqualsTo"	= "a dalv :"
+"$EditCurrency-Iso4217"		= "Kod ISO-4217 :"
+
+"$strEditCurrencyName"		= "monneiz"
+"$strEditCurrencyAmount"	= "hollad"
+"$strEditCurrencyRefAmount"	= "a dalv "
+
+
+/************************************************************************
+ * Reference currency edit dialog
+ ************************************************************************/
+
+"$EditCurrency-RefCurrencyName"	= "Monneiz-dave :"
+
+"$EditCurrency-OK"		= "Mat eo"
+"$EditCurrency-Cancel"		= "Nullañ"
+
+
+/************************************************************************
+ * Export dialog
+ ************************************************************************/
+
+"$Export-Title"			= "Ezporzhiañ d'ar C'harned-notenniñ"
+"$Export-Name"			= "Anv an ezporzh :"
+"$Export-DontSplit"		= "Arabat didroc'han mard eo re vras"
+"$Export-Export"		= "Ezporzhiañ"
+"$Export-Cancel"		= "Nullañ"
+
+"$strExportName"		= "Anv an ezporzh"
+
+
+/************************************************************************
+ * Mini statistics dialog
+ ************************************************************************/
+
+"$MiniStats-Between"		= "Etre :"
+"$MiniStats-And"		= "hag :"
+
+"$MiniStats-Credits"		= "Kredoù :"
+"$MiniStats-Debits"		= "Dleoù :"
+"$MiniStats-Total"		= "Sammad :"
+
+"$MiniStats-Back"		= "War-gil"
+"$MiniStats-Statistics" 	= "Stagedoù"
+
+/* (31 chars max) */
+"$MiniStatsBegDate"		= "Deroù ar stagedoù"
+"$MiniStatsEndDate"		= "Dibenn ar stagedoù"
+
+
+/************************************************************************
+ * The alarm rings!!!!
+ ************************************************************************/
+
+"$Alarm-Title"		= "Ma Tirelire 2 - Adc'halv"
+"$Alarm-OK"		= "Mat eo"
+
+
+/************************************************************************
+ * Alert boxes
+ ************************************************************************/
+ 
+/*************************************************************
+ * This application is a beta version, use at own your risks */
+ 
+"$alertBeta-Message"	= 	"An doare-mañ zo doare-beta.\n"\
+				"Implijit anezhañ dre ho riskloù-c'whi !\n"\
+				"Kasit danevell fazioù da :"\
+				"bug@Ma-Tirelire.net e soazneg pe c'halleg."
+"$alertBeta-Abort"	= "Nullañ"
+"$alertBeta-Continue"	= "Da vont"
+"$alertBeta-ContinueOK"	= "Arabat adlavarout"
+
+
+/*******************************
+ * Feature not yet implemented */
+
+"$alertNotImplementedXXX-Title"    = "N'eo ket emplementet"
+"$alertNotImplementedXXX-Message"  = "An arc'hweladur-mañ n'eo ket emplementet c'hoazh."
+"$alertNotImplementedXXX-Button"   = "Mat eo, gortoz a ran..."
+
+
+/********************
+ * Error in a field */
+
+"$alertErrorField-Title" 	= "Fazi"
+"$alertErrorField-Message" 	= "Ar vaezienn `^1' ^2."
+"$alertErrorField-Button" 	= "Difaziañ"
+
+/* to fill the previous alert box: "The field `XXX' has to be filled in" */
+"$alertErrorField-ErrMiss"	= "eo ret hec'h endalc'h"
+
+/* to fill the previous alert box: "The field `XXX' can't be nil" */
+"$alertErrorField-ErrNull"	= "ne c'hall ket chom didalvoud "
+
+
+/******************************
+ * Can't save the transaction */
+
+"$alertCantSave-Title"          = "Fazi"
+"$alertCantSave-Message"        = "Oberiadenn n'eo ket enrollet."
+"$alertCantSave-Button"         = "Gwazh a se"
+
+
+/***********************************************************************
+ * At least one erroneous transaction detected during the last hotsync */
+
+"$alertHaveToCorrectDB-Title"   = "Oberiadenn(où) gant fazioù"
+"$alertHaveToCorrectDB-Message" = "Un oberiadenn da nebeutañ zo bet kavet gant ur fazi "\
+                    "e-pad an Hotsync diwezhañ.\nNe c'hall ket Ma Tirelire 2 "\
+                    "difaziañ anezhi, fellout a rafe deoc'h hen ober ?"
+"$alertHaveToCorrectDB-No"      = "'ra ket."
+"$alertHaveToCorrectDB-Correct" = "Ya, difaziañ"
+"$alertHaveToCorrectDB-Quit"    = "'ra ket, mont kuit"
+
+
+/***********************************************
+ * Report the number of corrected transactions */
+
+"$alertIncorrectDBnumCorrections-Title"   = 	"Echu gant an difaziañ"
+"$alertIncorrectDBnumCorrections-Message" = 	"^1 oberiadenn difaziet "\
+						"e ^2 diazoù kontoù. "\
+                    				"Arabat disoñjal gwiriañ ho kontoù..."
+"$alertIncorrectDBnumCorrections-Button"  = "Mat eo"
+
+
+/***************************
+ * Overdrawn account alert */
+
+"$alertOverdrawnAccount-Title"		= "Kont dibourvez"
+"$alertOverdrawnAccount-Message"	= "Ar gont-mañ a zo dibourvez !"
+"$alertOverdrawnAccount-Button"		= "Mat eo"
+
+
+/************************************
+ * No longer overdrawn account alert */
+
+"$alertNoOverdrawnAccount-Title"	= "N'eo ket dibourvez ken"
+"$alertNoOverdrawnAccount-Message"	= "Ar gont-mañ n'eo ket dibourvez ken."
+"$alertNoOverdrawnAccount-Button"	= "Mat eo"
+
+
+/******************************
+ * Purge cleared transactions */
+
+"$alertDeleteCleared-Title"     = "Spurjañ ar re biziet"
+"$alertDeleteCleared-Message"   = "Fellout a ra deoc'h spurjañ an holl oberiadennoù biziet ? "\
+                    		"N'eus ket moaien da nullañ ar spurjañ."
+"$alertDeleteCleared-No"        = "Ne ra ket"
+"$alertDeleteCleared-Purge"     = "Spurjañ"
+
+
+/***********************
+ * No chequebook found */
+
+"$alertNoChequebook-Title"    = "Niverenn chekenn emgefreek"
+"$alertNoChequebook-Message"  = "Ar gont-mañ n'eus ket chekennaoueg eviti. "\
+				"Aozit keflunadurioù ar gont pe roit un niverenn-chekenn nevez amañ."
+"$alertNoChequebook-Button"   = "Mat eo"
+
+
+/**************************
+ * All chequebooks filled */
+
+"$alertFilledChequebooks-Title"		= "Niverenn chekenn emgefreek"
+"$alertFilledChequebooks-Message"	= "An holl chekennaouigi a zo implijet o niverenn-chekenn diwezhañ. "\
+					"Aozit keflunadurioù ar gont pe roit un niverenn-chekenn nevez amañ."
+"$alertFilledChequebooks-Button"	= "Mat eo"
+
+
+/**************************
+ * Create new chequebook? */
+
+"$alertNewChequebook-Title"	= 	"Chekennaoueg nevez"
+"$alertNewChequebook-Message"	= 	"Niverenn chekenn an oberiadenn-mañ "\
+					"n'eus ket anezhi e chekennaoueg ebet. "\
+					"Fellout a ra deoc'h krouiñ ur chekennaoueg nevez "\
+					"gant an niverenn-mañ evel niverenn gentañ ?"
+"$alertNewChequebook-Create"	= 	"Krouiñ"
+"$alertNewChequebook-No"	= 	"Nullañ"
+
+
+/***************************
+ * Transaction copy : date */
+
+"$alertCopy-Title"		= "Eilañ oberiadenn"
+"$alertCopy-Message"		= "Peseurt deiziad a zo da stagañ ouzh an oberiadenn eilet ?"
+"$alertCopy-Today"		= "Hiziv"
+"$alertCopy-Original"		= "Deiziad-orin"
+"$alertCopy-Cancel"		= "Nullañ"
+
+
+/**********************************
+ * Too many repeated transactions */
+
+"$alertTooManyRepeats-Title"	= 	"Oc'h adober oberiadenn..."
+"$alertTooManyRepeats-Message"	= 	""\
+				"War a seblant ez eus meur a oberiadenn da adober en dazont pell. "\
+				"Ar jedoniezh a c'hellfe padout pell ha kargañ ar memor a-leizh.\n"\
+				"Fellout a ra deoc'h..."
+"$alertTooManyRepeats-Stop"	= 	"Paouez"
+"$alertTooManyRepeats-Continue"	= 	"Kenderc'hel"
+
+
+/*************************************
+ * A macro definition can't be empty */
+
+"$alertEmptyMacroDef-Title"	  = "Makro goullo !"
+"$alertEmptyMacroDef-Message" = "Ne c'hall ket ur makro bezañ goullo."
+"$alertEmptyMacroDef-Button"  = "Leuniañ..."
+
+
+/*****************************************************************
+ * When auto-submit is checked, the macro have to be well filled */
+
+"$alertMacroCantAutoSubmit-Title"	= "N'hall ket emgadarnaat"
+"$alertMacroCantAutoSubmit-Message" 	= "Arabat emgadarnaat kuit da vezañ roet un hollad."
+"$alertMacroCantAutoSubmit-Button" 	= "Mat eo..."
+
+
+/************************************
+ * Really delete this description ? */
+
+"$alertDescDelete-Title"	= "Dilemel diskrivadur"
+"$alertDescDelete-Message"	= "Fellout a ra deoc'h dilemel an diskrivadur-mañ ?"
+"$alertDescDelete-Yes"		= "Ya"
+"$alertDescDelete-No"		= "Ne ra ket"
+
+
+/*****************************
+ * Really delete this mode ? */
+
+"$alertModeDelete-Title"	= "Dilemel giz paeañ"
+"$alertModeDelete-Message"	= "Mard eo koublet un oberiadenn pe ur makro gant ar giz-mañ, "\
+				"e vo koublet gant ar giz dre ziouer. Dilemel ?"
+"$alertModeDelete-Yes"		= "Ya"
+"$alertModeDelete-No"		= "Arabat !"
+
+
+/*****************************
+ * Really delete this type ? */
+
+"$alertTypeDelete-Title"	= "Dilemel seurt oberiadenn"
+"$alertTypeDelete-Message"	= "Mard eo koublet un oberiadenn pe ur makro gant ar seurt-mañ, "\
+				"e vo koublet gant ar seurt dre ziouer. Dilemel ?"
+"$alertTypeDelete-Yes"		= "Ya"
+"$alertTypeDelete-No"		= "Arabat !"
+
+
+/*******************************************************
+ * Really want to change subtypes sign for this type ? */
+
+"$alertTypeChangeChildrenSign-Title"	= 	"Cheñch arouezenn isseurtoù"
+"$alertTypeChangeChildrenSign-Message"	= 	"Kadarnaat ar seurt-mañ a cheñcho arouezenn e isseurtoù. "\
+						"Fellout a ra deoc'h kenderc'hel ?"
+"$alertTypeChangeChildrenSign-Yes"	= 	"Ya"
+"$alertTypeChangeChildrenSign-No"	= 	"Arabat !"
+
+
+/**************************************************************
+ * When a type/mode is deleted displays # of modified records */
+
+"$alertRecordsModified-Title"	= "Enrolladennoù kemmet"
+"$alertRecordsModified-Message"	= "Niver a enrolladennoù kemmet :\n"\
+					"- Oberiadennoù : ^1 diwar ^2 a ziazoù\n"\
+					"- Makroioù : ^3"
+"$alertRecordsModified-Button"	= "Mat eo"
+
+
+/************************************************************************
+ * Want to delete a currency but it used as main currency in an account */
+
+"$alertAccountMainCurrency-Title"	 = "Monneiz pennañ gwaskedet"
+"$alertAccountMainCurrency-Message"	 = "Ar monneiz-mañ n'hall ket bezañ dilemet : ar monneiz pennañ eo "\
+						"evit ^1 a gontoù diwar ^2 a ziazoù."
+"$alertAccountMainCurrency-Button"	 = "Mat eo"
+
+
+/********************************
+ * Really delete this currency? */
+
+"$alertCurrencyDelete-Title"	= "Dilemel ur monneiz"
+"$alertCurrencyDelete-Message"	= "Mard eo koublet un oberiadenn gant ar monneiz-mañ, "\
+				"e vo koublet gant ar monneiz dre ziouer. Dilemel ?"
+"$alertCurrencyDelete-Yes"		= "Ya"
+"$alertCurrencyDelete-No"		= "Arabat !"
+
+
+/**************************************************************
+ * When a currency is deleted displays # of modified records */
+
+"$alertCurrDelRecordsModified-Title"	= "Enrolladennoù kemmet"
+"$alertCurrDelRecordsModified-Message"	= "^1 a enrolladennoù kemmet diwar ^2 a ziazoù."
+"$alertCurrDelRecordsModified-Button"	= "Mat eo"
+
+
+/***********************************
+ * Bad access code : access denied */
+
+"$alertPasswordBadCode-Title"	= "Moned difennet"
+"$alertPasswordBadCode-Message"	= "Kod-moned direizh !\nKlaskit adarre..."
+"$alertPasswordBadCode-Button"	= "Mat eo"
+
+
+/**************************************************
+ * While code change, the two codes must be equal */
+
+"$alertPasswordCodesMustBeEqual-Title"		= "Fazi"
+"$alertPasswordCodesMustBeEqual-Message"	= ""\
+		"An daou god-moned a zo ret dezho bezañ par !\nKlaskit adarre..."
+"$alertPasswordCodesMustBeEqual-Button"		= "Mat eo"
+
+
+/*********************************************************************
+ * The external DB of currencies is not present, propose to download *
+ * it from http://ma-tirelire.net								     */
+
+"$alertNoExternalCurrencyDB-Title"		= "Diaz monneizoù a-ziavaez"
+"$alertNoExternalCurrencyDB-Message"	= ""\
+		"N'eus ket diaz monneizoù a-ziavaez ganeoc'h. "\
+		"Kargañ a c'hellit unan digoust diwar "\
+		"http://ma-tirelire.net/currencies"
+"$alertNoExternalCurrencyDB-Button"		= "Mat eo"
+
+
+/******************************************************************
+ * The external DB of currencies is present but don't contain the *
+ * reference currency ISO-4217 code								  */
+
+"$alertNoRefInExternalCurrencyDB-Title"		= "Diaz monneizoù a-ziavaez"
+"$alertNoRefInExternalCurrencyDB-Message"	= ""\
+		"Kod ISO-4217 ar monneiz dre ziouer n'hall ket bezañ kavet "\
+		"e diaz monneizoù a-ziavaez.\n"\
+		"Kit da http://ma-tirelire.net/currencies evit gouzout pelloc'h."
+"$alertNoRefInExternalCurrencyDB-Button"	= "Mat eo"
+
+
+/********************************************************************
+ * The user wants to delete an accounts DB, ask confirmation before *
+ * proceeding...												    */
+
+"$alertDBaseDelete-Title"	= "Dilemel an diaz"
+"$alertDBaseDelete-Message"	= ""\
+		"Sur oc'h e fell deoc'h dilemel an diaz-mañ gant ho kontoù ?\n"\
+		"Ma vo graet e vo kollet an diaz hag ar c'hontoù..."
+"$alertDBaseDelete-Yes"		= "Dilemel"
+"$alertDBaseDelete-No"		= "Arabat !"
+
+
+/****************************************************************
+ * The user wants to delete an account, ask confirmation before *
+ * proceeding...											    */
+
+"$alertAccountDelete-Title"		= "Dilemel ar gont"
+"$alertAccountDelete-Message"	= ""\
+		"Sur oc'h e fell deoc'h dilemel ar gont-mañ ?\n"\
+		"Ma vo graet e vo kollet ar gont hag he oberiadennoù..."
+"$alertAccountDelete-Yes"		= "Dilemel"
+"$alertAccountDelete-No"		= "Arabat !"
+
+
+/********************************************
+ * An account already exists with this name */
+
+"$alertAccountAlreadyExists-Title"		= "Ar gont a zo anezhi endeo..."
+"$alertAccountAlreadyExists-Message"	= ""\
+		"Ur gont gant an anv-mañ a zo anezhi endeo."
+"$alertAccountAlreadyExists-Button"		= "Mat eo"
+
+
+/*************************************************************
+ * The overdrawn threshold have to be lesser or equal to the *
+ * non-overdrawn threshold								     */
+
+"$alertAccountPropInvalidOverdrawnThreshold-Title"	= "Harz direizh..."
+"$alertAccountPropInvalidOverdrawnThreshold-Message"= ""\
+		"Harz an dibourvez eo ret dezhañ bezañ izeloc'h "\
+		"eget harz ur gont bourvezet."
+"$alertAccountPropInvalidOverdrawnThreshold-Button"	= "Mat eo"
+
+
+/********************************************************
+ * The account currency change, ask for confirmation... */
+
+"$alertAccountChangeCurrency-Title"		= "Amdreiñ ar monneiz..."
+"$alertAccountChangeCurrency-Message"	= ""\
+		"Cheñch monneiz ar gont a troio holl oberiadennoù ar gont-mañ "\
+		"d'ar monneiz nevez. "\
+		"En askont d'ar fazioù krennaat ne vo ket tu da vont war giz gant pizhder."
+"$alertAccountChangeCurrency-Yes"		= "Amdreiñ"
+"$alertAccountChangeCurrency-No"		= "Nullañ"
+
+
+/*************************
+ * No linked transaction */
+
+"$alertOpFormXferNoRec-Title"   = "Linked transaction"
+"$alertOpFormXferNoRec-Message" = ""\
+		"The linked transaction was deleted, probably consequent to "\
+		"a purge of the cleared transactions in the transfer account."
+"$alertOpFormXferNoRec-Button"  = "OK"
+
+/*******************************************
+ * Remove link between linked transactions */
+
+"$alertOpFormXferDel-Title"			= "Dilemel al liamm"
+"$alertOpFormXferDel-Message"		= ""\
+				"Fellout a ra deoc'h dilemel al liamm etre an div oberiadenn ? "\
+				"Dizalc'h e vint an eil diouzh eben."
+"$alertOpFormXferDel-No"		= "Ne ra ket"
+"$alertOpFormXferDel-DeleteLink"	= "Dilemel al liamm"
+
+/*****************************************************************
+ * Splits sum is lower than transaction sum: just a warning here */
+
+"$alertOpFormSplitsWarning-Title"	= "Fazi gant ar sammad"
+"$alertOpFormSplitsWarning-Message"	= "Ar sammad a zo izeloc'h eget hollad an oberiadenn."
+"$alertOpFormSplitsWarning-Continue"    = "Enrollañ koulskoude"
+"$alertOpFormSplitsWarning-Correct"	= "Difaziañ"
+
+/*************************************************************
+ * Splits sum is greater than transaction sum: it's an error */
+
+"$alertOpFormSplitsError-Title"		= "Fazi gant ar sammad"
+"$alertOpFormSplitsError-Message"	= "Ar sammad a zo uheloc'h eget hollad an oberiadenn..\n"\
+					  "N'eo ket reizh."
+"$alertOpFormSplitsError-Continue"	= "Cheñch hollad"
+"$alertOpFormSplitsError-Correct"	= "Difaziañ"
+
+/**********************************************************************
+ * Xfer splits sum is lower than transaction sum: just a warning here */
+
+"$alertOpFormSplitsXferWarning-Title"	= "Fazi gant ar sammad"
+"$alertOpFormSplitsXferWarning-Message"	= "An oberiadenn liammet a zo didroc'het. "\
+				"Sammad an isoberiadennoù a zo izeloc'h eget an hollad nevez."
+"$alertOpFormSplitsXferWarning-Continue"= "Enrollañ koulskoude"
+"$alertOpFormSplitsXferWarning-Correct"	= "Difaziañ"
+
+/******************************************************************
+ * Xfer splits sum is greater than transaction sum: it's an error */
+
+"$alertOpFormSplitsXferError-Title"		= "Fazi gant ar sammad"
+"$alertOpFormSplitsXferError-Message"	= "An oberiadenn liammet a zo didroc'het. "\
+				"Sammad an isoberiadennoù a zo uheloc'h eget an hollad nevez.\n"\
+				"N'eo ket reizh."
+"$alertOpFormSplitsXferError-Correct"	= "Difaziañ"
+
+/******************
+ * Outdated alarm */
+
+"$alertAlarmBeforeToday-Title"		= "Evezh distremenet !"
+"$alertAlarmBeforeToday-Message"	= ""\
+		"Deiziad an oberiadenn a zo a-raok hiziv. N'eus ket tu ebet da grouiñ un evezh !"
+"$alertAlarmBeforeToday-Edit"		= "Kemmañ"
+"$alertAlarmBeforeToday-Delete"		= "Dilemel an evezh"
+
+/***********************************
+ * Transaction delete confirmation */
+
+"$alertTransactionDelete-Title"		= "Dilemel oberiadenn"
+"$alertTransactionDelete-Message"	= "Fellout a ra deoc'h dilemel an oberiadenn-mañ ?"
+"$alertTransactionDelete-Yes"		= "Ya"
+"$alertTransactionDelete-No"		= "Ne ra ket"
+
+/******************
+ * Delete flagged */
+
+"$alertDeleteMarked-Title"		= "Dilemel ar re merket"
+"$alertDeleteMarked-Message"	= "Fellout a ra deoc'h dilemel holl an oberiadennoù merket e-barzh ar gont-mañ ? "\
+				"Ne vo ket tu ebet da nullañ an dilemel."
+"$alertDeleteMarked-No"			= "Ne ra ket"
+"$alertDeleteMarked-Delete"		= "Ya, dilemel"
+
+/*************************************************
+ * Transform flagged transaction to cleared ones */
+
+"$alertMarkedToChecked-Title"		= "Kemmañ ar re merket"
+"$alertMarkedToChecked-Message"		= "Fellout a ra deoc'h biziañ holl an oberiadennoù merket e-barzh ar gont-mañ ? "\
+					"Ne vo ket tu ebet da nullañ ar c'hemmañ."
+"$alertMarkedToChecked-No"		= "Ne ra ket"
+"$alertMarkedToChecked-Transform"	= "Kemmañ a re merket"
+
+/***************************
+ * Delete all transactions */
+
+"$alertDeleteAll-Title"		= "Dilemel an holl !"
+"$alertDeleteAll-Message"	= "Fellout a ra deoc'h dilemel an holl oberiadennoù e-barzh ar gont-mañ ? "\
+					"Ne vo ket tu ebet da nullañ an dilemel."
+"$alertDeleteAll-No"		= "Ne ra ket"
+"$alertDeleteAll-DeleteAll"     = "Dilemel an holl !"
+
+/********************************
+ * At the end of flagged screen */
+
+"$alertFlaggedUnflag-Title"		= "Diverkañ..."
+"$alertFlaggedUnflag-Message"		= "Fellout a ra deoc'h diverkañ an oberiadennoù n'int ket diuzet ?"
+"$alertFlaggedUnflag-No"		= "Ne ra ket"
+"$alertFlaggedUnflag-Yes"		= "Ya, diverkañ !"
+
+/**************************************
+ * Search didn't flag any transaction */
+ 
+"$alertSearchNone-Title"	= "O klask..."
+"$alertSearchNone-Message"	= "Oberiadenn ebet kavet."
+"$alertSearchNone-Button"	= "Mat eo"
+
+/*******************************************
+ * Search flagged at least one transaction */
+ 
+"$alertSearchMany-Title"	= "O klask..."
+"$alertSearchMany-Message"	= "^1 a oberiadennoù a zo bet kavet ha merket."
+"$alertSearchMany-OK"		= "Mat eo"
+"$alertSearchMany-See"		= "Sellout ouzh ar re merket..."
+
+/**************************************************************
+ * Clearing confirmation when no automatic statement handling */
+
+"$alertClearingConfirm-Title"	= "Kadarnaat ar biziañ"
+"$alertClearingConfirm-Message"	= "Mat eo gant ar biziañ-mañ ?"
+"$alertClearingConfirm-OK"	= "Ya, mat eo"
+"$alertClearingConfirm-Back"	= "Difaziañ"
+"$alertClearingConfirm-Cancel"	= "Nullañ"
+
+/**********************************************************
+ * User statement number is null or empty, ask to confirm */
+ 
+"$alertStatementNumberConfirmEmpty-Title"	= "Niverenn ebet evit ar stad"
+"$alertStatementNumberConfirmEmpty-Message"	= "Biziet e vo met hep niverenn stad. Mat eo e-giz-se ?"
+"$alertStatementNumberConfirmEmpty-No"		= "N'eo ket. Difaziañ !"
+"$alertStatementNumberConfirmEmpty-Yes"		= "Mat eo"
+
+/******************************************
+ * Auto clearing, no transaction to clear */
+
+"$alertAutoClearNone-Title"		= "Oberiadenn ebet da viziañ"
+"$alertAutoClearNone-Message"	= "N'eus ket oberiadenn ebet, pe emañ an holl oberiadennoù biziet endeo. "\
+                    		"Netra ken d'ober !"
+"$alertAutoClearNone-OK"		= "Mat eo"
+
+/*************************************************
+ * Auto clearing, too many transactions to clear */
+
+"$alertAutoClearTooMany-Title"		= "Re a oberiadennoù"
+"$alertAutoClearTooMany-Message"	= "Re a oberiadennoù n'int ket biziet (48 d'ar muiañ !). "\
+					"Ret eo deoc'h-c'hwi biziañ meur a oberiadenn a-raok."
+"$alertAutoClearTooMany-OK"		= "Mat eo"
+
+/************************************
+ * Auto clearing, no solution found */
+
+"$alertAutoClearNotFound-Title"		= "Biziañ emgefreek"
+"$alertAutoClearNotFound-Message"	= "N'eo ket kavet Kengejadur ebet. "\
+				"Gwiriit ar balañs ha sammad ar re biziet. "\
+                		"Mard eo reizh e ra diouer un oberiadenn da nebeutañ."
+"$alertAutoClearNotFound-OK"		= "Mat eo"
+
+/*******************************************
+ * Repeats view, view original transaction */
+
+"$alertRepeatsViewOrig-Title"	= "Oberiadenn da zont"
+"$alertRepeatsViewOrig-Message"	= "An oberiadenn-mañ n'eus ket anezhi c'hoazh.\n"\
+				"Fellout a ra deoc'h aozañ an oberiadenn hag a vo krouet diouzhi ?"
+"$alertRepeatsViewOrig-No"		= "Ne ra ket"
+"$alertRepeatsViewOrig-Yes"		= "Ya"
+
+/*************************************
+ * No problem after DBase correction */
+
+"$alertAllBasesAreOK-Title"		= "Fazi ebet"
+"$alertAllBasesAreOK-Message"	= "Fazi ebet e-pad an argerzh."
+"$alertAllBasesAreOK-OK"		= "Mat eo"
+
+
+/************************************************************************
+ * Alert messages for system errors...
+ ************************************************************************/
+
+"$alertDmErrInvalidDatabaseName-Title"		= "Anv an diaz direizh"
+"$alertDmErrInvalidDatabaseName-Message"	= ""\
+		"Arouezennoù direizh a zo e-barzh an anv dibabet."
+"$alertDmErrInvalidDatabaseName-Button"		= "Reizhañ"
+
+"$alertDmErrAlreadyExists-Title"	= "An diaz a zo anezhañ endeo"
+"$alertDmErrAlreadyExists-Message"	= "Un diaz anvet e-giz-se a zo anezhañ endeo."
+"$alertDmErrAlreadyExists-Button"	= "Reizhañ"
+
+"$alertMemErrNotEnoughSpace-Title"		= "Memor re verr"
+"$alertMemErrNotEnoughSpace-Message"	= ""\
+		"Re verr eo ar memor evit kas da benn an argerzh.\n" \
+		"(^1)"
+"$alertMemErrNotEnoughSpace-Button"		= "Mat eo"
+
+"$alertGenericError-Title"				= "Fazi..."
+"$alertGenericError-Message"			= ""\
+		"Fazi gant kod #^2 degouezhet.\n"\
+		"(^1)\n"\
+		"Kas ar c'hod-mañ da bug@ma-tirelire.net"
+"$alertGenericError-Button"				= "Mat eo"
+
+
+/************************************************************************
+ * Strings
+ ************************************************************************/
+
+/* Statement number management popup, keep the statement num (47 chars max) */
+"$strStatementNumKeep"   	= "Mirout niverenn ar stad %lu"
+
+/* Statement number management popup, cancel the statement num (47 chars max)*/
+"$strStatementNumCancel" 	= "Nullañ niverenn ar stad"
+
+/* Statement number management popup, just the number (47 chars max)*/
+"$strStatementNumNumber" 	= "Stad niv. %lu"
+
+/* Statement number management popup, another statement num (47 chars max) */
+"$strStatementNumAnother"	= "Dibabit un niverenn all..."
+
+/* Mode "Unknown" entry (31 chars max) */
+"$strModesListUnknown"	= "Dianv"
+
+/* Type "Unfilled" entry (31 chars max) */
+"$strTypesListUnfiled"	= "Dirummet"
+
+/* "Edit..." entry in Descriptions, Modes, Types and Currencies lists
+ * (31 chars max) */ 
+"$strEditList" = "Aozañ..."
+
+/* "Any" entry in Modes and Types lists (stats & search popups) 31 chars max */
+"$strAnyList"			= "Ne vern ket"
+
+/* Note used for created fake transaction when the currency of an
+ * account is changed (63 chars max) */
+"$strConvAccountCurrencyRound" = "Reizhadenn goude cheñchamant ar monneiz"
+
+/* Progress bar label used when computing repeats (50 chars max) */
+"$strProgressBarRepeats"		= "O jediñ adoberioù (prantad niv. %d)"
+
+/* Progress bar label used when computing accounts sums (63 chars max) */
+"$strProgressBarAccountsBalances" = "O jediñ balañs ar c'hontoù..."
+
+/* Progress bar label used when computing the account sum (63 chars max) */
+"$strProgressBarAccountBalance"	= "O jediñ balañs ar gont..."
+
+/* Progress bar label used during a cleared purge (63 chars max) */
+"$strProgressBarPurge"			= "O skarzhañ ar re merket..."
+"$strProgressBarPurgeGather"	= "O tastum ar re merket..."
+
+/* Progress bar label used when searching auto cheque numbers (63 chars max) */
+"$strProgressBarAutoChequeSearch" = "O klask niverennoù ar chekennoù..."
+
+/* Pbar label used when deleting all transactions of an acc. (63 chars max) */
+"$strProgressBarDeleteAllInAccount" = "O tilemel an oberiadennoù..."
+
+/* Progress bar label used when translating flagged -> cleared (63 chars max)*/
+"$strProgressBarFlaggedToCleared"	= "Biziet -> merket..."
+
+/* Pbar label used when deleting flagged (63 chars max) */
+"$strProgressBarDeleteFlagged"		= "O tilemel a re biziet..."
+
+/* Progress bar label used when manipulating flagged (63 chars max) */
+"$strProgressBarTransformFlagged"	= "O cheñch ar re biziet..."
+
+/* Progress bar label used when "go to XXX" search (63 chars max) */
+"$strProgressBarGotoSearch"		= "O klask..."
+
+/* Progress bar label used when changing account currency (63 chars max) */
+"$strProgressBarChangeAccountCurrency"	= "O cheñch ar monneiz..."
+
+/* Progress bar label used when deleting an account (63 chars max) */
+"$strProgressBarDeleteAccount1"		= "O tilemel ar gont..."
+"$strProgressBarDeleteAccount2"		= "O naetaat..."
+
+/* Progress bar label used when cloning a database (63 chars max) */
+"$strProgressBarDBItemCloning"		= "Oc'h eilskrivañ an diaz..."
+
+/* Progress bar label used when computing sum stats (63 chars max) */
+"$strProgressBarStats"				= "O jedin ar sammadoù..."
+
+/* Progress bar label used when unflagging before searching (63 chars max) */
+"$strProgressBarSearchUnflagAll"	= "O diviziañ an holl..."
+
+/* Progress bar label used while searching (63 chars max) */
+"$strProgressBarSearch"				= "O klask..."
+
+/* Progress bar label used during export (63 chars max) */
+"$strProgressBarExport"				= "Oc'h ezporzhiañ..."
+
+/* Progress bar label used during auto clearing process (63 chars max) */
+"$strProgressBarAutoClearing"		= "O verkañ..."
+
+/* Auto created types, modes and currencies
+   (%d will be replaced by the ID, let it)
+   (30 chars max including %d) */
+"$strAutoCreatedTypeName"	= "Seurt krouet niver. %d"
+/* (30 chars max including %d) */
+"$strAutoCreatedModeName"	= "Giz krouet niver. %d"
+"$strAutoCreatedCurrencyName"= "#%d"		 /* 3 char max including %d */
+
+
+/* All months in the year (31 chars max for each month) MUST BE CAPITALIZED */
+[$strLongMonths]	 = [	"Genver"
+				"C'hwevrer"
+				"Meurzh"
+				"Ebrel"
+				"Mae"
+				"Mezheven"
+				"Gouere"
+				"Eost"
+				"Gwengolo"
+				"Here"
+				"Du"
+				"Kerzu"]
+
+/* All months in the year in short form */
+[$strShortMonths]	= ["gen" "c'hw" "meu" "ebr" "mae" "even"
+		           "gou" "eost" "gwen" "here" "du" "ker"]
+
+END

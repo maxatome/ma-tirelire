@@ -1,0 +1,69 @@
+Feburary 16, 2005:
+     Better fullscreen mode with Mobile-Stream's Landscape utility.
+
+December 15, 2004:
+     Fixed status bar area call for Palm DIA.
+
+December 9:
+     Support full screen mode for Palm DIA via DIA_STATE_NO_STATUS_BAR.
+     Software that already uses this to support Sony full screen mode 
+     will theoretically need only a recompile.  Released as 1.2.4.
+
+November:
+     Handera fix.  Released as 1.2.3.
+
+September 28-29, 2004:
+     Fixed tapwave problem.  Released as 1.2.2.
+
+September 26, 2004:
+     Added prototype for HandleResizeNotifications() to resize.h.
+     Fixed demo for Sony.
+
+September 26, 2004:
+     Fixed a Sony bug in SetDIAState().  Released as 1.2.1.
+
+September 4, 2004:
+     No need for SUPPORT_DIA_PALM.  Revamped PALM DIA support to take into 
+     account a reentrancy issue.  The fix will not work for a fully
+     multitasking system, but should do the job for now.  Added a little
+     demo program.
+
+August 17, 2004:
+     Easier Handera support.
+
+July 2, 2004:
+     Fixed bug with DIA_H_GRANULAR (undesired font change).  #Included config.h
+     in resize.h.
+
+
+June 28, 2004:
+
+     Fixed fix of Sony bug.
+     
+     Fixed iQue 3600 bug.
+
+June 17-18, 2004:
+
+     Fixed Sony bug.
+
+     Faster handling of nilEvent.
+
+     DIA_H_GRANULAR attribute for forcing height of list or field to be
+     an integral number of rows.
+
+June 16, 2004:
+     Fixed use of globals in notification handler.
+     
+     Fixed movement of right- and bottom- aligned stuff.
+
+May 5, 2004:
+     Code tweaks for C++ compiler compatibility, removal of warnings, and fixing
+     typo in resize.h.
+
+May 1, 2004:
+     The per-event-type ResizeHandle*Event() functions should no longer be used 
+     (though backwards compatibility will be retained for a while).  Instead, 
+     you should use a single ResizeHandleEvent( event ) call in each handler.
+     See DIA.txt.  This will let me make deeper changes in the resize code 
+     without requiring changes in the app.  I am going to try to keep changes
+     that require changes in app code to a minimum, but I needed this.

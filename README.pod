@@ -1,0 +1,94 @@
+=head1 Ma Tirelire
+
+Ma Tirelire is a software for managing your accounts for smartphones
+and PDA based on Palm OS (or Pocket PC and Windows Mobile thanks to
+StyleTap emulator). Multi accounts management, multiple accounts
+databases, inter-account transfers, transaction repeats, powerful
+statistics, value date management for deferred debit, easy checking
+with or without statement numbers, automation of transaction entry
+using macro commands, transactions breaking-down, cheque books numbers
+and so on...
+
+
+=head1 COMPILATION
+
+The F<Makefile> is a BSD one.
+
+First, you need to install C<mcc> L<https://github.com/maxatome/mcc>.
+
+You need to install the C<prc-tools> L<http://prc-tools.sourceforge.net/>.
+
+You need to install C<pilrc>
+L<http://sourceforge.net/projects/pilrc/>. To support GB2312-80
+charset, you can apply the patch F<patches/pilrc-3.2.patch> over the
+3.2 version.
+
+You need to get C<multilink>
+L<http://www.djw.org/product/palm/multilink/index.html> and apply the
+path F<patches/multilink.patch> before installing it.
+
+In the F<Makefile> the following variables can be changed:
+
+=over 4
+
+=item SDK
+
+Path to the root of the cross-compilation environment.
+
+=item SONY_SDK
+
+Path to the SONY SDK.
+
+=item PALM_SDK
+
+Path to the includes of the Palm OS SDK.
+
+=item HANDERA_SDK
+
+Path to the Handera SDK.
+
+=item BASE
+
+Path to find the cross-compilation tools.
+
+=item MCC
+
+Path to find the C<mcc.pl> script (see C<mcc> above).
+
+=back
+
+There is no support, so please don't ask.
+
+
+=head1 LICENSE
+
+C<PalmResize>, copied inside the repo because of a small patch, can be
+found at L<http://freshmeat.net/projects/palmresize/>.
+
+The hi-definition logo F<bmp/logo-matirelire.svg> is copyrighted by
+Gofre L<http://glacealeau.com/>.
+
+F<MaTirelire-translate.tmpl/> contains executables copyrighted by
+their authors:
+
+=over 4
+
+=item pilrc.exe
+
+GNU General Public License (GPL).
+
+=item perl.exe & perl56.dll
+
+Copyright 1987-2011, Larry Wall, Perl Artistic License or GPL.
+
+=item cygwin1.dll
+
+GNU General Public License (GPL).
+
+=back
+
+
+For the remainder, copyright 1996-2011, Maxime SoulE<eacute>
+
+Ma Tirelire source code may be copied under the terms of GNU General
+Public License.
